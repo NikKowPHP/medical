@@ -55,6 +55,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const createProduct = useCallback(
     async (data: ProductSubmissionData): Promise<Product> => {
+      debugger
       const result = await fetchApi<Product>({
         url: '/api/products',
         method: 'POST',
