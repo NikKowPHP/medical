@@ -79,6 +79,22 @@ export default function AdminDashboard() {
           </Button>
         </Link>
 
+        {/* Products Section */}
+        <Link
+          href="/admin/sections/products"
+          className="flex flex-col p-6 bg-white border-2 border-gray-200 hover:shadow-lg transition-shadow"
+        >
+          <h2 className="text-xl font-medium text-gray-900 mb-2">
+            Products Section
+          </h2>
+          <p className="text-gray-600 mb-4">
+            Manage the products section.
+          </p>
+          <Button variant="primary" className="mt-auto w-full sm:w-auto">
+            Manage Products Section
+          </Button>
+        </Link>
+
         {/* Add more admin sections here as needed */}
       </div>
     </div>
