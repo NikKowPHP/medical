@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Roboto Serif';
+  src: url('/fonts/sans-serif/RobotoSerif-Italic-VariableFont_GRAD,opsz,wdth,wght.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 100 300 400 500 600 700 800 900;
+  font-display: swap;
+}
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  /* Apply the locally loaded Roboto Serif font */
+  font-family: "Roboto Serif", serif;
+}
+
+/* Optional: Remove or update the universal selector if you want a consistent font */
+* {
+  font-family: "Roboto Serif", serif;
+}
+
