@@ -7,10 +7,16 @@ import { Input } from '@/components/ui/input/input'
 import { Label } from '@/components/ui/label/label'
 import { Product } from '@/domain/models/models'
 
+// Define a custom form type that extends Partial<Product> with separate file fields.
+type ProductFormValues = Partial<Product> & {
+  imageFile?: FileList;
+  pdfFile?: FileList;
+}
+
 interface ProductFormProps {
   product?: Product | null
-  onSubmit: (data: Partial<Product>) => Promise<void>
-  onUpdate: (data: Partial<Product>) => Promise<void>
+  onSubmit: (data: Partial<Product> & { imageFile?: File; pdfFile?: File }) => Promise<void>
+  onUpdate: (data: Partial<Product> & { imageFile?: File; pdfFile?: File }) => Promise<void>
   onCancel: () => void
   loading: boolean
 }
@@ -26,15 +32,23 @@ export function ProductForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Partial<Product>>({
+  } = useForm<ProductFormValues>({
     defaultValues: product || {},
   })
 
-  const submitHandler = async (data: Partial<Product>) => {
+  const submitHandler = async (data: ProductFormValues) => {
+    // Extract file inputs (which are FileLists) and get the first file if available.
+    const { imageFile, pdfFile, ...rest } = data
+    const finalData = {
+      ...rest,
+      imageFile: imageFile && imageFile[0],
+      pdfFile: pdfFile && pdfFile[0],
+    }
+
     if (product && product.id) {
-      await onUpdate({ ...data })
+      await onUpdate(finalData)
     } else {
-      await onSubmit({ ...data })
+      await onSubmit(finalData)
     }
   }
 
@@ -63,17 +77,6 @@ export function ProductForm({
       </div>
 
       <div>
-        <Label htmlFor="image_url">Image URL</Label>
-        <Input
-          type="text"
-          id="image_url"
-          {...register('image_url', { required: 'Image URL is required' })}
-          className="w-full"
-        />
-        {errors.image_url && <p className="text-red-600">{errors.image_url.message}</p>}
-      </div>
-
-      <div>
         <Label htmlFor="description">Description</Label>
         <textarea
           id="description"
@@ -84,11 +87,21 @@ export function ProductForm({
       </div>
 
       <div>
-        <Label htmlFor="pdf_url">PDF URL</Label>
+        <Label htmlFor="imageFile">Image Upload</Label>
         <Input
-          type="text"
-          id="pdf_url"
-          {...register('pdf_url')}
+          type="file"
+          id="imageFile"
+          {...register('imageFile')}
+          className="w-full"
+        />
+      </div>
+
+      <div>
+        <Label htmlFor="pdfFile">PDF Upload</Label>
+        <Input
+          type="file"
+          id="pdfFile"
+          {...register('pdfFile')}
           className="w-full"
         />
       </div>
