@@ -1,70 +1,40 @@
 'use client'
 
-import { useState } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button/button'
 import { Input } from '@/components/ui/input/input'
 import { Label } from '@/components/ui/label/label'
-import { BlogPost } from '@/domain/models/models'
-import React from 'react'
-import { useQuill } from 'react-quilljs'
-import 'quill/dist/quill.snow.css'
+import { Product } from '@/domain/models/models'
 
-interface BlogPostFormProps {
-  post?: BlogPost | null
-  onSubmit: (data: Partial<BlogPost>) => Promise<void>
-  onUpdate: (data: Partial<BlogPost>) => Promise<void>
+interface ProductFormProps {
+  product?: Product | null
+  onSubmit: (data: Partial<Product>) => Promise<void>
+  onUpdate: (data: Partial<Product>) => Promise<void>
   onCancel: () => void
   loading: boolean
 }
 
-export function BlogPostForm({
-  post,
+export function ProductForm({
+  product,
   onSubmit,
   onUpdate,
   onCancel,
   loading,
-}: BlogPostFormProps) {
-
+}: ProductFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Partial<BlogPost>>({
-    defaultValues: post || undefined,
+  } = useForm<Partial<Product>>({
+    defaultValues: product || {},
   })
-  const [content, setContent] = useState(post?.content_html || '')
-  const [excerpt, setExcerpt] = useState(post?.excerpt || '')
-  const { quill: quillContent, quillRef: quillRefContent } = useQuill({ theme: 'snow' })
-  const { quill: quillExcerpt, quillRef: quillRefExcerpt } = useQuill({ theme: 'snow' })
 
-  React.useEffect(() => {
-    if (quillContent) {
-      quillContent.on('text-change', () => {
-        setContent(quillContent.root.innerHTML)
-      })
-      if (post?.content_html) {
-        quillContent.clipboard.dangerouslyPasteHTML(post.content_html)
-      }
-    }
-  }, [quillContent, post?.content_html])
-
-  React.useEffect(() => {
-    if (quillExcerpt) {
-      quillExcerpt.on('text-change', () => {
-        setExcerpt(quillExcerpt.root.innerHTML)
-      })
-      if (post?.excerpt) {
-        quillExcerpt.clipboard.dangerouslyPasteHTML(post.excerpt)
-      }
-    }
-  }, [quillExcerpt, post?.excerpt])
-
-  const submitHandler = async (data: Partial<BlogPost>) => {
-    if (post?.id) {
-      await onUpdate({ ...data, content_html: content, excerpt: excerpt  })
+  const submitHandler = async (data: Partial<Product>) => {
+    if (product && product.id) {
+      await onUpdate({ ...data })
     } else {
-      await onSubmit({ ...data, content_html: content, excerpt: excerpt})
+      await onSubmit({ ...data })
     }
   }
 
@@ -78,75 +48,52 @@ export function BlogPostForm({
           {...register('title', { required: 'Title is required' })}
           className="w-full"
         />
-        {errors.title && (
-          <p className="text-red-600">{errors.title.message}</p>
-        )}
+        {errors.title && <p className="text-red-600">{errors.title.message}</p>}
       </div>
 
       <div>
-        <Label htmlFor="slug">Slug</Label>
+        <Label htmlFor="category">Category</Label>
         <Input
           type="text"
-          id="slug"
-          {...register('slug', { required: 'Slug is required' })}
+          id="category"
+          {...register('category', { required: 'Category is required' })}
           className="w-full"
         />
-        {errors.slug && (
-          <p className="text-red-600">{errors.slug.message}</p>
-        )}
+        {errors.category && <p className="text-red-600">{errors.category.message}</p>}
       </div>
 
       <div>
-        <Label htmlFor="imageurl">Image URL</Label>
+        <Label htmlFor="image_url">Image URL</Label>
         <Input
           type="text"
-          id="imageurl"
+          id="image_url"
           {...register('image_url', { required: 'Image URL is required' })}
           className="w-full"
         />
-        {errors.image_url && (
-          <p className="text-red-600">{errors.image_url.message}</p>
-        )}
+        {errors.image_url && <p className="text-red-600">{errors.image_url.message}</p>}
       </div>
 
       <div>
-        <Label htmlFor="image_alt">Image Alt Text</Label>
+        <Label htmlFor="description">Description</Label>
+        <textarea
+          id="description"
+          {...register('description', { required: 'Description is required' })}
+          className="w-full p-2 border rounded"
+        />
+        {errors.description && <p className="text-red-600">{errors.description.message}</p>}
+      </div>
+
+      <div>
+        <Label htmlFor="pdf_url">PDF URL</Label>
         <Input
           type="text"
-          id="image_alt"
-          {...register('image_alt')}
+          id="pdf_url"
+          {...register('pdf_url')}
           className="w-full"
         />
       </div>
 
-      <div>
-        <Label htmlFor="tag">Tag</Label>
-        <Input
-          type="text"
-          id="tag"
-          {...register('tag')}
-          className="w-full"
-        />
-      </div>
-
-      <div>
-        <Label htmlFor="excerpt">Excerpt</Label>
-        <div style={{ width: '100%', height: 100 }}>
-          <div ref={quillRefExcerpt} />
-        </div>
-        {errors.excerpt && (
-          <p className="text-red-600">{errors.excerpt.message}</p>
-        )}
-      </div>
-
-      <div className="pt-20">
-        <Label htmlFor="contentHtml">Content</Label>
-        <div style={{ width: '100%', height: 500 }}>
-          <div ref={quillRefContent} />
-        </div>
-      </div>
-
-      <div className="flex justify-end gap-5 pt-20">
+      <div className="flex justify-end gap-5">
         <Button variant="secondary" onClick={onCancel} disabled={loading}>
           Cancel
         </Button>
