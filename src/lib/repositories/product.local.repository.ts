@@ -3,11 +3,12 @@ import { SqlLiteAdapter } from '@/lib/repositories/adapters/sqllite.adapter';
 import { Database } from 'sqlite3';
 import { getDatabaseFilePath } from '@/lib/config/database.config';
 import logger from '@/lib/logger';
+import { IProductRepository } from '../services/product.service';
 
 const dbPath = getDatabaseFilePath();
 const db = new Database(dbPath);
 
-export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> {
+export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> implements IProductRepository  {
   constructor() {
     // Using same table name as the Supabase repository ("medical_products")
     super("medical_products", db);

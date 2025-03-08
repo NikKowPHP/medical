@@ -2,7 +2,9 @@ import { SupabaseClient } from '@supabase/supabase-js'
 import { Product } from '@/domain/models/models'
 import { supabase } from '../supabase'
 import logger from '@/lib/logger'
-export class ProductRepository {
+import { IProductRepository } from '../services/product.service';
+
+export class ProductRepository implements IProductRepository {
   private supabaseClient: SupabaseClient
   private tableName: string = 'medical_products'
 

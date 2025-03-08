@@ -1,48 +1,49 @@
-import { Locale } from "@/i18n"
-import { CaseStudyRepository } from "../repositories/product.repository"
-import { CaseStudy } from "@/domain/models/case-study.model"
-import { caseStudyRepositoryLocal } from "../repositories/product.local.repository"
-import { ICaseStudyRepository } from "../interfaces/caseStudyRepository.interface"
+import { ProductRepository } from "../repositories/product.repository"
+import { Product } from "@/domain/models/models"
+import { productRepositoryLocal } from "../repositories/product.local.repository"
 
 
-const caseStudyRepository = new CaseStudyRepository()
+export interface IProductRepository {
+  getProducts(): Promise<Product[]>
+  createProduct(product: Partial<Product>): Promise<Product>
+  updateProduct(id: string, product: Partial<Product>): Promise<Product>
+  deleteProduct(id: string): Promise<void>
+}
 
+// Create an instance of the production repository
+const productionRepository = new ProductRepository()
 
-
-export class CaseStudyService {
-  private caseStudyRepository: ICaseStudyRepository
+export class ProductService {
+  private productRepository: IProductRepository
+  
   constructor() {
-    if(process.env.MOCK_REPOSITORIES === 'true') {
-      this.caseStudyRepository = caseStudyRepositoryLocal
+    if (process.env.MOCK_REPOSITORIES === 'true') {
+      this.productRepository = productRepositoryLocal
     } else {
-      this.caseStudyRepository = caseStudyRepository
+      this.productRepository = productionRepository
     }
   }
 
-  getCaseStudies = async (locale: Locale): Promise<CaseStudy[]> => {
-    return this.caseStudyRepository.getCaseStudies(locale)
+  getProducts = async (): Promise<Product[]> => {
+    return this.productRepository.getProducts()
   }
 
-  getCaseStudyBySlug = async (slug: string, locale: Locale): Promise<CaseStudy | null> => {
-    return this.caseStudyRepository.getCaseStudyBySlug(slug, locale)
+  createProduct = async (product: Partial<Product>): Promise<Product> => {
+    return this.productRepository.createProduct(product)
   }
 
-  createCaseStudy = async (caseStudy: Partial<CaseStudy>, locale: Locale): Promise<CaseStudy> => {
-    return this.caseStudyRepository.createCaseStudy(caseStudy, locale)
+  updateProduct = async (id: string, product: Partial<Product>): Promise<Product> => {
+    return this.productRepository.updateProduct(id, product)
   }
 
-  updateCaseStudy = async (id: string, caseStudy: Partial<CaseStudy>, locale: Locale): Promise<CaseStudy> => {
-    return this.caseStudyRepository.updateCaseStudy(id, caseStudy, locale);
-  }
-
-  deleteCaseStudy = async (id: string, locale: Locale): Promise<void> => {
-    return this.caseStudyRepository.deleteCaseStudy(id, locale)
+  deleteProduct = async (id: string): Promise<void> => {
+    return this.productRepository.deleteProduct(id)
   }
 }
 
-// export singleton
-export const caseStudyService = new CaseStudyService()
+// Export singleton
+export const productService = new ProductService()
 
-export const getCaseStudyService = async () => {
-  return new CaseStudyService()
+export const getProductService = async (): Promise<ProductService> => {
+  return new ProductService()
 }
