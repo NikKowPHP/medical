@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { LayoutDashboard, FileText, Youtube, Quote } from 'lucide-react'
+import { LayoutDashboard, FileText, Youtube, Quote, ShoppingBag } from 'lucide-react'
 import { AdminProvider } from '@/contexts/admin-context'
 import { usePathname } from 'next/navigation'; 
 
@@ -49,7 +49,17 @@ export default async function AdminLayout({
             <span className="font-medium hidden md:block">News Posts</span>
           </Link>
 
-         
+          {/* Products Link */}
+          <Link
+            href="/admin/sections/products"
+            className={`flex items-center gap-3 py-3 px-4 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors ${
+              pathname === '/admin/sections/products' ? 'bg-gray-100 font-semibold text-primary-500' : ''
+            }`}
+          >
+            <ShoppingBag className="w-5 h-5" />
+            <span className="font-medium hidden md:block">Products</span>
+          </Link>
+
           <Link
             href="/admin/sections/youtube"
             className={`flex items-center gap-3 py-3 px-4 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors ${

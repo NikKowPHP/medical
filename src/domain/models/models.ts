@@ -29,3 +29,14 @@ export interface YoutubeItem {
   created_at: Date
   updated_at: Date
 }
+
+export interface Product {
+  id: string
+  image_url: string
+  description: string
+  pdf_url: string
+  title: string
+  category: string
+  created_at: Date
+  updated_at: Date
+}
