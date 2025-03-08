@@ -1,7 +1,7 @@
 import { ProductRepository } from "../repositories/product.repository"
 import { Product } from "@/domain/models/models"
 import { productRepositoryLocal } from "../repositories/product.local.repository"
-
+import { VercelBlobService } from "./vercel-blob.service"
 
 export interface IProductRepository {
   getProducts(): Promise<Product[]>
@@ -15,8 +15,10 @@ const productionRepository = new ProductRepository()
 
 export class ProductService {
   private productRepository: IProductRepository
-  
+  private blobService: VercelBlobService
+
   constructor() {
+    this.blobService = new VercelBlobService()
     if (process.env.MOCK_REPOSITORIES === 'true') {
       this.productRepository = productRepositoryLocal
     } else {
@@ -28,8 +30,18 @@ export class ProductService {
     return this.productRepository.getProducts()
   }
 
-  createProduct = async (product: Partial<Product>): Promise<Product> => {
-    return this.productRepository.createProduct(product)
+  // Allow optional imageFile and pdfFile for uploads
+  createProduct = async (
+    product: Partial<Product> & { imageFile?: File; pdfFile?: File }
+  ): Promise<Product> => {
+    const finalProduct = { ...product }
+    if (product.imageFile) {
+      finalProduct.image_url = await this.blobService.uploadToVercelBlob(product.imageFile);
+    }
+    if (product.pdfFile) {
+      finalProduct.pdf_url = await this.blobService.uploadToVercelBlob(product.pdfFile);
+    }
+    return this.productRepository.createProduct(finalProduct)
   }
 
   updateProduct = async (id: string, product: Partial<Product>): Promise<Product> => {

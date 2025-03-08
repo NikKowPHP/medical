@@ -43,11 +43,10 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       method: 'GET',
       errorMessage: 'Failed to fetch products'
     });
-    if (!result) {
-      throw new Error('Failed to fetch products');
-    }
-    setProducts(result);
-    return result;
+    // Ensure we have an array
+    const productsArray = Array.isArray(result) ? result : [];
+    setProducts(productsArray);
+    return productsArray;
   }, [fetchApi]);
 
   const createProduct = useCallback(async (data: Partial<Product>): Promise<Product> => {

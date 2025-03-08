@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS medical_products;
 
-CREATE TABLE products (
+CREATE TABLE medical_products (
     id TEXT PRIMARY KEY DEFAULT uuid_generate_v4(),
     image_url TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE products (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO products (id, image_url, description, pdf_url, title, category, created_at, updated_at)
+INSERT INTO medical_products (id, image_url, description, pdf_url, title, category, created_at, updated_at)
 VALUES (
     'product1',
     'https://example.com/product1-image.jpg',
