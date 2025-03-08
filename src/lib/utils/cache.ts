@@ -3,6 +3,7 @@ export const CACHE_TAGS = {
   BLOG_POSTS: 'blog-posts',
   YOUTUBE: 'youtube',
   QUOTE: 'quote',
+  PRODUCTS: 'products',
 } as const;
 
 export const CACHE_TIMES = {

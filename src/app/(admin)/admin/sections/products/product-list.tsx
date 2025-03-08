@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import logger from '@/lib/logger'
 import { useAdmin } from '@/contexts/admin-context'
 import { Button } from '@/components/ui/button/button'
@@ -19,7 +18,6 @@ export function ProductList() {
     createProduct,
     updateProduct,
   } = useAdmin()
-  const router = useRouter()
   const [localLoading, setLocalLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
