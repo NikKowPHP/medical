@@ -42,18 +42,44 @@ export const useAdminProducts = () => {
     async (
       data: ProductSubmissionData
     ): Promise<{ imageUrl: string; pdfUrl: string }> => {
-      let imageUrl: string;
-      let pdfUrl: string;
+      let imageUrl = data.image_url || '';
+      let pdfUrl = data.pdf_url || '';
+
+      if (!data.imageFile && !data.pdfFile) {
+        if (imageUrl && pdfUrl) {
+          return { imageUrl, pdfUrl };
+        }
+        throw new Error("No files provided and no existing URLs found");
+      }
 
       if (process.env.NEXT_PUBLIC_MOCK_UPLOADS === "true") {
-        imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg`;
-        pdfUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf?download=1`;
+        if(data.imageFile) {
+          imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg`;
+        }
+        if(data.pdfFile) {
+          pdfUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf?download=1`;
+        }
       } else {
-        [imageUrl, pdfUrl] = await Promise.all([
-          uploadFile(data.imageFile!, "products/images"),
-          uploadFile(data.pdfFile!, "products/documents"),
-        ]);
+        const uploadPromises = [];
+        if(data.imageFile) {
+          uploadPromises.push(
+            uploadFile(data.imageFile!, "products/images")
+            .then((url) => { imageUrl = url; })
+          );
+        }
+        if(data.pdfFile) {
+          uploadPromises.push(
+            uploadFile(data.pdfFile!, "products/documents")
+            .then((url) => { pdfUrl = url; })
+          );
+        }
+        await Promise.all(uploadPromises);
       }
+          // Validate we have URLs for required fields
+    
+      if (!imageUrl) throw new Error("Missing image URL");
+      if (!pdfUrl) throw new Error("Missing PDF URL");
+      
       return { imageUrl, pdfUrl };
     },
     [uploadFile]
@@ -98,6 +124,8 @@ export const useAdminProducts = () => {
       try {
         // Validate required fields
         validateProductData(data);
+
+        debugger
 
         const { imageUrl, pdfUrl } = await uploadFiles(data);
         debugger
@@ -158,7 +186,7 @@ export const useAdminProducts = () => {
       };
 
       const result = await fetchApi<Product>({
-        url: `/api/admin/products/${id}`,
+        url: `/api/admin/product/${id}`,
         method: "PUT",
         data: productData,
         errorMessage: "Failed to update product",

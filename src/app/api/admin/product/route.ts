@@ -4,6 +4,16 @@ import { revalidateTag } from 'next/cache';
 import { CACHE_TAGS } from '@/lib/utils/cache';
 import { productService } from '@/lib/services/product.service';
 
+
+
+
+
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
+
+
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -16,7 +26,13 @@ export async function GET(
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }
-    return NextResponse.json(product);
+    return NextResponse.json(product, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   } catch (error) {
     logger.error(`Error fetching product: ${error}`);
     return NextResponse.json(
@@ -36,7 +52,13 @@ export async function PUT(
     logger.log(`Updating product: ${id} with data: ${JSON.stringify(data)}`);
     const updatedProduct = await productService.updateProduct(id, data);
     revalidateTag(CACHE_TAGS.PRODUCTS);
-    return NextResponse.json(updatedProduct);
+    return NextResponse.json(updatedProduct, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   } catch (error) {
     logger.error(`Error updating product: ${error}`);
     return NextResponse.json(
@@ -55,7 +77,13 @@ export async function DELETE(
     logger.log(`Deleting product: ${id}`);
     await productService.deleteProduct(id);
     revalidateTag(CACHE_TAGS.PRODUCTS);
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   } catch (error) {
     logger.error(`Error deleting product: ${error}`);
     return NextResponse.json(
@@ -63,4 +91,16 @@ export async function DELETE(
       { status: 500 }
     );
   }
+}
+
+export function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      headers: {
+        'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    }
+  )
 }
