@@ -47,6 +47,12 @@ export function ProductList() {
     setModalOpen(true)
   }
 
+  // const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   e.stopPropagation()
+  //   setModalOpen(false)
+  //   setSelectedProduct(null)
+  // }
+
   return (
     <div className="space-y-8">
       {error && <div className="p-4 bg-red-50 text-red-600">{error}</div>}
@@ -155,7 +161,7 @@ export function ProductList() {
 
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-        onClick={() => setModalOpen(false)}
+          // onClick={handleOutsideClick}
         
         >
           <div className="bg-white p-6 rounded shadow-lg w-full max-w-xl">

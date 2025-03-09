@@ -97,7 +97,14 @@ export async function DELETE(
       deletePromises.push(del(product.pdf_url));
     }
     logger.log('product.route.delete.log deleting files from blob', deletePromises)
-    await Promise.all(deletePromises);
+    const results = await Promise.allSettled(deletePromises);
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        logger.log(`Deleted file ${index + 1} successfully`);
+      } else {
+        logger.error(`Failed to delete file ${index + 1}:`, result.reason);
+      }
+    });
 
     // 3. Delete database record
     await productService.deleteProduct(body.id);
