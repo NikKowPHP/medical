@@ -52,6 +52,7 @@ export function ProductForm({
     }
   }
 
+
   return (
     <form onSubmit={handleSubmit(submitHandler)} className="space-y-6">
       <div>

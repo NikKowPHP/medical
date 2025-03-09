@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import logger from '@/lib/logger'
 import { useAdmin } from '@/contexts/admin-context'
 import { Button } from '@/components/ui/button/button'
@@ -22,9 +22,7 @@ export function ProductList() {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
-  useEffect(() => {
-    getProducts()
-  }, [])
+
 
   const handleDelete = async (id: string) => {
     setLocalLoading(true)

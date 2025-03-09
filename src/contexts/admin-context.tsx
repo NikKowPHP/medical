@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useApi } from "@/hooks/use-api";
 import { Product } from "@/domain/models/models";
 import { upload } from "@vercel/blob/client";
@@ -33,6 +33,17 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const [products, setProducts] = useState<Product[]>([]);
   const { fetchApi, loading, error, setError } = useApi();
 
+
+  useEffect(() => {
+    logger.log('products', products)
+    if (products.length > 0) {
+      debugger
+      
+    }
+  }, [products])
+
+  
+
   const revalidateCache = useCallback(async () => {
     await fetchApi({
       url: "/api/admin/revalidate",
@@ -45,10 +56,11 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const getProducts = useCallback(async (): Promise<Product[]> => {
     const result = await fetchApi<Product[]>({
-      url: "/api/products",
+      url: "/api/admin/products",
       method: "GET",
       errorMessage: "Failed to fetch products",
     });
+    debugger
     // Ensure we have an array
     const productsArray = Array.isArray(result) ? result : [];
     setProducts(productsArray);
@@ -75,10 +87,12 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   const uploadFiles = useCallback(async (data: ProductSubmissionData): Promise<{ imageUrl: string; pdfUrl: string }> => {
     let imageUrl: string;
     let pdfUrl: string;
+
     if (process.env.NEXT_PUBLIC_MOCK_UPLOADS === "true") {
       imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg`;
       pdfUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf?download=1`;
     } else {
+     
       [imageUrl, pdfUrl] = await Promise.all([
         uploadFile(data.imageFile!, "products/images"),
         uploadFile(data.pdfFile!, "products/documents"),
@@ -123,6 +137,9 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
           data: productData,
           errorMessage: "Failed to create product",
         });
+        debugger
+
+        logger.log(`Product created: ${JSON.stringify(result)}`);
 
         if (!result) {
           throw new Error("Failed to create product");
@@ -168,6 +185,10 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   );
 
   const clearError = () => setError(null);
+
+  useEffect(() => {
+    getProducts()
+  }, [getProducts])
 
   return (
     <AdminContext.Provider

@@ -25,8 +25,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { data } = await request.json();
-    const logId = createLogId();
+    const  data  = await request.json();
+    const logId = await createLogId();
     logger.log(`Processing product creation ${logId}`, { data });
     const newProduct = await productService.createProduct(data);
     logger.log(`Product created ${logId}`, { newProduct });

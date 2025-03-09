@@ -17,6 +17,7 @@ export class ProductRepository implements IProductRepository {
       .from(`${this.tableName}`)
       .select('*')
       .order('created_at', { ascending: false })
+      .throwOnError()
 
       if (error) {
         logger.log('Error fetching case studies:', error)
@@ -32,9 +33,10 @@ export class ProductRepository implements IProductRepository {
       .insert(product)
       .select()
       .single()
+    .throwOnError()
 
     if (error) {
-      logger.log('Error creating case study:', error)
+      logger.log('Error creating product:', error)
       throw error
     }
 
@@ -48,9 +50,10 @@ export class ProductRepository implements IProductRepository {
       .eq('id', id)
       .select()
       .single()
+    .throwOnError()
 
     if (error) {
-      logger.log('Error updating case study:', error)
+      logger.log('Error updting product:', error)
       throw error
     }
 
@@ -62,9 +65,10 @@ export class ProductRepository implements IProductRepository {
       .from(`${this.tableName}`)
       .delete()
       .eq('id', id)
+      .throwOnError()
 
     if (error) {
-      logger.log('Error deleting case study:', error)
+      logger.log('Error deleting product:', error)
       throw error
     }
   }
