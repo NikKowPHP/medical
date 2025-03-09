@@ -25,6 +25,7 @@ export async function POST(request: Request) {
         // when the upload is complete
       },
     });
+    logger.log('jsonResponse in upload-token', jsonResponse)
 
     return NextResponse.json(jsonResponse);
   } catch (error) {
