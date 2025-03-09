@@ -88,7 +88,7 @@ export function ProductList() {
                 <tr key={product.id} className={loading ? 'opacity-50' : ''}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
-                      {product.title.length > 30 ? product.title.slice(0, 30) + '…' : product.title}
+                      {product?.title.length > 30 ? product.title.slice(0, 30) + '…' : product.title}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

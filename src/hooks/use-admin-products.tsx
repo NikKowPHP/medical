@@ -172,7 +172,6 @@ export const useAdminProducts = () => {
       // debugger
 
       const { imageUrl, pdfUrl } = await uploadFiles(data);
-      // debugger
 
       logger.log("Image uploaded successfully:", imageUrl);
       logger.log("PDF uploaded successfully:", pdfUrl);
@@ -186,11 +185,12 @@ export const useAdminProducts = () => {
       };
 
       const result = await fetchApi<Product>({
-        url: `/api/admin/product/${id}`,
+        url: `/api/admin/product?id=${id}`,
         method: "PUT",
         data: productData,
         errorMessage: "Failed to update product",
       });
+      debugger
       if (!result) {
         throw new Error("Update failed");
       }

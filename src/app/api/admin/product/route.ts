@@ -46,9 +46,9 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params;
+  const  id  = params;
   try {
-    const { data } = await request.json();
+    const  data  = await request.json();
     logger.log(`Updating product: ${id} with data: ${JSON.stringify(data)}`);
     const updatedProduct = await productService.updateProduct(id, data);
     revalidateTag(CACHE_TAGS.PRODUCTS);

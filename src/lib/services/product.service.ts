@@ -36,10 +36,12 @@ export class ProductService {
   }
 
   updateProduct = async (id: string, product: Partial<Product>): Promise<Product> => {
+    logger.log('product.service.updateProduct.log', id, product)
     return this.productRepository.updateProduct(id, product)
   }
 
   deleteProduct = async (id: string): Promise<void> => {
+    logger.log('product.service.deleteProduct.log', id)
     return this.productRepository.deleteProduct(id)
   }
 }

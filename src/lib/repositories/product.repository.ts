@@ -44,6 +44,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   updateProduct = async (id: string, product: Partial<Product>): Promise<Product> => {
+    logger.log('product.repository.updateProduct.log', id, product)
     const { data, error } = await this.supabaseClient
       .from(`${this.tableName}`)
       .update(product)
@@ -51,6 +52,7 @@ export class ProductRepository implements IProductRepository {
       .select()
       .single()
     .throwOnError()
+    logger.log('product.repository.updateProduct.log', data)
 
     if (error) {
       logger.log('Error updting product:', error)
@@ -61,12 +63,14 @@ export class ProductRepository implements IProductRepository {
   }
 
   deleteProduct = async (id: string): Promise<void> => {
+    logger.log('product.repository.deleteProduct.log', id)
     const { error } = await this.supabaseClient
       .from(`${this.tableName}`)
       .delete()
       .eq('id', id)
       .throwOnError()
 
+    logger.log('product.repository.deleteProduct.log', error)
     if (error) {
       logger.log('Error deleting product:', error)
       throw error
