@@ -54,10 +54,10 @@ export const useAdminProducts = () => {
 
       if (process.env.NEXT_PUBLIC_MOCK_UPLOADS === "true") {
         if(data.imageFile) {
-          imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg`;
+          imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/images/1741514066709-2025-03-09_07-55-trAfuCDSuaW2aZYiXHgENMuGfGNdCo.png`;
         }
         if(data.pdfFile) {
-          pdfUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf?download=1`;
+          pdfUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/documents/1741514066710-MikitaKavaliou_CV-o9tq6KQeC8Awjc34ZpYCfci1PLfycY.pdf?download=1`;
         }
       } else {
         const uploadPromises = [];
@@ -125,10 +125,10 @@ export const useAdminProducts = () => {
         // Validate required fields
         validateProductData(data);
 
-        debugger
+        // debugger
 
         const { imageUrl, pdfUrl } = await uploadFiles(data);
-        debugger
+        // debugger
 
         logger.log("Image uploaded successfully:", imageUrl);
         logger.log("PDF uploaded successfully:", pdfUrl);
@@ -169,10 +169,10 @@ export const useAdminProducts = () => {
 
   const updateProduct = useCallback(
     async (id: string, data: ProductSubmissionData): Promise<Product> => {
-      debugger
+      // debugger
 
       const { imageUrl, pdfUrl } = await uploadFiles(data);
-      debugger
+      // debugger
 
       logger.log("Image uploaded successfully:", imageUrl);
       logger.log("PDF uploaded successfully:", pdfUrl);
