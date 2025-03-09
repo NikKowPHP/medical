@@ -76,6 +76,25 @@ export class ProductRepository implements IProductRepository {
       throw error
     }
   }
+
+  getProductById = async (id: string): Promise<Product> => {
+    logger.log('product.repository.getProductById.log', id)
+    const { data, error } = await this.supabaseClient
+      .from(`${this.tableName}`)
+      .select('*')
+      .eq('id', id)
+      .single()
+      .throwOnError()
+
+    logger.log('product.repository.getProductById.log', data)
+
+    if (error) {
+      logger.log('Error fetching product by id:', error)
+      throw error
+    }
+
+    return data
+  }
 }
 
 // export singleton

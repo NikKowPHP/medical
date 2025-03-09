@@ -8,6 +8,7 @@ export interface IProductRepository {
   createProduct(product: Partial<Product>): Promise<Product>
   updateProduct(id: string, product: Partial<Product>): Promise<Product>
   deleteProduct(id: string): Promise<void>
+  getProductById(id: string): Promise<Product>
 }
 
 // Create an instance of the production repository
@@ -43,6 +44,11 @@ export class ProductService {
   deleteProduct = async (id: string): Promise<void> => {
     logger.log('product.service.deleteProduct.log', id)
     return this.productRepository.deleteProduct(id)
+  }
+
+  getProductById = async (id: string): Promise<Product> => {
+    logger.log('product.service.getProductById.log', id)
+    return this.productRepository.getProductById(id)
   }
 }
 

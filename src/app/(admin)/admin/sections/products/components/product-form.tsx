@@ -105,7 +105,7 @@ export function ProductForm({
             <img
               src={product.image_url}
               alt={product.title}
-              className="h-4xl w-4xl object-cover"
+              className="h-[200px] w-[400px] object-cover"
                     />
           </div>
         )}

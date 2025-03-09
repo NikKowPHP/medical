@@ -204,8 +204,9 @@ export const useAdminProducts = () => {
   const deleteProduct = useCallback(
     async (id: string): Promise<void> => {
       await fetchApi({
-        url: `/api/admin/products/${id}`,
+        url: `/api/admin/product`,
         method: "DELETE",
+        data: { id },
         errorMessage: "Failed to delete product",
       });
       setProducts(products.filter((p) => p.id !== id));

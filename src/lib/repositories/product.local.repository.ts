@@ -124,6 +124,14 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
       });
     });
   };
+
+  getProductById = async (id: string): Promise<Product> => {
+    return new Promise((resolve, reject) => {
+      this.db.get(`SELECT * FROM "${this.tableName}" WHERE id = ?;`, [id], (err, row: Product) => {
+        resolve(row);
+      });
+    });
+  }
 }
 
 // Export a singleton instance

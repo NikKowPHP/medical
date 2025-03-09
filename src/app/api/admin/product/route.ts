@@ -3,6 +3,7 @@ import logger from '@/lib/logger';
 import { revalidateTag } from 'next/cache';
 import { CACHE_TAGS } from '@/lib/utils/cache';
 import { productService } from '@/lib/services/product.service';
+import { del } from '@vercel/blob';
 
 
 
@@ -70,26 +71,60 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: NextRequest
 ) {
-  const { id } = params;
+  const body = await request.json()
+  if (!body.id) {
+    return NextResponse.json({ message: 'ID is required for updating product' }, { status: 400 });
+  }
   try {
-    logger.log(`Deleting product: ${id}`);
-    await productService.deleteProduct(id);
+    // 1. Get product data first
+    const product = await productService.getProductById(body.id);
+    logger.log('product.route.delete.log', product)
+    if (!product) {
+      return NextResponse.json(
+        { error: 'Product not found' },
+        { status: 404 }
+      );
+    }
+
+    // 2. Delete files from blob storage
+    const deletePromises = [];
+    if (product.image_url) {
+      deletePromises.push(del(product.image_url));
+    }
+    if (product.pdf_url) {
+      deletePromises.push(del(product.pdf_url));
+    }
+    logger.log('product.route.delete.log deleting files from blob', deletePromises)
+    await Promise.all(deletePromises);
+
+    // 3. Delete database record
+    await productService.deleteProduct(body.id);
+    logger.log('product.route.delete.log deleted product from database')
+
     revalidateTag(CACHE_TAGS.PRODUCTS);
-    return NextResponse.json({ success: true }, {
-      headers: {
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
+    logger.log('product.route.delete.log revalidated cache')
+    
+    return NextResponse.json(
+      { success: true },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        }
       }
-    });
+    );
+
   } catch (error) {
     logger.error(`Error deleting product: ${error}`);
     return NextResponse.json(
       { error: 'Failed to delete product' },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   }
 }
