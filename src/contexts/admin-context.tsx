@@ -68,45 +68,50 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   const createProduct = useCallback(
     async (data: ProductSubmissionData): Promise<Product> => {
-     
       try {
+        // Validate required fields
         if(!data.imageFile || !data.pdfFile || !data.title || !data.description || !data.category) {
           throw new Error('Missing required fields');
         }
-         // Upload image directly to Vercel Blob
-         const imageBlob = await upload(`products/${Date.now()}-${data.imageFile.name}`, data.imageFile, {
+        
+        // Upload image with correct pathname format
+        const imageFilename = `products/${Date.now()}-${data.imageFile.name}`;
+        const imageBlob = await upload(imageFilename, data.imageFile, {
           access: 'public',
           handleUploadUrl: '/api/admin/upload-token',
-          // Optional: Track upload progress
           onUploadProgress: ({ percentage }) => logger.log(`Image upload progress: ${percentage}%`),
         });
-        logger.log('imageBlob', imageBlob)
-         // Upload PDF directly to Vercel Blob
-         const pdfBlob = await upload(`products/${Date.now()}-${data.pdfFile.name}`, data.pdfFile, {
+        logger.log('Image uploaded successfully:', imageBlob.url);
+        
+        // Upload PDF with correct pathname format
+        const pdfFilename = `products/${Date.now()}-${data.pdfFile.name}`;
+        const pdfBlob = await upload(pdfFilename, data.pdfFile, {
           access: 'public',
           handleUploadUrl: '/api/admin/upload-token',
-          // Optional: Track upload progress
           onUploadProgress: ({ percentage }) => logger.log(`PDF upload progress: ${percentage}%`),
         });
-        logger.log('pdfBlob', pdfBlob)
+        logger.log('PDF uploaded successfully:', pdfBlob.url);
       
-      const result = await fetchApi<Product>({
-        url: '/api/admin/products',
-        method: 'POST',
-        data: {
-          image_url: imageBlob.url,
-          pdf_url: pdfBlob.url,
-          title: data.title,
-          description: data.description,
-          category: data.category,
-        },
-        errorMessage: 'Failed to create product',
-      });
-      if (!result) {
-        throw new Error('Failed to create product');
-      }
-      setProducts([...products, result]);
-      return result;
+        // Now create the product in your database
+        const result = await fetchApi<Product>({
+          url: '/api/admin/products',
+          method: 'POST',
+          data: {
+            image_url: imageBlob.url,
+            pdf_url: pdfBlob.url,
+            title: data.title,
+            description: data.description,
+            category: data.category,
+          },
+          errorMessage: 'Failed to create product',
+        });
+        
+        if (!result) {
+          throw new Error('Failed to create product');
+        }
+        
+        setProducts([...products, result]);
+        return result;
       } catch (error) {
         console.error('Error creating product:', error);
         throw error;
