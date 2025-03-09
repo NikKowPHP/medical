@@ -3,6 +3,8 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { useApi } from '@/hooks/use-api';
 import { Product } from '@/domain/models/models';
+import { upload } from '@vercel/blob/client';
+import logger from '@/lib/logger';
 
 // Update the function types to accept file values as separate fields.
 type ProductSubmissionData = Partial<Product> & { 
@@ -53,6 +55,16 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     return productsArray;
   }, [fetchApi]);
 
+  // const uploadFile = useCallback(
+  //   async (file: File, path: string): Promise<string> => {
+  //     const blob = await upload(path, file, {
+  //       access: 'public',
+  //       handleUploadUrl: '/api/admin/upload-token',
+  //     });
+  //     return blob.url;
+  //   },
+  //   [fetchApi]
+  // );
 
   const createProduct = useCallback(
     async (data: ProductSubmissionData): Promise<Product> => {
@@ -61,20 +73,32 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         if(!data.imageFile || !data.pdfFile || !data.title || !data.description || !data.category) {
           throw new Error('Missing required fields');
         }
-        const formData = new FormData();
-        formData.append('imageFile', data.imageFile);
-        formData.append('pdfFile', data.pdfFile);
-        formData.append('title', data.title);
-        formData.append('description', data.description);
-        formData.append('category', data.category);
-
-        console.log('formData', JSON.stringify(formData))
+         // Upload image directly to Vercel Blob
+         const imageBlob = await upload(`products/${Date.now()}-${data.imageFile.name}`, data.imageFile, {
+          access: 'public',
+          handleUploadUrl: '/api/admin/upload-token',
+          // Optional: Track upload progress
+          onUploadProgress: ({ percentage }) => logger.log(`Image upload progress: ${percentage}%`),
+        });
+        logger.log('imageBlob', imageBlob)
+         // Upload PDF directly to Vercel Blob
+         const pdfBlob = await upload(`products/${Date.now()}-${data.pdfFile.name}`, data.pdfFile, {
+          access: 'public',
+          handleUploadUrl: '/api/admin/upload-token',
+          // Optional: Track upload progress
+          onUploadProgress: ({ percentage }) => logger.log(`PDF upload progress: ${percentage}%`),
+        });
+        logger.log('pdfBlob', pdfBlob)
+      
       const result = await fetchApi<Product>({
         url: '/api/admin/products',
         method: 'POST',
-        data: formData,
-        customHeaders: {
-          'Content-Type': 'multipart/form-data',
+        data: {
+          image_url: imageBlob.url,
+          pdf_url: pdfBlob.url,
+          title: data.title,
+          description: data.description,
+          category: data.category,
         },
         errorMessage: 'Failed to create product',
       });

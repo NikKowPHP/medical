@@ -69,6 +69,7 @@ async function parseForm(
 
 export async function GET(request: NextRequest) {
   try {
+    logger.log('Fetching products', request.url)
     const products = await productService.getProducts();
     return NextResponse.json(products);
   } catch (error) {
