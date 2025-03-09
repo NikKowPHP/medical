@@ -18,7 +18,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params;
+  const  id  = params;
   try {
     // As the service has no direct getById, fetch all and filter.
     const products = await productService.getProducts();
@@ -43,14 +43,15 @@ export async function GET(
 }
 
 export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: NextRequest
 ) {
-  const  id  = params;
+  const body = await request.json()
+  if (!body.id) {
+    return NextResponse.json({ message: 'ID is required for updating product' }, { status: 400 });
+  }
   try {
-    const  data  = await request.json();
-    logger.log(`Updating product: ${id} with data: ${JSON.stringify(data)}`);
-    const updatedProduct = await productService.updateProduct(id, data);
+    logger.log(`Updating product: ${body.id} with data: ${JSON.stringify(body)}`);
+    const updatedProduct = await productService.updateProduct(body.id, body);
     revalidateTag(CACHE_TAGS.PRODUCTS);
     return NextResponse.json(updatedProduct, {
       headers: {

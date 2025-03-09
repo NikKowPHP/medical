@@ -177,6 +177,7 @@ export const useAdminProducts = () => {
       logger.log("PDF uploaded successfully:", pdfUrl);
 
       const productData = {
+        id: id,
         title: data.title,
         description: data.description,
         category: data.category,
@@ -185,7 +186,7 @@ export const useAdminProducts = () => {
       };
 
       const result = await fetchApi<Product>({
-        url: `/api/admin/product?id=${id}`,
+        url: `/api/admin/product`,
         method: "PUT",
         data: productData,
         errorMessage: "Failed to update product",
