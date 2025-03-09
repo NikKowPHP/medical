@@ -85,7 +85,7 @@ export const useAdminProducts = () => {
       method: "GET",
       errorMessage: "Failed to fetch products",
     });
-    debugger;
+    // debugger;
     // Ensure we have an array
     const productsArray = Array.isArray(result) ? result : [];
     setProducts(productsArray);
@@ -100,6 +100,7 @@ export const useAdminProducts = () => {
         validateProductData(data);
 
         const { imageUrl, pdfUrl } = await uploadFiles(data);
+        debugger
 
         logger.log("Image uploaded successfully:", imageUrl);
         logger.log("PDF uploaded successfully:", pdfUrl);
@@ -140,10 +141,26 @@ export const useAdminProducts = () => {
 
   const updateProduct = useCallback(
     async (id: string, data: ProductSubmissionData): Promise<Product> => {
+      debugger
+
+      const { imageUrl, pdfUrl } = await uploadFiles(data);
+      debugger
+
+      logger.log("Image uploaded successfully:", imageUrl);
+      logger.log("PDF uploaded successfully:", pdfUrl);
+
+      const productData = {
+        title: data.title,
+        description: data.description,
+        category: data.category,
+        image_url: imageUrl,
+        pdf_url: pdfUrl,
+      };
+
       const result = await fetchApi<Product>({
-        url: `/api/products/${id}`,
+        url: `/api/admin/products/${id}`,
         method: "PUT",
-        data,
+        data: productData,
         errorMessage: "Failed to update product",
       });
       if (!result) {
@@ -152,13 +169,13 @@ export const useAdminProducts = () => {
       setProducts(products.map((p) => (p.id === id ? result : p)));
       return result;
     },
-    [fetchApi, products]
+    [fetchApi, products, uploadFiles]
   );
 
   const deleteProduct = useCallback(
     async (id: string): Promise<void> => {
       await fetchApi({
-        url: `/api/products/${id}`,
+        url: `/api/admin/products/${id}`,
         method: "DELETE",
         errorMessage: "Failed to delete product",
       });
@@ -176,8 +193,8 @@ export const useAdminProducts = () => {
  
   useEffect(() => {
     logger.log('products', products)
-    if (products.length > 0) {
-      debugger
+    if (products && products.length > 0) {
+      // debugger
       
     }
   }, [products])

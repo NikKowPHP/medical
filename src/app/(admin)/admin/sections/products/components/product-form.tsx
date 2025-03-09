@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button/button'
 import { Input } from '@/components/ui/input/input'
 import { Label } from '@/components/ui/label/label'
 import { Product } from '@/domain/models/models'
+import Image from 'next/image'
+import Link from 'next/link'
 
 // Define a custom form type that extends Partial<Product> with separate file fields.
 type ProductFormValues = Partial<Product> & {
@@ -89,21 +91,54 @@ export function ProductForm({
 
       <div>
         <Label htmlFor="imageFile">Image Upload</Label>
+        {product?.image_url && (
+          <div className="mb-4">
+            <p className="text-sm text-gray-500 mb-2">Current Image:</p>
+            {/* <Image
+              src={product.image_url}
+              alt={product.title || 'Product image'}
+              width={150}
+              height={150}
+              className="rounded border p-1"
+            /> */}
+
+            <img
+              src={product.image_url}
+              alt={product.title}
+              className="h-4xl w-4xl object-cover"
+                    />
+          </div>
+        )}
         <Input
           type="file"
           id="imageFile"
+          accept="image/*"
           {...register('imageFile')}
-          className="w-full"
+          className="w-full mt-2"
         />
       </div>
 
       <div>
         <Label htmlFor="pdfFile">PDF Upload</Label>
+        {product?.pdf_url && (
+          <div className="mb-4">
+            <p className="text-sm text-gray-500 mb-2">Current PDF:</p>
+            <Link
+              href={product.pdf_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              View Current PDF
+            </Link>
+          </div>
+        )}
         <Input
           type="file"
           id="pdfFile"
+          accept="application/pdf"
           {...register('pdfFile')}
-          className="w-full"
+          className="w-full mt-2"
         />
       </div>
 

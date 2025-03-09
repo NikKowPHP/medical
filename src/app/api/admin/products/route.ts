@@ -6,6 +6,8 @@ import { productService } from '@/lib/services/product.service';
 
 
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 
 
 
@@ -13,7 +15,13 @@ export async function GET(request: NextRequest) {
   try {
     logger.log('Fetching products', request.url)
     const products = await productService.getProducts();
-    return NextResponse.json(products);
+    return NextResponse.json(products, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   } catch (error) {
     logger.error(`Error fetching products: ${error}`);
     return NextResponse.json(
@@ -31,7 +39,13 @@ export async function POST(request: NextRequest) {
     const newProduct = await productService.createProduct(data);
     logger.log(`Product created ${logId}`, { newProduct });
     revalidateTag(CACHE_TAGS.PRODUCTS);
-    return NextResponse.json(newProduct);
+    return NextResponse.json(newProduct, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   } catch (error) {
     logger.error(`Error creating product: ${error}`);
     return NextResponse.json(
@@ -47,4 +61,17 @@ export async function POST(request: NextRequest) {
 
 export async function createLogId() {
   return `product-${Date.now().toString()}`;
+}
+
+
+export function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      headers: {
+        'Access-Control-Allow-Methods': 'GET, PUT, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    }
+  )
 }
