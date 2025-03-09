@@ -1,0 +1,26 @@
+Upload completed: {
+  url: 'https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg',
+  downloadUrl: 'https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg?download=1',
+  pathname: 'products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736.jpeg',
+  contentType: 'image/jpeg',
+  contentDisposition: 'inline; filename="1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736.jpeg"'
+} {"__development__":"bypass-auth-for-localhost"}
+jsonResponse in upload-token { type: 'blob.upload-completed', response: 'ok' }
+ POST /api/admin/upload-token 200 in 9ms
+ ✓ Compiled /api/admin/products in 239ms (972 modules)
+ ✓ Compiled in 0ms (972 modules)
+ ✓ Compiled in 0ms (972 modules)
+ ✓ Compiled in 0ms (972 modules)
+contentType application/json
+Processing product creation { data: undefined }
+product.service.createProduct.log {}
+Error creating product: TypeError: Cannot read properties of undefined (reading 'imageFile')
+ POST /api/admin/products 500 in 596ms
+Upload completed: {
+  url: 'https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf',
+  downloadUrl: 'https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf?download=1',
+  pathname: 'products/1741507911168-MikitaKavaliou_CV.pdf',
+  contentType: 'application/pdf',
+  contentDisposition: 'inline; filename="1741507911168-MikitaKavaliou_CV.pdf"'
+} {"__development__":"bypass-auth-for-localhost"}
+jsonResponse in upload-token { type: 'blob.upload-completed', response: 'ok' }

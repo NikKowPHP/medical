@@ -72,6 +72,21 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     []
   );
 
+  const uploadFiles = useCallback(async (data: ProductSubmissionData): Promise<{ imageUrl: string; pdfUrl: string }> => {
+    let imageUrl: string;
+    let pdfUrl: string;
+    if (process.env.NEXT_PUBLIC_MOCK_UPLOADS === "true") {
+      imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507909552-497021ab-0717-4f7d-ae17-fcbbfa2e6736-pZfk4H3sytIkoIxkCp26Kbo7VBQq3N.jpeg`;
+      pdfUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/1741507911168-MikitaKavaliou_CV-sHU18ghkL0agBMJFrtnOEPbq1fbju3.pdf?download=1`;
+    } else {
+      [imageUrl, pdfUrl] = await Promise.all([
+        uploadFile(data.imageFile!, "products/images"),
+        uploadFile(data.pdfFile!, "products/documents"),
+      ]);
+    }
+    return { imageUrl, pdfUrl };
+  }, [uploadFile]);
+
   const validateProductData = useCallback((data: ProductSubmissionData): boolean => {
     if (!data.imageFile || !data.pdfFile || !data.title || !data.description || !data.category) {
       throw new Error("Missing required fields");
@@ -85,10 +100,9 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         // Validate required fields
         validateProductData(data);
 
-        const [imageUrl, pdfUrl] = await Promise.all([
-          uploadFile(data.imageFile!, "products/images"),
-          uploadFile(data.pdfFile!, "products/documents"),
-        ]);
+
+        const { imageUrl, pdfUrl } = await uploadFiles(data);
+
 
         logger.log("Image uploaded successfully:", imageUrl);
         logger.log("PDF uploaded successfully:", pdfUrl);
@@ -100,7 +114,8 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
           image_url: imageUrl,
           pdf_url: pdfUrl
         };
-  
+
+        logger.log(`Product data: ${JSON.stringify(productData)}`);
 
         const result = await fetchApi<Product>({
           url: "/api/admin/products",
@@ -120,7 +135,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         throw error;
       }
     },
-    [fetchApi, validateProductData, uploadFile]
+    [fetchApi, validateProductData, uploadFiles]
   );
 
   const updateProduct = useCallback(
