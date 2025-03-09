@@ -53,13 +53,29 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     return productsArray;
   }, [fetchApi]);
 
+
   const createProduct = useCallback(
     async (data: ProductSubmissionData): Promise<Product> => {
-      debugger
+     
+      try {
+        if(!data.imageFile || !data.pdfFile || !data.title || !data.description || !data.category) {
+          throw new Error('Missing required fields');
+        }
+        const formData = new FormData();
+        formData.append('imageFile', data.imageFile);
+        formData.append('pdfFile', data.pdfFile);
+        formData.append('title', data.title);
+        formData.append('description', data.description);
+        formData.append('category', data.category);
+
+        console.log('formData', JSON.stringify(formData))
       const result = await fetchApi<Product>({
-        url: '/api/products',
+        url: '/api/admin/products',
         method: 'POST',
-        data,
+        data: formData,
+        customHeaders: {
+          'Content-Type': 'multipart/form-data',
+        },
         errorMessage: 'Failed to create product',
       });
       if (!result) {
@@ -67,6 +83,10 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       }
       setProducts([...products, result]);
       return result;
+      } catch (error) {
+        console.error('Error creating product:', error);
+        throw error;
+      }
     },
     [fetchApi, products]
   );

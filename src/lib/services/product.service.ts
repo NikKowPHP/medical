@@ -2,6 +2,7 @@ import { ProductRepository } from "../repositories/product.repository"
 import { Product } from "@/domain/models/models"
 import { productRepositoryLocal } from "../repositories/product.local.repository"
 import { VercelBlobService } from "./vercel-blob.service"
+import logger from "../logger"
 
 export interface IProductRepository {
   getProducts(): Promise<Product[]>
@@ -35,6 +36,7 @@ export class ProductService {
     product: Partial<Product> & { imageFile?: File; pdfFile?: File }
   ): Promise<Product> => {
     const finalProduct = { ...product }
+    logger.log('product.service.createProduct.log', finalProduct)
     if (product.imageFile) {
       finalProduct.image_url = await this.blobService.uploadToVercelBlob(product.imageFile);
     }

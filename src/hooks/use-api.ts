@@ -8,6 +8,7 @@ type ApiRequest<T> = {
   data?: any;
   onSuccess?: (data: T) => void;
   errorMessage?: string;
+  customHeaders?: Record<string, string>;
 };
 
 export const useApi = () => {
@@ -19,7 +20,8 @@ export const useApi = () => {
     method,
     data,
     onSuccess,
-    errorMessage = 'Request failed'
+    errorMessage = 'Request failed',
+    customHeaders = {}
   }: ApiRequest<T>): Promise<T | undefined> => {
     setLoading(true);
     setError(null);
@@ -36,7 +38,8 @@ export const useApi = () => {
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
-          'Expires': '0'
+          'Expires': '0',
+          ...customHeaders,
         }
       });
 

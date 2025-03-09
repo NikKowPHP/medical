@@ -85,6 +85,7 @@ export async function POST(request: NextRequest) {
     let data: any;
     // Check if the content-type is multipart/form-data
     const contentType = request.headers.get('content-type') || '';
+    console.log('contentType', contentType)
     if (contentType.includes('multipart/form-data')) {
       const { fields, files } = await parseForm(request);
       data = {};
