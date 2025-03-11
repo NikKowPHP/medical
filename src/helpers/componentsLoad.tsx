@@ -70,3 +70,10 @@ export const FaqSection = dynamic(
     ssr: true,
   }
 )
+
+export const CtaSection = dynamic(
+  () => import('@/components/sections/cta-section').then(mod => mod.CtaSection),
+  {
+    ssr: true,
+  }
+)
