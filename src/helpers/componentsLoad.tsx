@@ -49,3 +49,10 @@ export const QuoteSection = dynamic(
     ssr: true,
   }
 )
+
+export const SubHeroSection = dynamic(
+  () => import('@/components/sections/hero/subhero').then(mod => mod.SubHeroSection),
+  {
+    ssr: true,
+  }
+)

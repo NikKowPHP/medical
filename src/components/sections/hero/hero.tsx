@@ -1,4 +1,4 @@
-import { ArrowUpRight, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
 export const HeroSection = async () => {
@@ -12,7 +12,7 @@ export const HeroSection = async () => {
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
-      <div className='max-w-7xl mx-auto py-[100px]'>
+      <div className='max-w-7xl mx-auto pt-[100px]'>
 
        
  

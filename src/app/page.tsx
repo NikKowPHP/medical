@@ -5,6 +5,7 @@ import {
   YoutubeSection,
   QuoteSection,
   BlogPosts,
+  SubHeroSection
 } from '@/helpers/componentsLoad'
 import { companyConfig } from '@/config/company'
 
@@ -19,6 +20,7 @@ export default async function HomePage() {
       >
         {/* Priority Content for LCP */}
         <HeroSection />
+        <SubHeroSection />  
 
         {/* Deferred Content */}
         <div className="relative">
