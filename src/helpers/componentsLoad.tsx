@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 
 export const HeroSection = dynamic(
   () =>
-    import('@/components/sections/hero/hero').then((mod) => mod.HeroSection),
+    import('@/components/sections/hero').then((mod) => mod.HeroSection),
   {
     ssr: true,
   }
@@ -12,7 +12,7 @@ export const HeroSection = dynamic(
 
 export const MyExpertise = dynamic(
   () =>
-    import('@/components/sections/my-expertise/my-expertise').then(
+    import('@/components/sections/my-expertise').then(
       (mod) => mod.MyExpertise
     ),
   {
@@ -22,7 +22,7 @@ export const MyExpertise = dynamic(
 
 export const YoutubeSection = dynamic(
   () =>
-    import('@/components/sections/youtube-section/youtube-section').then(
+    import('@/components/sections/youtube-section').then(
       (mod) => mod.YoutubeSection
     ),
   {
@@ -31,10 +31,10 @@ export const YoutubeSection = dynamic(
 )
 
 
-export const BlogPosts = dynamic(
+export const ProductList = dynamic(
   () =>
-    import('@/components/sections/blog-posts/blog-posts').then(
-      (mod) => mod.BlogPosts
+    import('@/components/sections/products-section').then(
+      (mod) => mod.ProductList
     ),
   { 
     ssr: true,
@@ -44,14 +44,14 @@ export const BlogPosts = dynamic(
 
 
 export const QuoteSection = dynamic(
-  () => import('@/components/sections/quote-section/quote-section').then(mod => mod.QuoteSection),
+  () => import('@/components/sections/quote-section').then(mod => mod.QuoteSection),
   {
     ssr: true,
   }
 )
 
 export const SubHeroSection = dynamic(
-  () => import('@/components/sections/hero/subhero').then(mod => mod.SubHeroSection),
+  () => import('@/components/sections/subhero').then(mod => mod.SubHeroSection),
   {
     ssr: true,
   }

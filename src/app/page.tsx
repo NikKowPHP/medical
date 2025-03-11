@@ -1,16 +1,13 @@
-import { Suspense } from 'react'
+import { Suspense } from "react";
 import {
   HeroSection,
-  MyExpertise,
-  YoutubeSection,
   QuoteSection,
-  BlogPosts,
-  SubHeroSection
-} from '@/helpers/componentsLoad'
-import { companyConfig } from '@/config/company'
+  ProductList,
+  SubHeroSection,
+} from "@/helpers/componentsLoad";
+import { companyConfig } from "@/config/company";
 
 export default async function HomePage() {
-
   return (
     <>
       <div
@@ -20,12 +17,15 @@ export default async function HomePage() {
       >
         {/* Priority Content for LCP */}
         <HeroSection />
-        <SubHeroSection />  
+        <SubHeroSection />
 
         {/* Deferred Content */}
         <div className="relative">
-          <Suspense fallback={<div className="min-h-[400px]"></div>}> 
+          <Suspense fallback={<div className="min-h-[400px]"></div>}>
             <QuoteSection />
+          </Suspense>
+          <Suspense fallback={<div className="min-h-[300px]" />}>
+            <ProductList />
           </Suspense>
           {/* <Suspense fallback={<div className="min-h-[700px]" />}>
             <div>
@@ -38,24 +38,17 @@ export default async function HomePage() {
               <YoutubeSection />
             </div>
           </Suspense> */}
-
-
-          <Suspense fallback={<div className="min-h-[300px]" />}>
-            <BlogPosts displayReadAll={true} />
-          </Suspense>
-
-        
         </div>
 
         {/* Metadata */}
         <meta itemProp="name" content={companyConfig.name} />
         <meta itemProp="description" content={companyConfig.description} />
         <meta itemProp="image" content="/images/ziro.avif" />
-        <meta itemProp="dateModified" content={new Date().toISOString().split('T')[0]} />
+        <meta
+          itemProp="dateModified"
+          content={new Date().toISOString().split("T")[0]}
+        />
       </div>
-
-   
     </>
-  )
+  );
 }
-

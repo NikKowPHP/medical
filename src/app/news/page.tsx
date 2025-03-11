@@ -1,7 +1,7 @@
 
 
 import { Suspense } from 'react'
-import { BlogPosts } from '@/components/sections/blog-posts/blog-posts'
+import { BlogPosts } from '@/components/sections/products-section'
 
 
 
