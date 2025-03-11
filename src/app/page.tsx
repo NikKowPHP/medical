@@ -24,21 +24,21 @@ export default async function HomePage() {
 
         {/* Deferred Content */}
         <div className="relative">
-          <Suspense fallback={<div className="min-h-[700px]" />}>
-            <div>
-              <MyExpertise />
-            </div>
-          </Suspense>
-
-          <Suspense fallback={<div className="min-h-[400px]">Loading video...</div>}>
-            <div>
-              <YoutubeSection />
-            </div>
-          </Suspense>
-
           <Suspense fallback={<div className="min-h-[400px]"></div>}> 
             <QuoteSection />
           </Suspense>
+          {/* <Suspense fallback={<div className="min-h-[700px]" />}>
+            <div>
+              <MyExpertise />
+            </div>
+          </Suspense> */}
+
+          {/* <Suspense fallback={<div className="min-h-[400px]">Loading video...</div>}>
+            <div>
+              <YoutubeSection />
+            </div>
+          </Suspense> */}
+
 
           <Suspense fallback={<div className="min-h-[300px]" />}>
             <BlogPosts displayReadAll={true} />
