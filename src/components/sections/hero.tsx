@@ -30,7 +30,7 @@ export const HeroSection = async () => {
               {`Your Trusted Source for Alton's Sterile Disposable Endoscopic Accessories`}
             </h2>
 
-            <Link href="/products" className="flex items-center gap-[10px] text-white  text-[16px] bg-[#014441] rounded-full  pl-[20px] pr-[10px] py-[15px]">Contact Us <ChevronRight className="w-6 h-6" /></Link>
+            <Link href="/products" className="flex items-center text-center gap-[10px]  text-white  text-[16px] bg-[#014441] rounded-full  pl-[20px] pr-[10px] py-[15px]">Contact Us <ChevronRight className="w-6 h-6" /></Link>
            
           
           </div>
