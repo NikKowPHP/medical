@@ -5,6 +5,7 @@ import { navigationConfig } from '@/config/navigation'
 import { ChevronRight, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -86,34 +87,40 @@ export function Navbar() {
       </div>
 
       {/* Mobile Dropdown Navbar */}
-      {mobileMenuOpen && (
-        <nav
-          id="mobile-menu"
-          className="absolute left-0 right-0 top-full bg-white md:hidden transition-opacity duration-300 "
-          aria-label="Mobile navigation"
-        >
-          <ul className="flex flex-col p-4 gap-[16px] justify-center items-center pb-[24px]">
-            {navigationConfig.mainNav.map((item) => (
-              <li key={item.href} aria-label={item.title}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-[18px] font-medium"
-                >
-                  {item.title}
-                </Link>
-              </li>
-           
-            ))}
-               <li key="request-a-quote">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.nav
+            key="mobile-menu"
+            id="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute left-0 right-0 top-full bg-white md:hidden"
+            aria-label="Mobile navigation"
+          >
+            <ul className="flex flex-col p-4 gap-[16px] justify-center items-center pb-[24px]">
+              {navigationConfig.mainNav.map((item) => (
+                <li key={item.href} aria-label={item.title}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block text-[18px] font-medium"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+              <li key="request-a-quote">
                 <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
                   <span className="text-[16px]">Request a Quote</span>
                   <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
                 </button>
               </li>
-          </ul>
-        </nav>
-      )}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
