@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Square } from "lucide-react";
-import { SliderItem as SliderType } from "@/lib/data/safer_solutions-data";
+import { sliderItems, SliderItem as SliderType } from "@/lib/data/safer_solutions-data";
 
 export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) {
   return (
@@ -41,38 +41,32 @@ const ProcessTitleSubtitle = () => {
   );
 };
 
-const RoseMedicalSlider = () => {
+const RoseMedicalSlider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
   const [selectedOption, setSelectedOption] = useState("300E");
-
-  const options = [
-    { id: "200E", label: "200E", color: "bg-[#CCD8D7]" },
-    { id: "300E", label: "300E", color: "bg-[#99A9A8]" },
-    { id: "400E", label: "400E", color: "bg-[#01423F]" },
-  ];
 
   return (
     <div className="bg-[#01423F] rounded-xl overflow-hidden w-full h-[300px] flex relative">
       {/* Color Options Column */}
       <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-10">
-        {options.map((option) => (
+        {sliderItems.map((option) => (
           <button
             key={option.id}
             onClick={() => setSelectedOption(option.id)}
-            className={`${option.color} rounded-full w-14 h-14 flex items-center justify-center text-xs font-medium ${
+            className={`rounded-full w-[40px] overflow-hidden h-[20px] flex items-center justify-center ${
               selectedOption === option.id
                 ? "ring-2 ring-white ring-offset-2 ring-offset-[#01423F]"
                 : ""
             }`}
           >
-            <span className={`${selectedOption === option.id ? "text-white" : "text-slate-800"}`}>
-              {option.label}
-            </span>
+            <div className="relative w-[50px] h-[30px] rounded-xl overflow-hidden">
+              <Image src={option.image_url} alt="Alton" fill className="object-cover" />
+            </div>
           </button>
         ))}
       </div>
 
       {/* Logo */}
-      <div className="flex-1 flex items-center justify-center">
+      {/* <div className="flex-1 flex items-center justify-center">
         <div className="relative w-48 h-24">
           <Image
             src="/rose-logo-white.png"
@@ -81,7 +75,7 @@ const RoseMedicalSlider = () => {
             className="object-contain"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -97,7 +91,7 @@ const SliderItem = ({ index, item }: { index: number; item: SliderType }) => {
         itemType="https://schema.org/HowToStep"
       >
         <meta itemProp="position" content={`${index + 1}`} />
-        <RoseMedicalSlider />
+        <RoseMedicalSlider sliderItems={sliderItems} />
       </div>
     );
   }
