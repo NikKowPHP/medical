@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Square } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SliderItem as SliderType } from "@/lib/data/safer_solutions-data";
 
 export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) {
@@ -48,12 +49,12 @@ const Slider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
   return (
     <div className="bg-[#01423F] rounded-xl overflow-hidden w-full h-[300px] flex relative">
       {/* Color Options Column */}
-      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-10 gap-[16px]">
+      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col z-10 gap-[16px]">
         {sliderItems.map((option) => (
           <button
             key={option.id}
             onClick={() => setSelectedOption(option)}
-            className={`rounded-full w-[72px] h-[46px]  overflow-hidden flex flex-col items-center justify-center ${
+            className={`rounded-full w-[72px] h-[46px] overflow-hidden flex flex-col items-center justify-center transition-all duration-300 ${
               selectedOption.id === option.id
                 ? "ring-2 ring-white ring-offset-2 ring-offset-[#01423F]"
                 : ""
@@ -67,9 +68,23 @@ const Slider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
       </div>
       {selectedOption && (
         <div className="flex-1 flex items-center justify-center">
-          <div className="relative w-full h-full">
-            <Image src={selectedOption.image_url} alt="Rose Medical" fill className="object-cover" />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedOption.id}
+              className="relative w-full h-full"
+              initial={{ opacity: 0.5, scale: 1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0.5, scale: 1 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+            >
+              <Image
+                src={selectedOption.image_url}
+                alt="Rose Medical"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
       )}
 
