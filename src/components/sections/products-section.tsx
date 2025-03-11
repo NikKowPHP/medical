@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Suspense, useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { blogPostService } from '@/lib/services/blog-post.service';
-import { BlogPost } from '@/domain/models/models';
-import Image from 'next/image';
-import { Tag } from '@/components/ui/tag/tag';
-import { ArrowUpRight } from 'lucide-react';
-import logger from '@/lib/logger';
+import { Suspense, useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { blogPostService } from "@/lib/services/blog-post.service";
+import { BlogPost } from "@/domain/models/models";
+import Image from "next/image";
+import { Tag } from "@/components/ui/tag/tag";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
+import logger from "@/lib/logger";
 
 export interface Product {
   id: string;
@@ -22,24 +22,24 @@ export interface Product {
 
 const products: Product[] = [
   {
-    id: '1',
-    image_url: '/product1.avif',
+    id: "1",
+    image_url: "/product1.avif",
     description:
-      'Single-use design eliminates the risk of patient infection, improving patient trust and confidence.',
-    pdf_url: 'https://example.com/product1.pdf',
-    title: 'Product 1',
-    category: 'Enhanced Safety:',
+      "Single-use design eliminates the risk of patient infection, improving patient trust and confidence.",
+    pdf_url: "https://example.com/product1.pdf",
+    title: "Product 1",
+    category: "Enhanced Safety:",
     created_at: new Date(),
     updated_at: new Date(),
   },
   {
-    id: '2',
-    image_url: '/product1.avif',
+    id: "2",
+    image_url: "/product1.avif",
     description:
-      'Reduces expenses associated with sterilization, disinfectants, and autoclaves. Streamline your workflow and save valuable resources.',
-    pdf_url: 'https://example.com/product2.pdf',
-    title: 'Product 2',
-    category: 'Cost-Effective',
+      "Reduces expenses associated with sterilization, disinfectants, and autoclaves. Streamline your workflow and save valuable resources.",
+    pdf_url: "https://example.com/product2.pdf",
+    title: "Product 2",
+    category: "Cost-Effective",
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -68,10 +68,10 @@ function ParallaxImage({
         setOffset(rect.top * 0.1);
       }
     }
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     // Initialize the position
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -84,7 +84,7 @@ function ParallaxImage({
         src={src}
         alt={alt}
         fill
-        className={`object-cover ${className ? className : ''}`}
+        className={`object-cover ${className ? className : ""}`}
         loading="lazy"
         quality={100}
       />
@@ -140,39 +140,76 @@ const ProductItem = ({
       itemType="https://schema.org/Product"
       itemProp="itemListElement"
     >
-      {/* Image Section */}
-      {product.image_url && (
-        <div
-          className="w-full relative aspect-[6/3] rounded-xl sm:h-full sm:w-full overflow-hidden"
-          role="img"
-          aria-label={`${product.title} preview image`}
-        >
-          <ParallaxImage src={product.image_url} alt={product.title} />
-        </div>
-      )}
-
-      {/* Content Section */}
-      <div className="flex flex-col justify-between h-full p-[20px] gap-[20px] bg-[#FFE8D8]">
-        <header className="flex justify-between gap-2">
-        
-
-          <div className="flex items-center">
-            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))" style="user-select: none; width: 100%; height: 100%; display: inline-block; fill: var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40)); color: var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40)); flex-shrink: 0;"><g color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))" weight="regular"><path d="M56,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0ZM88,24a8,8,0,0,0-8,8V224a8,8,0,0,0,16,0V32A8,8,0,0,0,88,24Zm40,32a8,8,0,0,0-8,8V192a8,8,0,0,0,16,0V64A8,8,0,0,0,128,56Zm40,32a8,8,0,0,0-8,8v64a8,8,0,0,0,16,0V96A8,8,0,0,0,168,88Zm40-16a8,8,0,0,0-8,8v96a8,8,0,0,0,16,0V80A8,8,0,0,0,208,72Z"></path></g></svg></span>
-            <span>
-              <Tag variant="simple" className="px-8 text-sm sm:text-base">
-                {product.category}
-              </Tag>
-            </span>
+      <div className="flex flex-col gap-[24px]">
+        {/* Image Section */}
+        {product.image_url && (
+          <div
+            className="relative w-full h-full aspect-[6/3] rounded-xl overflow-hidden"
+            role="img"
+            aria-label={`${product.title} preview image`}
+          >
+            <ParallaxImage src={product.image_url} alt={product.title} />
           </div>
-        </header>
+        )}
+        <div className="flex flex-col gap-[24px]">
+          {/* Content Section */}
+          <div className="flex flex-col justify-between h-full  gap-[20px] ">
+            <header className="flex justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 256 256"
+                    focusable="false"
+                    className="w-6 h-6"
+                    color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))"
+                    style={{
+                      userSelect: "none",
 
-        <div
-          className="text-[16px] sm:text-[18px] lg:text-[20px] font-medium tracking-[-0.02em] flex items-center gap-2"
-          itemProp="headline"
-        >
-          {product.description}
+                      display: "inline-block",
+                      fill: "var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))",
+                      color:
+                        "var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <g color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))">
+                      <path d="M56,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0ZM88,24a8,8,0,0,0-8,8V224a8,8,0,0,0,16,0V32A8,8,0,0,0,88,24Zm40,32a8,8,0,0,0-8,8V192a8,8,0,0,0,16,0V64A8,8,0,0,0,128,56Zm40,32a8,8,0,0,0-8,8v64a8,8,0,0,0,16,0V96A8,8,0,0,0,168,88Zm40-16a8,8,0,0,0-8,8v96a8,8,0,0,0,16,0V80A8,8,0,0,0,208,72Z" />
+                    </g>
+                  </svg>
+                </span>
+                <span>
+                  <Tag variant="simple" className="px-8 text-[20px]">
+                    {product.category}
+                  </Tag>
+                </span>
+              </div>
+            </header>
+
+            <div
+              className="text-[26px] sm:text-[18px] lg:text-[20px] font-medium tracking-[-0.02em] flex items-center gap-2"
+              itemProp="headline"
+            >
+              {product.description}
+            </div>
+            <meta itemProp="position" content={String(position)} />
+          </div>
+
+          <div className="flex flex-wrap  gap-[10px]">
+            <Link
+              href="/products"
+              className="flex items-center gap-[10px] text-white  text-[16px] bg-[#014441] rounded-full  pl-[20px] pr-[10px] py-[15px]"
+            >
+              Request a Quote <ChevronRight className="w-6 h-6" />
+            </Link>
+            <Link
+              href="/products"
+              className="flex items-center gap-[10px] text-white  text-[16px] bg-[black] rounded-full  pl-[20px] pr-[10px] py-[15px]"
+            >
+              Download Product Brochure <ChevronRight className="w-6 h-6" />
+            </Link>
+          </div>
         </div>
-        <meta itemProp="position" content={String(position)} />
       </div>
     </li>
   );
