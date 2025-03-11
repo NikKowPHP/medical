@@ -2,23 +2,12 @@
 
 import { Suspense, useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { blogPostService } from "@/lib/services/blog-post.service";
-import { BlogPost } from "@/domain/models/models";
+import {  Product } from "@/domain/models/models";
 import Image from "next/image";
 import { Tag } from "@/components/ui/tag/tag";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
-import logger from "@/lib/logger";
+import { ChevronRight } from "lucide-react";
 
-export interface Product {
-  id: string;
-  image_url: string;
-  description: string;
-  pdf_url: string;
-  title: string;
-  category: string;
-  created_at: Date;
-  updated_at: Date;
-}
+
 
 const products: Product[] = [
   {

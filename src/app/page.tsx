@@ -4,6 +4,7 @@ import {
   QuoteSection,
   ProductList,
   SubHeroSection,
+  BetterOutcomesSection,
 } from "@/helpers/componentsLoad";
 import { companyConfig } from "@/config/company";
 
@@ -27,11 +28,11 @@ export default async function HomePage() {
           <Suspense fallback={<div className="min-h-[300px]" />}>
             <ProductList />
           </Suspense>
-          {/* <Suspense fallback={<div className="min-h-[700px]" />}>
+          <Suspense fallback={<div className="min-h-[700px]" />}>
             <div>
-              <MyExpertise />
+              <BetterOutcomesSection />
             </div>
-          </Suspense> */}
+          </Suspense>
 
           {/* <Suspense fallback={<div className="min-h-[400px]">Loading video...</div>}>
             <div>

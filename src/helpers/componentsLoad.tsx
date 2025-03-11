@@ -10,10 +10,10 @@ export const HeroSection = dynamic(
 )
 
 
-export const MyExpertise = dynamic(
+export const BetterOutcomesSection = dynamic(
   () =>
-    import('@/components/sections/my-expertise').then(
-      (mod) => mod.MyExpertise
+    import('@/components/sections/better_outcomes-section').then(
+      (mod) => mod.BetterOutcomesSection
     ),
   {
     ssr: true,
