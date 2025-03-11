@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FaqItem  } from '@/lib/data/faq-data'
 import { cn } from '@/lib/utils/cn'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 interface FaqAccordionProps {
   faqItem: FaqItem
@@ -22,7 +23,7 @@ function FaqAccordion({ faqItem, isOpen, onToggle }: FaqAccordionProps) {
       itemType="https://schema.org/Question"
     >
       <button
-        className="flex w-full items-center justify-between py-6 text-left px-10"
+        className="flex w-full items-center justify-between p-[16px] text-left "
         onClick={onToggle}
       >
         <span className="text-[20px] font-medium">
@@ -30,9 +31,19 @@ function FaqAccordion({ faqItem, isOpen, onToggle }: FaqAccordionProps) {
         </span>
         <span className="ml-6 flex-shrink-0">
           {isOpen ? (
-            <ChevronUp className="h-5 w-5 sm:h-6 sm:w-6" />
+            <motion.div
+              animate={{ rotate: 180 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ChevronDown className="h-6 w-6" />
+            </motion.div>
           ) : (
-            <ChevronDown className="h-5 w-5 sm:h-6 sm:w-6" />
+            <motion.div
+              animate={{ rotate: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ChevronDown className="h-6 w-6" />
+            </motion.div>
           )}
         </span>
       </button>
