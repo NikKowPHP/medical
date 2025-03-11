@@ -15,11 +15,11 @@ export interface SliderItem {
       },
       {
         id: 'items.item2',
-        image_url: '/product1.avif',
+        image_url: '/alton.avif',
       },
       {
         id: 'items.item3',
-        image_url: '/rose.avif',
+        image_url: '/subhero.avif',
       },
     
     // Add more testimonials

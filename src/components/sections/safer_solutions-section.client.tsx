@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Square } from "lucide-react";
-import { sliderItems, SliderItem as SliderType } from "@/lib/data/safer_solutions-data";
+import { SliderItem as SliderType } from "@/lib/data/safer_solutions-data";
 
 export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) {
   return (
@@ -17,7 +17,7 @@ export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) 
       <div className="max-w-7xl mx-auto px-[20px] sm:px-0">
         <ProcessTitleSubtitle />
         {/* <Sliderist items={items} /> */}
-        <RoseMedicalSlider sliderItems={sliderItems} />
+        <Slider sliderItems={items} />
       </div>
     </section>
   );
@@ -42,24 +42,24 @@ const ProcessTitleSubtitle = () => {
   );
 };
 
-const RoseMedicalSlider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
+const Slider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
   const [selectedOption, setSelectedOption] = useState<SliderType>(sliderItems[0]);
 
   return (
     <div className="bg-[#01423F] rounded-xl overflow-hidden w-full h-[300px] flex relative">
       {/* Color Options Column */}
-      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-10">
+      <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-10 gap-[16px]">
         {sliderItems.map((option) => (
           <button
             key={option.id}
             onClick={() => setSelectedOption(option)}
-            className={`rounded-full w-[40px] overflow-hidden h-[20px] flex items-center justify-center ${
+            className={`rounded-full w-[72px] h-[46px]  overflow-hidden flex flex-col items-center justify-center ${
               selectedOption.id === option.id
                 ? "ring-2 ring-white ring-offset-2 ring-offset-[#01423F]"
                 : ""
             }`}
           >
-            <div className="relative w-[50px] h-[30px] rounded-xl overflow-hidden">
+            <div className="relative w-[72px] h-[46px] rounded-xl overflow-hidden">
               <Image src={option.image_url} alt="Alton" fill className="object-cover" />
             </div>
           </button>
@@ -88,53 +88,3 @@ const RoseMedicalSlider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
   );
 };
 
-const SliderItem = ({ index, item }: { index: number; item: SliderType }) => {
-  // For the first item, use the RoseMedicalSlider component.
-  if (index === 0) {
-    return (
-      <div
-        className="relative rounded-3xl overflow-hidden"
-        itemProp="step"
-        itemScope
-        itemType="https://schema.org/HowToStep"
-      >
-        <meta itemProp="position" content={`${index + 1}`} />
-        <RoseMedicalSlider sliderItems={sliderItems} />
-      </div>
-    );
-  }
-
-  // For other items, render the provided image.
-  return (
-    <div
-      className="p-[25px] relative flex flex-col gap-[60px] leading-[1.6] bg-[#F8F1E7] rounded-3xl h-[300px]"
-      itemProp="step"
-      itemScope
-      itemType="https://schema.org/HowToStep"
-    >
-      <meta itemProp="position" content={`${index + 1}`} />
-      <div className="relative w-full h-full">
-        <Image
-          src={item.image_url}
-          alt="Rose Medical Safer Solutions Image Slider"
-          fill
-          className="object-cover"
-        />
-      </div>
-    </div>
-  );
-};
-
-// const Sliderist = ({ items }: { items: SliderType[] }) => {
-//   return (
-//     <div
-//       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[32px] sm:gap-y-0 sm:gap-x-[10px] w-full justify-center mx-auto"
-//       role="list"
-//       aria-label="Development process steps"
-//     >
-//       {items.map((item, index) => (
-//         <SliderItem index={index} item={item} key={index} />
-//       ))}
-//     </div>
-//   );
-// };
