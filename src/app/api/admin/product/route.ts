@@ -16,14 +16,16 @@ export const fetchCache = 'force-no-store';
 
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: NextRequest
 ) {
-  const  id  = params;
+  const body = await request.json()
+  if (!body.id) {
+    return NextResponse.json({ message: 'ID is required for updating product' }, { status: 400 });
+  }
+  const id = body.id
   try {
     // As the service has no direct getById, fetch all and filter.
-    const products = await productService.getProducts();
-    const product = products.find(p => p.id === id);
+    const product = await productService.getProductById(id);
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
     }

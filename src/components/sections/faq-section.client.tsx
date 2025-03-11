@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { FaqItem  } from '@/lib/data/faq-data'
 import { cn } from '@/lib/utils/cn'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 interface FaqAccordionProps {

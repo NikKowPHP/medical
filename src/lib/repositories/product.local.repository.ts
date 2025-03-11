@@ -128,6 +128,11 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
   getProductById = async (id: string): Promise<Product> => {
     return new Promise((resolve, reject) => {
       this.db.get(`SELECT * FROM "${this.tableName}" WHERE id = ?;`, [id], (err, row: Product) => {
+        if (err) {
+          logger.log(`Error fetching product with id ${id} from table "${this.tableName}":`, err);
+          reject(new Error(`Database error fetching product: ${err.message || 'Unknown error'}`));
+          return;
+        }
         resolve(row);
       });
     });
