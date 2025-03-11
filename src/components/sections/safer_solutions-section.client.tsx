@@ -16,7 +16,8 @@ export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) 
     >
       <div className="max-w-7xl mx-auto px-[20px] sm:px-0">
         <ProcessTitleSubtitle />
-        <Sliderist items={items} />
+        {/* <Sliderist items={items} /> */}
+        <RoseMedicalSlider sliderItems={sliderItems} />
       </div>
     </section>
   );
@@ -42,7 +43,7 @@ const ProcessTitleSubtitle = () => {
 };
 
 const RoseMedicalSlider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
-  const [selectedOption, setSelectedOption] = useState("300E");
+  const [selectedOption, setSelectedOption] = useState<SliderType>(sliderItems[0]);
 
   return (
     <div className="bg-[#01423F] rounded-xl overflow-hidden w-full h-[300px] flex relative">
@@ -51,9 +52,9 @@ const RoseMedicalSlider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
         {sliderItems.map((option) => (
           <button
             key={option.id}
-            onClick={() => setSelectedOption(option.id)}
+            onClick={() => setSelectedOption(option)}
             className={`rounded-full w-[40px] overflow-hidden h-[20px] flex items-center justify-center ${
-              selectedOption === option.id
+              selectedOption.id === option.id
                 ? "ring-2 ring-white ring-offset-2 ring-offset-[#01423F]"
                 : ""
             }`}
@@ -64,6 +65,13 @@ const RoseMedicalSlider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
           </button>
         ))}
       </div>
+      {selectedOption && (
+        <div className="flex-1 flex items-center justify-center">
+          <div className="relative w-full h-full">
+            <Image src={selectedOption.image_url} alt="Rose Medical" fill className="object-cover" />
+          </div>
+        </div>
+      )}
 
       {/* Logo */}
       {/* <div className="flex-1 flex items-center justify-center">
@@ -117,16 +125,16 @@ const SliderItem = ({ index, item }: { index: number; item: SliderType }) => {
   );
 };
 
-const Sliderist = ({ items }: { items: SliderType[] }) => {
-  return (
-    <div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[32px] sm:gap-y-0 sm:gap-x-[10px] w-full justify-center mx-auto"
-      role="list"
-      aria-label="Development process steps"
-    >
-      {items.map((item, index) => (
-        <SliderItem index={index} item={item} key={index} />
-      ))}
-    </div>
-  );
-};
+// const Sliderist = ({ items }: { items: SliderType[] }) => {
+//   return (
+//     <div
+//       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[32px] sm:gap-y-0 sm:gap-x-[10px] w-full justify-center mx-auto"
+//       role="list"
+//       aria-label="Development process steps"
+//     >
+//       {items.map((item, index) => (
+//         <SliderItem index={index} item={item} key={index} />
+//       ))}
+//     </div>
+//   );
+// };
