@@ -1,34 +1,46 @@
 export const footerConfig = {
+  aboutLinks: [
+    {
+      title: 'Company',
+      href: 'company',
+      isRoute: false,
+    },
+    {
+      title: 'Contact us',
+      href: 'contact-us',
+      isRoute: true,
+    },
+  
+  ],
+  pageLinks: [
+    {
+      title: 'Legal',
+      href: 'legal',
+      isRoute: true,
+    },
+    {
+      title: 'Terms of Service',
+      href: 'terms-of-service',
+      isRoute: true,
+    },
+    {
+      title: 'Privacy Policy',
+      href: 'privacy-policy',
+      isRoute: true,
+    },
+  ],
   socialLinks: [
     {
-      title: 'Book a call',
-      href: 'book-call',
+      title: 'X',
+      href: 'https://x.com/rosemedical',
       isRoute: false,
+      icon: 'X',
     },
     {
-      title: 'Email',
-      href: 'email',
+      title: 'Instagram',
+      href: 'https://www.instagram.com/rosemedical',
       isRoute: false,
-    },
-    {
-      title: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/proffessor-website/',
-      isRoute: false,
+      icon: 'Instagram',
     },
   ],
-  mainNavLinks: [
-    {
-      title: 'Patents',
-      href: 'https://patents.google.com/patent/US11964322B2/en',
-      isRoute: false,
-    },
-    {
-      title: 'ResearchGate',
-      href: 'https://www.researchgate.net/profile/Proffessor-Website',
-      isRoute: false,
-    },
-  ],
-  
-
 } as const 
-
