@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { navigationConfig } from '@/config/navigation'
-import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { ArrowUpRight, ChevronRight, Menu, X } from 'lucide-react'
 import { useEffect, useState, useRef } from 'react'
+import Image from 'next/image'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -11,87 +12,87 @@ export function Navbar() {
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
   const scrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0)
 
-  useEffect(() => {
-    let animationFrameId: number
+  // useEffect(() => {
+  //   let animationFrameId: number
 
-    const handleScroll = () => {
-      // Cancel any previous animation frame
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId)
-      }
+  //   const handleScroll = () => {
+  //     // Cancel any previous animation frame
+  //     if (animationFrameId) {
+  //       cancelAnimationFrame(animationFrameId)
+  //     }
 
-      // Use requestAnimationFrame for smoother scroll handling
-      animationFrameId = requestAnimationFrame(() => {
-        const currentScrollY = window.scrollY
-        scrollYRef.current = currentScrollY
+  //     // Use requestAnimationFrame for smoother scroll handling
+  //     animationFrameId = requestAnimationFrame(() => {
+  //       const currentScrollY = window.scrollY
+  //       scrollYRef.current = currentScrollY
         
-        // Clear existing timeout if it exists
-        if (scrollTimeout.current) {
-          clearTimeout(scrollTimeout.current)
-        }
+  //       // Clear existing timeout if it exists
+  //       if (scrollTimeout.current) {
+  //         clearTimeout(scrollTimeout.current)
+  //       }
 
-        // Use functional update to avoid stale state
-        scrollTimeout.current = setTimeout(() => {
-          setScrolled(prev => {
-            const isScrolled = currentScrollY > 20
-            return isScrolled !== prev ? isScrolled : prev
-          })
-        }, 100)
-      })
-    }
+  //       // Use functional update to avoid stale state
+  //       scrollTimeout.current = setTimeout(() => {
+  //         setScrolled(prev => {
+  //           const isScrolled = currentScrollY > 20
+  //           return isScrolled !== prev ? isScrolled : prev
+  //         })
+  //       }, 100)
+  //     })
+  //   }
 
-    // Initial check for scroll position
-    handleScroll()
+  //   // Initial check for scroll position
+  //   handleScroll()
 
-    // Use passive scroll listener for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true })
+  //   // Use passive scroll listener for better performance
+  //   window.addEventListener('scroll', handleScroll, { passive: true })
     
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (animationFrameId) cancelAnimationFrame(animationFrameId)
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current)
-    }
-  }, []) // Empty dependency array ensures this runs once
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll)
+  //     if (animationFrameId) cancelAnimationFrame(animationFrameId)
+  //     if (scrollTimeout.current) clearTimeout(scrollTimeout.current)
+  //   }
+  // }, []) // Empty dependency array ensures this runs once
 
-  useEffect(() => {
-    if (!scrolled) {
-      setMobileMenuOpen(false)
-    }
-  }, [scrolled])
+  // useEffect(() => {
+  //   if (!scrolled) {
+  //     setMobileMenuOpen(false)
+  //   }
+  // }, [scrolled])
 
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node
-      const menu = document.getElementById('mobile-menu')
-      const menuButton = document.getElementById('menu-button')
+  // // Close menu when clicking outside
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     const target = event.target as Node
+  //     const menu = document.getElementById('mobile-menu')
+  //     const menuButton = document.getElementById('menu-button')
 
-      if (
-        menu &&
-        !menu.contains(target) &&
-        menuButton &&
-        !menuButton.contains(target)
-      ) {
-        setMobileMenuOpen(false)
-      }
-    }
+  //     if (
+  //       menu &&
+  //       !menu.contains(target) &&
+  //       menuButton &&
+  //       !menuButton.contains(target)
+  //     ) {
+  //       setMobileMenuOpen(false)
+  //     }
+  //   }
 
-    if (mobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
+  //   if (mobileMenuOpen) {
+  //     document.addEventListener('mousedown', handleClickOutside)
+  //   }
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [mobileMenuOpen])
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside)
+  //   }
+  // }, [mobileMenuOpen])
 
-  useEffect(() => {
-    if (!mobileMenuOpen) {
-    document.body.style.overflowX = 'hidden';
-    } else {
-    document.body.style.overflowX = '';
-    }
-    }, [mobileMenuOpen]);
+  // useEffect(() => {
+  //   if (!mobileMenuOpen) {
+  //   document.body.style.overflowX = 'hidden';
+  //   } else {
+  //   document.body.style.overflowX = '';
+  //   }
+  //   }, [mobileMenuOpen]);
 
   return (
     <header
@@ -107,18 +108,21 @@ export function Navbar() {
         }
       `}</style>
 
-      <div className="mx-auto px-[5px] w-full max-w-7xl">
-        <div className="flex justify-between items-center">
+      <div className="mx-auto px-[5px] w-full max-w-7xl border border-red-500">
+
+        <div className="flex justify-between items-center border border-red-500">
+          <div className='flex-1 border border-red-500'>
+
           <Link
             href="/"
-            className={`gap-2 self-start font-bold transition-all duration-300 ${
-              scrolled ? 'text-[20px]' : 'text-[24px] sm:text-[48px]'
-            }`}
-            title="Michael Friebe"
-            aria-label="Michael Friebe Homepage"
+            className={`gap-2 self-start font-bold transition-all duration-300 max-w-[100px] max-h-[38px] `}
+            title="Rose Medical"
+            aria-label="Rose Medical Homepage"
           >
-            Michael Friebe
+              <Image src="/logo.svg" alt="Rose Medical Logo" width={100} height={100} className="w-full h-auto" />
           </Link>
+
+          </div>
 
           {/* Mobile menu button - always visible on mobile */}
           <button
@@ -136,42 +140,19 @@ export function Navbar() {
             )}
           </button>
 
+          
+
           {/* Desktop menu button - only when scrolled */}
-          {scrolled ? (
-            <button
-              className="hidden md:flex"
-              aria-label="Menu"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          ) : (
+         
             <nav
-              className="hidden md:block transition-opacity duration-300"
+              className="hidden md:block transition-opacity duration-300 border border-red-500"
               aria-label="Main navigation"
               itemScope
               itemType="https://schema.org/SiteNavigationElement"
             >
-              <div className="flex sm:gap-[100px]">
-                <ul className="flex flex-col justify-between gap-[5px]">
-                  <li>
+              <div className="flex sm:gap-[100px] border border-red-500">
+                <ul className="flex flex-col justify-between gap-[5px] border border-red-500">
                  
-
-                      <Link
-                         href="/book-a-call"
-                        className="transition-colors duration-200 inline-flex items-center  gap-2  px-[8px] py-[4px]"
-                        style={
-                          {
-                            '--hover-color': '#f9a8d4',
-                          } as React.CSSProperties
-                        }
-                      >
-                        Book a call
-                      <ArrowUpRight className="w-[17px] h-[17px]" />
-                        
-                      </Link>
-
-                  </li>
                   {navigationConfig.mainNav.map((item) => (
                     <li key={item.href} aria-label={item.title}>
                       <Link
@@ -189,27 +170,16 @@ export function Navbar() {
                   ))}
                 </ul>
 
-                <ul className="flex flex-col sm:gap-[5px] justify-between">
-                  {navigationConfig.mainNavLinks.map((item) => (
-                    <li key={item.href} aria-label={item.title}>
-                      <Link
-                        href={item.href}
-                        className="transition-colors duration-200 inline-flex items-center  gap-2 px-[8px] py-[4px]"
-                        style={
-                          {
-                            '--hover-color': item.color,
-                          } as React.CSSProperties
-                        }
-                      >
-                        {item.title}
-                        <ArrowUpRight className="w-[17px] h-[17px]" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+               
+            </div>
+            <div className="border border-red-500">
+              <button className="border border-red-500">
+                <span className="border border-red-500">Request a Quote </span>
+                <ChevronRight className="w-[17px] h-[17px]" />
+              </button>
+            </div>
             </nav>
-          )}
+        
         </div>
       </div>
 
@@ -221,64 +191,8 @@ export function Navbar() {
         />
       )}
 
-      {/* Combined Offcanvas Menu */}
-      <div
-        id="offcanvas-menu"
-        className={`fixed inset-y-0  right-0 w-[80%] md:w-[320px] h-screen z-[60] bg-[#FAF8F1] shadow-lg transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? ' translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="p-6 h-full">
-          <button
-            className="absolute top-4 right-4 p-2 bg-opacity-100"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-label="Close menu"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          <nav className="mt-10 flex flex-col gap-6">
-            {/* Mobile-specific content */}
-            <div className="md:hidden">
-              <Link
-                href="/book-a-call"
-                className="transition-colors text-lg duration-200 flex items-center w-fit gap-2 px-[8px] py-[4px]"
-                style={{ '--hover-color': '#f9a8d4' } as React.CSSProperties}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Book a call
-                <ArrowUpRight className="w-5 h-5" />
-              </Link>
-            </div>
-
-            {/* Combined navigation links */}
-            {navigationConfig.mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition-colors text-lg duration-200 flex items-center w-fit gap-2 px-[8px] py-[4px]"
-                style={{ '--hover-color': '#f9a8d4' } as React.CSSProperties}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.title}
-              </Link>
-            ))}
-
-            {/* External links with arrows */}
-            {navigationConfig.mainNavLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition-colors text-lg duration-200 flex items-center w-fit gap-2 px-[8px] py-[4px]"
-                style={{ '--hover-color': '#f9a8d4' } as React.CSSProperties}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.title}
-                <ArrowUpRight className="w-5 h-5" />
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </div>
+  
+    
     </header>
   )
 }

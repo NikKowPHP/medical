@@ -24,14 +24,14 @@ export const HeroSection = async () => {
       <div className='max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-0  lg:gap-x-[150px] md:gap-x-[100px] sm:gap-x-[50px] gap-y-[40px] sm:gap-y-0 '>
 
         <div className="w-full ">
-          <Image
+          {/* <Image
             src="/images/mf.webp"
             alt="Michael Friebe"
             width={1500}
             height={1000}
             className="w-full h-auto"
             priority
-          />
+          /> */}
         </div>
         {/* Optimize heading for LCP */}
         <div className="flex flex-col  gap-[20px]">
