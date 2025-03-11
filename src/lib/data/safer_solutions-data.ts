@@ -10,16 +10,16 @@ export interface SliderItem {
 
     {
         id: 'items.item1',
-        image_url: 'product1.avif',
+        image_url: '/product1.avif',
         
       },
       {
         id: 'items.item2',
-        image_url: 'product1.avif',
+        image_url: '/product1.avif',
       },
       {
         id: 'items.item3',
-        image_url: 'rose.avif',
+        image_url: '/rose.avif',
       },
     
     // Add more testimonials
