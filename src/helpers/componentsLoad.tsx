@@ -63,3 +63,10 @@ export const SaferSolutionsSection = dynamic(
     ssr: true,
   }
 )
+
+export const FaqSection = dynamic(
+  () => import('@/components/sections/faq-section.server').then(mod => mod.default),
+  {
+    ssr: true,
+  }
+)
