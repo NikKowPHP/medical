@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button/button'
 import { Input } from '@/components/ui/input/input'
 import { Label } from '@/components/ui/label/label'
 import { Product } from '@/domain/models/models'
-import Image from 'next/image'
 import Link from 'next/link'
 
 // Define a custom form type that extends Partial<Product> with separate file fields.

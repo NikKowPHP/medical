@@ -1,18 +1,9 @@
-import { ArrowUpRight } from 'lucide-react'
-import Image from 'next/image'
+import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
 export const HeroSection = async () => {
 
-  const massiveTransformativePurpose = () => {
-    return "Massive Transformative Purpose: ".split(' ').map((word, index) => (
-      <span key={index}>
-        <strong>{word[0]}</strong>
-        {word.slice(1)}
-        {' '}
-      </span>
-    ))
-  }
+
 
 
   return (
@@ -21,52 +12,30 @@ export const HeroSection = async () => {
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
-      <div className='max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-0  lg:gap-x-[150px] md:gap-x-[100px] sm:gap-x-[50px] gap-y-[40px] sm:gap-y-0 '>
+      <div className='max-w-7xl mx-auto py-[100px]'>
 
-        <div className="w-full ">
-          {/* <Image
-            src="/images/mf.webp"
-            alt="Michael Friebe"
-            width={1500}
-            height={1000}
-            className="w-full h-auto"
-            priority
-          /> */}
-        </div>
-        {/* Optimize heading for LCP */}
-        <div className="flex flex-col  gap-[20px]">
-          <div className=" flex flex-col items-start justify-start gap-[40px]">
+       
+ 
+          <div className=" flex flex-col items-center justify-center gap-[32px]">
             <h1
-              className=" text-[36px] sm:text-[36px] lg:text-[36px] leading-[1.1] font-bold italic "
+              className=" text-[36px] sm:text-[36px] lg:text-[36px] leading-[1.1] font-bold text-center"
               itemProp="headline"
             >
-              Prof. Michael Friebe, PhD
+              Disposable Endoscopic Accessories
             </h1>
             <h2
-              className="flex flex-col items-start justify-start text-[36px] max-w-[400px] sm:text-[36px] lg:text-[36px] leading-[1.1] font-normal "
+              className="text-[18px]  sm:text-[18px] lg:text-[18px] leading-[1.1] font-bold text-[#0AB2AC] text-center"
               itemProp="headline"
             >
-              <span>HealthTEC: </span> <span>
-                Creating Innovations <br /> for Enterprises and New Ventures +
-              </span>
+              {`Your Trusted Source for Alton's Sterile Disposable Endoscopic Accessories`}
             </h2>
-            <h3 className="flex flex-col text-[16px]">
-              <span>{massiveTransformativePurpose()}</span>
-              <span className="font-bold text-[24px] ">Health Democratise Enabler</span>
-            </h3>
-            <p className="text-[16px] max-w-[400px]">
-              Prof. Michael Friebe has extensive experience in medical technology,
-              with a focus on innovation, entrepreneurship, and image-guided
-              therapies. He has a strong background as a founder, innovator, CEO,
-              and investor in various MedTech ventures.
-            </p>
-          </div>
-          {/* cta */}
-          <div>
-            <Link href="/about" className="flex items-center gap-[10px] text-[#189E70] text-[16px]">My Investments <ArrowUpRight className="w-6 h-6" /></Link>
-          </div>
-        </div>
 
+            <Link href="/products" className="flex items-center gap-[10px] text-white  text-[16px] bg-[#014441] rounded-full  pl-[20px] pr-[10px] py-[15px]">Contact Us <ChevronRight className="w-6 h-6" /></Link>
+           
+          
+          </div>
+       
+       
       </div>
       <div className="opacity-0 animate-fadeIn"></div>
     </section>
