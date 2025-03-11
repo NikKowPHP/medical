@@ -7,92 +7,8 @@ import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null)
-  const scrollYRef = useRef(typeof window !== 'undefined' ? window.scrollY : 0)
 
-  // useEffect(() => {
-  //   let animationFrameId: number
-
-  //   const handleScroll = () => {
-  //     // Cancel any previous animation frame
-  //     if (animationFrameId) {
-  //       cancelAnimationFrame(animationFrameId)
-  //     }
-
-  //     // Use requestAnimationFrame for smoother scroll handling
-  //     animationFrameId = requestAnimationFrame(() => {
-  //       const currentScrollY = window.scrollY
-  //       scrollYRef.current = currentScrollY
-        
-  //       // Clear existing timeout if it exists
-  //       if (scrollTimeout.current) {
-  //         clearTimeout(scrollTimeout.current)
-  //       }
-
-  //       // Use functional update to avoid stale state
-  //       scrollTimeout.current = setTimeout(() => {
-  //         setScrolled(prev => {
-  //           const isScrolled = currentScrollY > 20
-  //           return isScrolled !== prev ? isScrolled : prev
-  //         })
-  //       }, 100)
-  //     })
-  //   }
-
-  //   // Initial check for scroll position
-  //   handleScroll()
-
-  //   // Use passive scroll listener for better performance
-  //   window.addEventListener('scroll', handleScroll, { passive: true })
-    
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll)
-  //     if (animationFrameId) cancelAnimationFrame(animationFrameId)
-  //     if (scrollTimeout.current) clearTimeout(scrollTimeout.current)
-  //   }
-  // }, []) // Empty dependency array ensures this runs once
-
-  // useEffect(() => {
-  //   if (!scrolled) {
-  //     setMobileMenuOpen(false)
-  //   }
-  // }, [scrolled])
-
-  // // Close menu when clicking outside
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     const target = event.target as Node
-  //     const menu = document.getElementById('mobile-menu')
-  //     const menuButton = document.getElementById('menu-button')
-
-  //     if (
-  //       menu &&
-  //       !menu.contains(target) &&
-  //       menuButton &&
-  //       !menuButton.contains(target)
-  //     ) {
-  //       setMobileMenuOpen(false)
-  //     }
-  //   }
-
-  //   if (mobileMenuOpen) {
-  //     document.addEventListener('mousedown', handleClickOutside)
-  //   }
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside)
-  //   }
-  // }, [mobileMenuOpen])
-
-  // useEffect(() => {
-  //   if (!mobileMenuOpen) {
-  //   document.body.style.overflowX = 'hidden';
-  //   } else {
-  //   document.body.style.overflowX = '';
-  //   }
-  //   }, [mobileMenuOpen]);
 
   return (
     <header
@@ -104,6 +20,7 @@ export function Navbar() {
      
 
       <div className="mx-auto px-[5px] w-full max-w-6xl border border-red-500">
+
 
         <div className="flex justify-between items-center py-[16px] border border-red-500">
           <div className='flex-1 border border-red-500'>
@@ -137,8 +54,9 @@ export function Navbar() {
 
           
 
-          {/* Desktop menu button - only when scrolled */}
+     
          
+         {/* Desktop menu */}
             <nav
               className="hidden md:block transition-opacity duration-300 border border-red-500"
               aria-label="Main navigation"
@@ -168,8 +86,11 @@ export function Navbar() {
                
             </div>
        
-          </nav>
-          <div className=" flex-1 flex justify-end items-center">
+            </nav>
+            
+            
+
+          <div className=" flex-1  hidden md:flex md:justify-end md:items-center ">
               <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
                 <span className="text-[16px] ">Request a Quote </span>
                 <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
