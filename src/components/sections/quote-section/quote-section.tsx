@@ -28,26 +28,30 @@ export const QuoteSection = () => {
   return (
     <section
       id="quote-section"
-      className="py-[50px] px-[20px] md:px-0 bg-black flex flex-col justify-center items-center"
+      className="py-[50px] px-[20px] md:px-0 bg-[#014441] flex flex-col justify-center items-center"
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-[26px] md:text-[48px] font-normal text-center text-white leading-[1.2] flex flex-col items-center justify-center gap-[20px]">
-        {/* {`"${quote.quote}"`} */}
-          <span className="flex  items-center relative ">
-        Elevate Endoscopy with <Image src="/alton.avif" alt="Alton" fill className="w-[50px] h-[50px] rounded-xl absolute inset-0" />
-
-          </span>
-          <span className="text-[26px] md:text-[48px] font-normal text-center text-white leading-[1.2]">
-          Alton Accessories
-          </span>
-
-        <span className="flex  items-center  ">
-        Now Supplied by  <Image src="/rose.avif" alt="Rose Medical" width={50} height={50} className="w-auto h-auto" />
-        </span>
-        Rose Medical
-
+        <h2 className="text-[26px] md:text-[48px] font-bold text-center text-white leading-[1.2] flex flex-col items-center justify-center gap-[20px]">
+          <div className="flex items-center gap-2">
+            <span>Elevate Endoscopy with</span>
+            <div className="relative w-[50px] h-[30px] rounded-xl overflow-hidden">
+              <Image src="/alton.avif" alt="Alton" fill className="object-cover" />
+            </div>
+          </div>
+          <div>
+            <span>Alton Accessories</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span>Now Supplied by</span>
+            <div className="relative w-[50px] h-[30px] rounded-xl overflow-hidden">
+              <Image src="/rose.avif" alt="Rose Medical" fill className="object-cover" />
+            </div>
+          </div>
+          <div>
+            <span>Rose Medical</span>
+          </div>
         </h2>
       </div>
     </section>
