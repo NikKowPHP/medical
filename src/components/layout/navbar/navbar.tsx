@@ -96,21 +96,16 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 left-0 right-0 z-50 bg-opacity-80 backdrop-blur-sm bg-[#FAF8F1] transition-all duration-300 ${
-        scrolled ? 'py-2' : 'py-6'
-      }`}
+      className={`sticky top-0 left-0 right-0 z-50 bg-opacity-80 backdrop-blur-sm text-[#575757] transition-all duration-300 `}
       itemScope
       itemType="https://schema.org/WPHeader"
     >
-      <style jsx global>{`
-        [style*='--hover-color']:hover {
-          background-color: var(--hover-color) !important;
-        }
-      `}</style>
+   
+     
 
-      <div className="mx-auto px-[5px] w-full max-w-7xl border border-red-500">
+      <div className="mx-auto px-[5px] w-full max-w-6xl border border-red-500">
 
-        <div className="flex justify-between items-center border border-red-500">
+        <div className="flex justify-between items-center py-[16px] border border-red-500">
           <div className='flex-1 border border-red-500'>
 
           <Link
@@ -119,7 +114,7 @@ export function Navbar() {
             title="Rose Medical"
             aria-label="Rose Medical Homepage"
           >
-              <Image src="/logo.svg" alt="Rose Medical Logo" width={100} height={100} className="w-full h-auto" />
+              <Image src="/logo.svg" alt="Rose Medical Logo" width={100} height={100} className=" h-auto" />
           </Link>
 
           </div>
@@ -151,13 +146,13 @@ export function Navbar() {
               itemType="https://schema.org/SiteNavigationElement"
             >
               <div className="flex sm:gap-[100px] border border-red-500">
-                <ul className="flex flex-col justify-between gap-[5px] border border-red-500">
+                <ul className="flex justify-between gap-[42px] border border-red-500">
                  
                   {navigationConfig.mainNav.map((item) => (
                     <li key={item.href} aria-label={item.title}>
                       <Link
                         href={item.href}
-                        className="transition-colors inline-flex items-center  gap-2 duration-200 px-[8px] py-[4px]"
+                        className="transition-colors inline-flex items-center text-[16px]  gap-2 duration-200 px-[8px] py-[4px]"
                         style={
                           {
                             '--hover-color': item.color,
@@ -172,13 +167,14 @@ export function Navbar() {
 
                
             </div>
-            <div className="border border-red-500">
-              <button className="border border-red-500">
-                <span className="border border-red-500">Request a Quote </span>
-                <ChevronRight className="w-[17px] h-[17px]" />
+       
+          </nav>
+          <div className=" flex-1 flex justify-end items-center">
+              <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
+                <span className="text-[16px] ">Request a Quote </span>
+                <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
               </button>
             </div>
-            </nav>
         
         </div>
       </div>

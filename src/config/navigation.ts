@@ -16,8 +16,15 @@ export const navigationConfig = {
     {
       title: 'Products',
       href: 'products',
-      isRoute: true,
-       color: '#f9a8d4' // pink
+      isRoute: false,
+      color: '#f9a8d4' // pink
+
+    },
+    {
+      title: 'Contact',
+      href: 'contact',
+      isRoute: false,
+      color: '#f9a8d4' // pink
 
     }
   ],

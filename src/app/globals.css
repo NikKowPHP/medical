@@ -2,14 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
-  font-family: 'Roboto Serif';
-  src: url('/fonts/sans-serif/RobotoSerif-Italic-VariableFont_GRAD,opsz,wdth,wght.ttf') format('truetype');
-  font-style: italic;
-  font-weight: 100 300 400 500 600 700 800 900;
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/_helveticaneuedesktinterface_bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/_helveticaneuedesktinterface_thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/_helveticaneuedesktinterface_ultralightp2.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('/fonts/_helveticaneuedesktinterface_regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --background: #ffffff;
@@ -29,11 +53,11 @@ body {
   color: var(--foreground);
   background: var(--background);
   /* Apply the locally loaded Roboto Serif font */
-  font-family: "Roboto Serif", serif;
+  font-family: "Helvetica Neue", sans-serif;
 }
 
 /* Optional: Remove or update the universal selector if you want a consistent font */
 * {
-  font-family: "Roboto Serif", serif;
+  font-family: "Helvetica Neue", serif;
 }
 
