@@ -1,25 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export function SubHeroSection() {
-  const [offset, setOffset] = useState(0);
+  // Get the current vertical scroll position
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Update the offset - you can tweak the multiplier to suit your design.
-      setOffset(window.pageYOffset);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // The multiplier controls the parallax speed.
-  const parallaxStyle = {
-    transform: `translateY(${offset * 0.1}px)`,
-  };
+  // Multiply the scroll value by 0.1 for a parallax effect
+  const y = useTransform(scrollY, (latest) => latest * 0.1);
 
   return (
     <section
@@ -28,14 +17,15 @@ export function SubHeroSection() {
       itemType="https://schema.org/WebPageElement"
     >
       <div className="max-w-7xl mx-auto relative h-[400px] overflow-hidden">
-        <div style={parallaxStyle} className="absolute inset-0">
+        {/* The motion.div will animate the translateY based on the scroll position */}
+        <motion.div style={{ y }} className="absolute inset-0">
           <Image
             src="/subhero.avif"
             alt="Subhero"
             fill
             className="object-cover"
           />
-        </div>
+        </motion.div>
       </div>
       <div className="opacity-0 animate-fadeIn"></div>
     </section>

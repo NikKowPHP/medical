@@ -1,13 +1,12 @@
 "use client";
 
-import { Suspense, useState, useEffect, useRef } from "react";
+import { Suspense, useRef } from "react";
 import Link from "next/link";
-import {  Product } from "@/domain/models/models";
+import { Product } from "@/domain/models/models";
 import Image from "next/image";
 import { Tag } from "@/components/ui/tag/tag";
 import { ChevronRight } from "lucide-react";
-
-
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const products: Product[] = [
   {
@@ -35,7 +34,7 @@ const products: Product[] = [
 ];
 
 /**
- * A client-only component that adds a simple parallax effect to an image.
+ * A client-only component that adds a parallax effect to an image using Framer Motion.
  */
 function ParallaxImage({
   src,
@@ -47,28 +46,19 @@ function ParallaxImage({
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
 
-  useEffect(() => {
-    function handleScroll() {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        // Adjust the factor (0.1) to control the parallax effect strength.
-        setOffset(rect.top * 0.1);
-      }
-    }
-    window.addEventListener("scroll", handleScroll);
-    // Initialize the position
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Get the scroll progress relative to the element referenced by containerRef.
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Map the scroll progress to a translateY effect.
+  // Adjust the output range (here: 0 to 50) to change the parallax strength.
+  const y = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{ transform: `translateY(${offset}px)` }}
-      className="absolute inset-0 w-full h-full"
-    >
+    <motion.div ref={containerRef} style={{ y }} className="absolute inset-0 w-full h-full">
       <Image
         src={src}
         alt={alt}
@@ -77,7 +67,7 @@ function ParallaxImage({
         loading="lazy"
         quality={100}
       />
-    </div>
+    </motion.div>
   );
 }
 
