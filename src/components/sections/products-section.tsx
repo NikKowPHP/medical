@@ -78,7 +78,7 @@ function ParallaxImage({
     <div
       ref={containerRef}
       style={{ transform: `translateY(${offset}px)` }}
-      className="absolute inset-0 rounded-xl"
+      className="absolute inset-0 w-full h-full"
     >
       <Image
         src={src}
@@ -154,11 +154,10 @@ const ProductItem = ({
       {/* Content Section */}
       <div className="flex flex-col justify-between h-full p-[20px] gap-[20px] bg-[#FFE8D8]">
         <header className="flex justify-between gap-2">
-          <div className="px-[10px] py-[5px]" itemProp="datePublished">
-            {new Date(product.created_at).toLocaleDateString()}
-          </div>
+        
 
           <div className="flex items-center">
+            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" focusable="false" color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))" style="user-select: none; width: 100%; height: 100%; display: inline-block; fill: var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40)); color: var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40)); flex-shrink: 0;"><g color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))" weight="regular"><path d="M56,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0ZM88,24a8,8,0,0,0-8,8V224a8,8,0,0,0,16,0V32A8,8,0,0,0,88,24Zm40,32a8,8,0,0,0-8,8V192a8,8,0,0,0,16,0V64A8,8,0,0,0,128,56Zm40,32a8,8,0,0,0-8,8v64a8,8,0,0,0,16,0V96A8,8,0,0,0,168,88Zm40-16a8,8,0,0,0-8,8v96a8,8,0,0,0,16,0V80A8,8,0,0,0,208,72Z"></path></g></svg></span>
             <span>
               <Tag variant="simple" className="px-8 text-sm sm:text-base">
                 {product.category}
