@@ -55,10 +55,10 @@ function ParallaxImage({
 
   // Map the scroll progress to a translateY effect.
   // Adjust the output range (here: 0 to 50) to change the parallax strength.
-  const y = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const y = useTransform(scrollYProgress, [0, 1], [50, -200]);
 
   return (
-    <motion.div ref={containerRef} style={{ y }} className="absolute inset-0 w-full h-full">
+    <motion.div ref={containerRef} style={{ y }} className="absolute inset-0 w-full md:min-h-[400px] h-[200%]">
       <Image
         src={src}
         alt={alt}
@@ -87,7 +87,7 @@ export async function ProductList() {
           }
         >
             <ul
-              className="relative  flex flex-col gap-[32px] md:gap-[40px] justify-start md:justify-center md:items-center border border-green-500"
+              className="relative  flex flex-col gap-[32px] md:gap-[200px] justify-start md:justify-center md:items-center border border-green-500"
               itemScope
               itemType="https://schema.org/ItemList"
           >
@@ -120,20 +120,20 @@ const ProductItem = ({
       itemType="https://schema.org/Product"
       itemProp="itemListElement"
     >
-      <div className="flex flex-col md:flex-row justify-between gap-[24px] border border-red-500">
+      <div className="flex flex-col md:flex-row justify-between items-end gap-[24px] border border-red-500">
         {/* Image Section */}
         {product.image_url && (
           <div
-            className="relative w-full h-full aspect-[6/3] rounded-xl overflow-hidden md:order-2 "
+            className="relative w-full h-full aspect-[6/3] md:min-h-[400px] rounded-xl overflow-hidden md:order-2 "
             role="img"
             aria-label={`${product.title} preview image`}
           >
             <ParallaxImage src={product.image_url} alt={product.title} />
           </div>
         )}
-        <div className="flex flex-col gap-[24px] border border-blue-500 w-full">
+        <div className="flex flex-col gap-[24px] md:justify-end h-full border border-blue-500 w-full">
           {/* Content Section */}
-          <div className="flex flex-col justify-between h-full  gap-[20px] ">
+          <div className="flex flex-col justify-between   gap-[20px] ">
             <header className="flex justify-between gap-2">
               <div className="flex items-center gap-2">
                 <span>
@@ -160,14 +160,14 @@ const ProductItem = ({
                 </span>
                 <span>
                   <Tag variant="simple" className="px-8 text-[20px]">
-                    {product.category}
+                    {product.category} 
                   </Tag>
                 </span>
               </div>
             </header>
 
             <div
-              className="text-[26px] sm:text-[18px] lg:text-[20px] font-medium tracking-[-0.02em] flex items-center gap-2"
+              className="text-[26px] sm:text-[36px]  font-medium tracking-[-0.02em] flex items-center gap-2"
               itemProp="headline"
             >
               {product.description}
