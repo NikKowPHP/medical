@@ -7,7 +7,7 @@ import normalizeWheel from 'normalize-wheel'
 export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: 1.1,
       smoothWheel: true,
       infinite: false,
       syncTouch: true,

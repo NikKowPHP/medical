@@ -42,9 +42,9 @@ export default async function LocaleLayout({
       <body suppressHydrationWarning>
           <PageProvider>
             <ClientWrapper>
-              <SmoothScroll>
+              {/* <SmoothScroll> */}
                 <main className="relative">{children}</main>
-              </SmoothScroll>
+              {/* </SmoothScroll> */}
               </ClientWrapper>
             </PageProvider>
       </body>
