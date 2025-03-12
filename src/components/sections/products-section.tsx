@@ -86,7 +86,6 @@ export async function ProductList() {
             </div>
           }
         >
-          <div className="relative w-full  flex flex-center gap-[32px] md:gap-[40px] justify-start md:justify-center md:items-center border border-green-500">
             <ul
               className="relative  flex flex-col gap-[32px] md:gap-[40px] justify-start md:justify-center md:items-center border border-green-500"
               itemScope
@@ -101,7 +100,6 @@ export async function ProductList() {
               />
               ))}
             </ul>
-          </div>
         </Suspense>
       </div>
     </section>
