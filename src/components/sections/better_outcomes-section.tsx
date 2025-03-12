@@ -40,7 +40,7 @@ export const BetterOutcomesSection = async () => {
 
 const ProcessTitleSubtitle = () => {
   return (
-    <header className="mb-[42px] gap-[32px] flex flex-col flex-start">
+    <header className="mb-[42px] gap-[32px] md:gap-[12px] flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
         <div className="bg-[#014441] px-[10px] py-[8px] flex items-center justify-center rounded-full gap-[10px] ">
           {/* <RectangleSvg width={20} height={20} /> */}
@@ -50,8 +50,8 @@ const ProcessTitleSubtitle = () => {
           </span>
         </div>
       </h2>
-      <h3 className="text-[24px] ">Achieve Better Outcomes in Endoscopy</h3>
-      <p className="text-[18px]">
+      <h3 className="text-[24px] md:text-[44px] ">Achieve Better Outcomes in Endoscopy</h3>
+      <p className="text-[18px] md:text-[20px]">
         Discover the advantages of single-use instruments for enhanced safety
         and efficiency.
       </p>
@@ -69,7 +69,7 @@ const ProcessItem = ({
   const Icon = LucideIcons[item.icon];
   return (
     <div
-      className="p-[25px]  flex flex-col gap-[60px] leading-[1.6]  bg-[#F8F1E7] rounded-3xl"
+      className="p-[25px]  flex flex-col md:flex-row gap-[60px] md:gap-[32px] leading-[1.6]  bg-[#F8F1E7] rounded-3xl"
       itemProp="step"
       itemScope
       itemType="https://schema.org/HowToStep"
@@ -81,11 +81,11 @@ const ProcessItem = ({
         </div>
 
         <div className="flex flex-col gap-[16px]">
-          <h3 className="text-[20px] font-bold " itemProp="name">
+          <h3 className="text-[20px] md:text-[28px] font-bold " itemProp="name">
             {item.title}
           </h3>
           <p
-            className="text-[18px] leading-[1.6]"
+            className="text-[18px] md:text-[20px] leading-[1.6]"
             itemProp="itemListElement"
             itemScope
             itemType="https://schema.org/ItemList"
@@ -106,7 +106,7 @@ const ProcessItemList = async ({
   const items = await processItems;
   return (
     <div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[32px] sm:gap-y-0 sm:gap-x-[10px] w-full justify-center mx-auto"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-[32px] sm:gap-y-0 sm:gap-x-[32px] w-full justify-center mx-auto"
       role="list"
       aria-label="Development process steps"
     >

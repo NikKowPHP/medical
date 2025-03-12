@@ -96,7 +96,7 @@ export async function ProductList() {
               <ProductItem
                 key={product.id}
                 product={product}
-                position={index + 1}
+                position={index}
               />
               ))}
             </ul>
@@ -113,9 +113,12 @@ const ProductItem = ({
   product: Product;
   position: number;
 }) => {
+  const isImageRight = position % 3 !== 0;
+  console.log(isImageRight)
+
   return (
     <li
-      className=" w-full"
+      className="w-full"
       itemScope
       itemType="https://schema.org/Product"
       itemProp="itemListElement"
@@ -124,7 +127,9 @@ const ProductItem = ({
         {/* Image Section */}
         {product.image_url && (
           <div
-            className="relative w-full h-full aspect-[6/3] md:min-h-[400px] rounded-xl overflow-hidden md:order-2 "
+            className={`relative w-full h-full aspect-[6/3] md:min-h-[400px] rounded-xl overflow-hidden ${
+              isImageRight ? "md:order-2" : ""
+            }`}
             role="img"
             aria-label={`${product.title} preview image`}
           >
@@ -145,7 +150,6 @@ const ProductItem = ({
                     color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))"
                     style={{
                       userSelect: "none",
-
                       display: "inline-block",
                       fill: "var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))",
                       color:
@@ -153,14 +157,16 @@ const ProductItem = ({
                       flexShrink: 0,
                     }}
                   >
-                    <g color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))">
+                    <g
+                      color="var(--token-8e9f7d65-9fbe-4bbc-aa91-54812dc50f56, rgb(38, 38, 40))"
+                    >
                       <path d="M56,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0ZM88,24a8,8,0,0,0-8,8V224a8,8,0,0,0,16,0V32A8,8,0,0,0,88,24Zm40,32a8,8,0,0,0-8,8V192a8,8,0,0,0,16,0V64A8,8,0,0,0,128,56Zm40,32a8,8,0,0,0-8,8v64a8,8,0,0,0,16,0V96A8,8,0,0,0,168,88Zm40-16a8,8,0,0,0-8,8v96a8,8,0,0,0,16,0V80A8,8,0,0,0,208,72Z" />
                     </g>
                   </svg>
                 </span>
                 <span>
                   <Tag variant="simple" className="px-8 text-[20px]">
-                    {product.category} 
+                    {product.category}
                   </Tag>
                 </span>
               </div>
