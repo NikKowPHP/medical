@@ -119,18 +119,18 @@ const ProductItem = ({
       itemType="https://schema.org/Product"
       itemProp="itemListElement"
     >
-      <div className="flex flex-col gap-[24px]">
+      <div className="flex flex-col md:flex-row justify-between gap-[24px] border border-red-500">
         {/* Image Section */}
         {product.image_url && (
           <div
-            className="relative w-full h-full aspect-[6/3] rounded-xl overflow-hidden"
+            className="relative w-full h-full aspect-[6/3] rounded-xl overflow-hidden md:order-2"
             role="img"
             aria-label={`${product.title} preview image`}
           >
             <ParallaxImage src={product.image_url} alt={product.title} />
           </div>
         )}
-        <div className="flex flex-col gap-[24px]">
+        <div className="flex flex-col gap-[24px] border border-blue-500">
           {/* Content Section */}
           <div className="flex flex-col justify-between h-full  gap-[20px] ">
             <header className="flex justify-between gap-2">
