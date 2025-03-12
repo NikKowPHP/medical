@@ -26,7 +26,7 @@ function FaqAccordion({ faqItem, isOpen, onToggle }: FaqAccordionProps) {
         className="flex w-full items-center justify-between p-[16px] text-left "
         onClick={onToggle}
       >
-        <span className="text-[20px] font-medium">
+        <span className="text-[20px] md:text-[28px] font-medium">
           {faqItem.question}
         </span>
         <span className="ml-6 flex-shrink-0">
@@ -61,7 +61,7 @@ function FaqAccordion({ faqItem, isOpen, onToggle }: FaqAccordionProps) {
         >
           <p
             itemProp="text"
-            className="text-gray-600 text-base pb-6 px-10"
+            className="text-gray-600 text-base pb-6 px-10 "
           >
             {faqItem.answer}
           </p>
@@ -77,17 +77,17 @@ export function Faq({ items }: { items: FaqItem[] }) {
   return (
     <section
       id='faqs'
-      className="pb-[80px] "
+      className="pb-[80px] md:pb-[160px] "
        itemScope
       itemType="https://schema.org/FAQPage"
     >
-      <div className="max-w-7xl mx-auto px-[20px] sm:px-0 flex flex-col gap-[32px]">
+      <div className="max-w-7xl mx-auto px-[20px] sm:px-0 flex flex-col md:flex-row gap-[32px] md:gap-[62px]">
         <div className='flex flex-col gap-[24px]'>
 
-        <h2 className="text-black text-[20px]  font-medium " itemProp="name">
+        <h2 className="text-black text-[20px] md:text-[28px]  font-medium " itemProp="name">
           Welcome to FAQ!
         </h2>
-        <p className='text-[24px]'>
+        <p className='text-[24px] md:text-[44px]'>
         Everything You Need to Know Alton's disposable endoscopic accessories supplied by Rose Medical
         </p>
         </div>

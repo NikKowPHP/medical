@@ -10,7 +10,7 @@ export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) 
   return (
     <section
       id="safer-solutions"
-      className="pb-[80px] sm:py-[25px]"
+      className="pb-[80px] md:pb-[160px] "
       itemScope
       itemType="https://schema.org/HowTo"
       aria-labelledby="process-title"

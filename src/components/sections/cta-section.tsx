@@ -10,21 +10,24 @@ export const CtaSection = () => {
       itemType="https://schema.org/WebPageElement"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-start justify-start gap-[32px] ">
-          <h2 className="text-[36px] font-bold  text-black leading-[1.2] ">
-            Ready to Improve Your Endoscopy Procedures?
-          </h2>
-          <div className="flex items-center justify-start">
-            <Link
-              href="/products"
-              className="flex items-center justify-between gap-[30px]  text-white  text-[18px] bg-[#262625] rounded-full  pl-[20px] pr-[10px] py-[10px]" >
+        <div className="flex flex-col md:flex-row items-start  justify-start gap-[32px] ">
+          <div className="flex flex-col gap-[32px]">
+            <h2 className="text-[36px] md:text-[60px] font-bold  text-black leading-[1.2] ">
+              Ready to Improve Your Endoscopy Procedures?
+            </h2>
+            <div className="flex items-center justify-start">
+              <Link
+                href="/products"
+                className="flex items-center justify-between gap-[30px]  text-white  text-[18px] md:text-[20px] bg-[#262625] rounded-full  pl-[20px] pr-[10px] py-[10px]"
+              >
                 <span>Request a Quote</span>
-              <div className="p-[10px] bg-white rounded-full">
-                <ChevronRight className="w-6 h-6 text-black" />
-              </div>
-            </Link>
+                <div className="p-[10px] bg-white rounded-full">
+                  <ChevronRight className="w-6 h-6 text-black" />
+                </div>
+              </Link>
+            </div>
           </div>
-          <h3 className="text-[20px] font-bold text-black leading-[1.2] ">
+          <h3 className="text-[20px] md:text-[28px] font-bold text-black leading-[1.2] ">
             Elevate your practice with Alton's disposable accessories, supplied
             by Rose Medical.
           </h3>
