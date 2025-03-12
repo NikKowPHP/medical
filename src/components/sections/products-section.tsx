@@ -77,7 +77,7 @@ export async function ProductList() {
 
   return (
     <section id="work" className="relative overflow-hidden">
-      <div className="max-w-7xl px-[20px] md:px-0 mx-auto py-[80px] flex flex-col gap-[80px]">
+      <div className="max-w-7xl px-[20px] md:px-0 mx-auto py-[80px]">
         <Suspense
           fallback={
             <div className="min-h-[500px]">
@@ -86,19 +86,22 @@ export async function ProductList() {
             </div>
           }
         >
-          <ul
-            className="relative mx-auto flex flex-col gap-[32px] md:gap-[40px] w-full justify-start"
-            itemScope
-            itemType="https://schema.org/ItemList"
+          <div className="relative w-full  flex flex-center gap-[32px] md:gap-[40px] justify-start md:justify-center md:items-center border border-green-500">
+            <ul
+              className="relative  flex flex-col gap-[32px] md:gap-[40px] justify-start md:justify-center md:items-center border border-green-500"
+              itemScope
+              itemType="https://schema.org/ItemList"
           >
+            
             {products.map((product, index) => (
               <ProductItem
                 key={product.id}
                 product={product}
                 position={index + 1}
               />
-            ))}
-          </ul>
+              ))}
+            </ul>
+          </div>
         </Suspense>
       </div>
     </section>
@@ -114,7 +117,7 @@ const ProductItem = ({
 }) => {
   return (
     <li
-      className="max-w-5xl"
+      className=" w-full"
       itemScope
       itemType="https://schema.org/Product"
       itemProp="itemListElement"
@@ -123,14 +126,14 @@ const ProductItem = ({
         {/* Image Section */}
         {product.image_url && (
           <div
-            className="relative w-full h-full aspect-[6/3] rounded-xl overflow-hidden md:order-2"
+            className="relative w-full h-full aspect-[6/3] rounded-xl overflow-hidden md:order-2 "
             role="img"
             aria-label={`${product.title} preview image`}
           >
             <ParallaxImage src={product.image_url} alt={product.title} />
           </div>
         )}
-        <div className="flex flex-col gap-[24px] border border-blue-500">
+        <div className="flex flex-col gap-[24px] border border-blue-500 w-full">
           {/* Content Section */}
           <div className="flex flex-col justify-between h-full  gap-[20px] ">
             <header className="flex justify-between gap-2">
