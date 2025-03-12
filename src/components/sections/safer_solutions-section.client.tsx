@@ -26,7 +26,7 @@ export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) 
 
 const ProcessTitleSubtitle = () => {
   return (
-    <header className="mb-[42px] gap-[32px] flex flex-col flex-start">
+    <header className="mb-[42px] gap-[32px] md:gap-[12px]  flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
         <div className="bg-[#014441] px-[10px] py-[8px] flex items-center justify-center rounded-full gap-[10px]">
           <Square className="w-[20px] h-[20px] text-white transform -rotate-45" />
@@ -35,8 +35,8 @@ const ProcessTitleSubtitle = () => {
           </span>
         </div>
       </h2>
-      <h3 className="text-[24px]">Reimagining Endoscopy: Safer, Smarter Solutions Await</h3>
-      <p className="text-[18px]">
+      <h3 className="text-[24px] md:text-[44px]">Reimagining Endoscopy: Safer, Smarter Solutions Await</h3>
+      <p className="text-[18px] md:text-[20px]">
         Elevate your practice with Alton's disposable accessories, supplied by Rose Medical.
       </p>
     </header>
@@ -47,7 +47,7 @@ const Slider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
   const [selectedOption, setSelectedOption] = useState<SliderType>(sliderItems[0]);
 
   return (
-    <div className="bg-[#01423F] rounded-xl overflow-hidden w-full h-[300px] flex relative">
+    <div className="bg-[#01423F] rounded-xl overflow-hidden w-full h-[300px] md:h-[680px] flex relative">
       {/* Color Options Column */}
       <div className="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col z-10 gap-[16px]">
         {sliderItems.map((option) => (
@@ -60,18 +60,18 @@ const Slider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
                 : ""
             }`}
           >
-            <div className="relative w-[72px] h-[46px] rounded-xl overflow-hidden">
+            <div className="relative w-[72px] h-[46px]  rounded-xl overflow-hidden">
               <Image src={option.image_url} alt="Alton" fill className="object-cover" />
             </div>
           </button>
         ))}
       </div>
       {selectedOption && (
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center ">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedOption.id}
-              className="relative w-full h-full"
+              className="relative w-full h-full "
               initial={{ opacity: 0.5, scale: 1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0.5, scale: 1 }}
@@ -81,6 +81,7 @@ const Slider = ({ sliderItems }: { sliderItems: SliderType[] }) => {
                 src={selectedOption.image_url}
                 alt="Rose Medical"
                 fill
+                quality={100}
                 className="object-cover"
               />
             </motion.div>

@@ -23,7 +23,7 @@ export const BetterOutcomesSection = async () => {
       >
         <section
           id="better-outcomes"
-          className="pb-[80px] sm:py-[25px] "
+          className="pb-[80px] md:py-[160px]  "
           itemScope
           itemType="https://schema.org/HowTo"
           aria-labelledby="process-title"
