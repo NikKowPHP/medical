@@ -29,7 +29,7 @@ export function SubHeroSection() {
             y: shouldReduceMotion ? 0 : y,
             scale: shouldReduceMotion ? 1 : scale,
           }} 
-          className="absolute inset-0 h-[150%] w-full"
+          className="relative inset-0 h-[150%] w-full"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ 

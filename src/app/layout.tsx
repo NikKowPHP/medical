@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 import { ClientWrapper } from './client-wrapper'
 import { PageProvider } from '@/contexts/page-context'
 import { siteUrl } from '@/config/constants';
-
+import { SmoothScroll } from '@/components/smooth-scroll';
 
 interface LocaleLayoutProps {
   children: React.ReactNode
@@ -18,7 +18,7 @@ export default async function LocaleLayout({
 
  
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <head>
         <link rel="canonical" href={siteUrl} />
         
@@ -42,7 +42,9 @@ export default async function LocaleLayout({
       <body suppressHydrationWarning>
           <PageProvider>
             <ClientWrapper>
-              <main className="relative">{children}</main>
+              <SmoothScroll>
+                <main className="relative">{children}</main>
+              </SmoothScroll>
               </ClientWrapper>
             </PageProvider>
       </body>

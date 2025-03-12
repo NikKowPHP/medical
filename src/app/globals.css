@@ -54,6 +54,7 @@ body {
   background: var(--background);
   /* Apply the locally loaded Roboto Serif font */
   font-family: "Helvetica Neue", sans-serif;
+  scroll-snap-type: y proximity;
 }
 
 /* Optional: Remove or update the universal selector if you want a consistent font */
@@ -61,3 +62,8 @@ body {
   font-family: "Helvetica Neue", serif;
 }
 
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+}
