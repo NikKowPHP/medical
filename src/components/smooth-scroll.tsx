@@ -27,11 +27,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     const resizeObserver = new ResizeObserver(() => lenis.resize())
     resizeObserver.observe(document.documentElement)
 
-    let lastTime = 0
     const raf = (time: number) => {
-      const delta = time - lastTime
       lenis.raf(time)
-      lastTime = time
       requestAnimationFrame(raf)
     }
 

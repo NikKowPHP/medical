@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 import { ClientWrapper } from './client-wrapper'
 import { PageProvider } from '@/contexts/page-context'
 import { siteUrl } from '@/config/constants';
-import { SmoothScroll } from '@/components/smooth-scroll';
+// import { SmoothScroll } from '@/components/smooth-scroll';
 
 interface LocaleLayoutProps {
   children: React.ReactNode
