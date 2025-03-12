@@ -7,8 +7,11 @@ export function SubHeroSection() {
   // Get the current vertical scroll position
   const { scrollY } = useScroll();
 
-  // Multiply the scroll value by 0.1 for a parallax effect
-  const y = useTransform(scrollY, (latest) => latest * 0.1);
+  // Vertical parallax effect
+  const y = useTransform(scrollY, [0, 1000], [0, -200], { clamp: false });
+  
+  // Scale transformation (zoom effect)
+  const scale = useTransform(scrollY, [0, 1000], [1, 1.1], { clamp: false });
 
   return (
     <section
@@ -16,14 +19,23 @@ export function SubHeroSection() {
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
-      <div className="max-w-7xl mx-auto relative h-[400px] overflow-hidden">
-        {/* The motion.div will animate the translateY based on the scroll position */}
-        <motion.div style={{ y }} className="absolute inset-0">
+      <div className="max-w-3xl mx-auto relative h-[400px] overflow-hidden sm:h-[800px] transform -translate-y-[250px]">
+        <motion.div 
+          style={{ 
+            y,
+            scale, // Apply both transformations
+            transformOrigin: 'center' // Ensure scaling happens from the center
+          }} 
+          className="absolute inset-0 h-[150%] w-full"
+        >
           <Image
             src="/subhero.avif"
             alt="Subhero"
             fill
+            quality={100}
+            
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </motion.div>
       </div>

@@ -26,7 +26,7 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Roboto Serif' ],
+        sans: ['Helvetica Neue' ],
       },
       fontSize: {
         'xs': '12px',
