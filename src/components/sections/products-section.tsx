@@ -87,7 +87,7 @@ export async function ProductList() {
           }
         >
             <ul
-              className="relative  flex flex-col gap-[32px] md:gap-[200px] justify-start md:justify-center md:items-center border border-green-500"
+              className="relative  flex flex-col gap-[32px] md:gap-[200px] justify-start md:justify-center md:items-center"
               itemScope
               itemType="https://schema.org/ItemList"
           >
@@ -123,7 +123,7 @@ const ProductItem = ({
       itemType="https://schema.org/Product"
       itemProp="itemListElement"
     >
-      <div className="flex flex-col md:flex-row justify-between items-end gap-[24px] border border-red-500">
+      <div className="flex flex-col md:flex-row justify-between items-end gap-[24px] ">
         {/* Image Section */}
         {product.image_url && (
           <div
@@ -136,7 +136,7 @@ const ProductItem = ({
             <ParallaxImage src={product.image_url} alt={product.title} />
           </div>
         )}
-        <div className="flex flex-col gap-[24px] md:justify-end h-full border border-blue-500 w-full">
+        <div className="flex flex-col gap-[24px] md:justify-end h-full w-full">
           {/* Content Section */}
           <div className="flex flex-col justify-between   gap-[20px] ">
             <header className="flex justify-between gap-2">

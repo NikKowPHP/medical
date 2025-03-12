@@ -1,10 +1,6 @@
 export const footerConfig = {
   aboutLinks: [
-    {
-      title: 'Company',
-      href: 'company',
-      isRoute: false,
-    },
+   
     {
       title: 'Contact us',
       href: 'contact-us',
@@ -13,11 +9,7 @@ export const footerConfig = {
   
   ],
   pageLinks: [
-    {
-      title: 'Legal',
-      href: 'legal',
-      isRoute: true,
-    },
+   
     {
       title: 'Terms of Service',
       href: 'terms-of-service',
