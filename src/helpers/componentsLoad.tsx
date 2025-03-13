@@ -10,25 +10,17 @@ export const HeroSection = dynamic(
 )
 
 
-export const BetterOutcomesSection = dynamic(
+export const SliderSection = dynamic(
   () =>
-    import('@/components/sections/better_outcomes-section').then(
-      (mod) => mod.BetterOutcomesSection
+    import('@/components/sections/slider-section.server').then(
+      (mod) => mod.default
     ),
   {
     ssr: true,
   }
 )
 
-export const YoutubeSection = dynamic(
-  () =>
-    import('@/components/sections/youtube-section').then(
-      (mod) => mod.YoutubeSection
-    ),
-  {
-    ssr: true,
-  }
-)
+
 
 
 export const ProductList = dynamic(
@@ -58,7 +50,7 @@ export const SubHeroSection = dynamic(
 )
 
 export const SaferSolutionsSection = dynamic(
-  () => import('@/components/sections/safer_solutions-section.server').then(mod => mod.default),
+  () => import('@/components/sections/slider-section.server').then(mod => mod.default),
   {
     ssr: true,
   }

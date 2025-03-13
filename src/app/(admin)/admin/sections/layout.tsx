@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 import Link from 'next/link'
-import { LayoutDashboard, FileText, Youtube, Quote, ShoppingBag } from 'lucide-react'
+import { LayoutDashboard, ShoppingBag } from 'lucide-react'
 import { AdminProvider } from '@/contexts/admin-context'
 
 export default async function AdminLayout({
@@ -32,16 +32,6 @@ export default async function AdminLayout({
               <span className="font-medium hidden md:block">Dashboard</span>
             </Link>
             
-            <Link 
-              href="/admin/sections/blog-posts" 
-              className={`flex items-center gap-3 py-3 px-4 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors ${
-                pathname === '/admin/sections/blog-posts' ? 'bg-gray-100 font-semibold text-primary-500' : ''
-              }`}
-            >
-              <FileText className="w-5 h-5" />
-              <span className="font-medium hidden md:block">News Posts</span>
-            </Link>
-
             {/* Products Link */}
             <Link
               href="/admin/sections/products"
@@ -54,23 +44,16 @@ export default async function AdminLayout({
             </Link>
 
             <Link
-              href="/admin/sections/youtube"
+              href="/admin/sections/slider"
               className={`flex items-center gap-3 py-3 px-4 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors ${
-                pathname === '/admin/sections/youtube' ? 'bg-gray-100 font-semibold text-primary-500' : ''
+                pathname === '/admin/sections/slider' ? 'bg-gray-100 font-semibold text-primary-500' : ''
               }`}
             >
-              <Youtube className="w-5 h-5" />
-              <span className="font-medium hidden md:block">YouTube</span>
+              <LayoutDashboard className="w-5 h-5" />
+              <span className="font-medium hidden md:block">Slider</span>
             </Link>
-            <Link
-              href="/admin/sections/quote"
-              className={`flex items-center gap-3 py-3 px-4 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors ${
-                pathname === '/admin/sections/quote' ? 'bg-gray-100 font-semibold text-primary-500' : ''
-              }`}
-            >
-              <Quote className="w-5 h-5" />
-              <span className="font-medium hidden md:block">Quote</span>
-            </Link>
+
+          
           </nav>
         </aside>
 

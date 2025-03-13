@@ -6,7 +6,7 @@ import {
 import { Square } from "lucide-react";
 import { LucideIcons } from "@/lib/data/better_outcome-data";
 
-export const BetterOutcomesSection = async () => {
+export const SliderSection = async () => {
   const processItems = getProcessItems();
 
   return (

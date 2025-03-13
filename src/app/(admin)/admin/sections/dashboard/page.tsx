@@ -34,49 +34,14 @@ export default function AdminDashboard() {
       
 
 
+        {/* Slider Section */}
         <Link
-          href="/admin/sections/blog-posts"
-          className="flex flex-col p-6 bg-white  border-2 border-gray-200 hover:shadow-lg transition-shadow"
-        >
-          <h2 className="text-xl font-medium text-gray-900 mb-2">
-            News Posts
-          </h2>
-          <p className="text-gray-600 mb-4">
-            Manage your blog posts, add new ones, or edit existing ones.
-          </p>
-          <Button variant="primary" className="mt-auto w-full sm:w-auto">
-            Manage Blog Posts
-          </Button>
-        </Link>
-
-       
-         <Link
-          href="/admin/sections/youtube"
+          href="/admin/sections/slider"
           className="flex flex-col p-6 bg-white border-2 border-gray-200 hover:shadow-lg transition-shadow"
         >
           <h2 className="text-xl font-medium text-gray-900 mb-2">
-            YouTube Section
+            Slider Section
           </h2>
-          <p className="text-gray-600 mb-4">
-            Manage YouTube section
-          </p>
-          <Button variant="primary" className="mt-auto w-full sm:w-auto">
-            Manage YouTube Section
-          </Button>
-        </Link>
-         <Link
-          href="/admin/sections/quote"
-          className="flex flex-col p-6 bg-white border-2 border-gray-200 hover:shadow-lg transition-shadow"
-        >
-          <h2 className="text-xl font-medium text-gray-900 mb-2">
-            Quote Section
-          </h2>
-          <p className="text-gray-600 mb-4">
-            Manage the quote section.
-          </p>
-          <Button variant="primary" className="mt-auto w-full sm:w-auto">
-            Manage Quote Section
-          </Button>
         </Link>
 
         {/* Products Section */}

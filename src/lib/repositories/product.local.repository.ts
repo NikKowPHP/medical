@@ -3,7 +3,7 @@ import { SqlLiteAdapter } from '@/lib/repositories/adapters/sqllite.adapter';
 import { Database } from 'sqlite3';
 import { getDatabaseFilePath } from '@/lib/config/database.config';
 import logger from '@/lib/logger';
-import { IProductRepository } from '../services/product.service';
+import { IProductRepository } from '@/lib/interfaces/repositories.interface';
 
 const dbPath = getDatabaseFilePath();
 const db = new Database(dbPath);

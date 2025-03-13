@@ -4,9 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import { Square } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SliderItem as SliderType } from "@/lib/data/safer_solutions-data";
+import { SliderItem as SliderType } from "@/domain/models/models";
 
-export function SaferSolutionsSectionClient({ items }: { items: SliderType[] }) {
+export function SliderSectionClient({ items }: { items: SliderType[] }) {
   return (
     <section
       id="safer-solutions"

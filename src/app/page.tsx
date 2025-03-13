@@ -4,7 +4,7 @@ import {
   QuoteSection,
   ProductList,
   SubHeroSection,
-  BetterOutcomesSection,
+  SliderSection,
   SaferSolutionsSection,
   FaqSection,
   CtaSection
@@ -32,9 +32,7 @@ export default async function HomePage() {
             <ProductList />
           </Suspense>
           <Suspense fallback={<div className="min-h-[700px]" />}>
-            <div>
-              <BetterOutcomesSection />
-            </div>
+            <SliderSection />
           </Suspense>
           <Suspense fallback={<div className="min-h-[700px]" />}> 
             <SaferSolutionsSection />
