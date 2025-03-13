@@ -11,7 +11,7 @@ const db = new Database(dbPath);
 export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> implements IProductRepository  {
   constructor() {
     // Using same table name as the Supabase repository ("medical_products")
-    super("medical_products", db);
+    super("products", db);
   }
 
   // Fetch all products ordered by created_at descending

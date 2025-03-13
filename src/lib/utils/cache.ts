@@ -1,8 +1,6 @@
 
 export const CACHE_TAGS = {
-  BLOG_POSTS: 'blog-posts',
-  YOUTUBE: 'youtube',
-  QUOTE: 'quote',
+  SLIDER: 'slider',
   PRODUCTS: 'products',
 } as const;
 

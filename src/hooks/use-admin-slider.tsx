@@ -60,6 +60,7 @@ export const useAdminSlider = () => {
       method: "GET",
       errorMessage: "Failed to fetch slider items",
     });
+    debugger
     const itemsArray = Array.isArray(result) ? result : [];
     setSliderItems(itemsArray);
     return itemsArray;
