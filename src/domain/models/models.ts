@@ -40,3 +40,10 @@ export interface Product {
   created_at: Date
   updated_at: Date
 }
+
+
+export interface SliderItem {
+  id: string
+  image_url: string
+
+}
