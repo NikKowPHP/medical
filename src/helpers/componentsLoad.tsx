@@ -77,3 +77,10 @@ export const CtaSection = dynamic(
     ssr: true,
   }
 )
+
+export const ContactSection = dynamic(
+  () => import('@/components/sections/contact-section').then(mod => mod.ContactSection),
+  {
+    ssr: true,
+  }
+)
