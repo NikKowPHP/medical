@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { useApi } from "@/hooks/use-api";
-import { upload } from "@vercel/blob/client";
 import { Product } from "@/domain/models/models";
 import logger from "@/lib/logger";
+import { useUpload } from "./use-upload";
 
 export type ProductSubmissionData = Partial<Product> & {
   imageFile?: File;
@@ -11,6 +11,7 @@ export type ProductSubmissionData = Partial<Product> & {
 
 export const useAdminProducts = () => {
   const { fetchApi } = useApi();
+  const { uploadFile } = useUpload();
 
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -20,23 +21,6 @@ export const useAdminProducts = () => {
 
 
 
-  // helper functions
-  const uploadFile = useCallback(
-    async (file: File, pathPrefix: string): Promise<string> => {
-      const filename = `${pathPrefix}/${Date.now()}-${file.name}`;
-      const blob = await upload(filename, file, {
-        access: "public",
-        handleUploadUrl: "/api/admin/upload-token",
-        clientPayload: JSON.stringify({
-          __development__: "bypass-auth-for-localhost",
-        }),
-        onUploadProgress: ({ percentage }) =>
-          logger.log(`Upload progress: ${percentage}%`),
-      });
-      return blob.url;
-    },
-    []
-  );
 
   const uploadFiles = useCallback(
     async (
