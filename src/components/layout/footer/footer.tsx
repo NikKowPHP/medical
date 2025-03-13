@@ -36,7 +36,7 @@ export function Footer() {
   return (
     <>
       <footer
-        className="bg-[#014441] w-full py-12 px-[20px]  md:px-20 text-white text-base md:text-[16px]"
+        className="bg-[#014441] w-full py-12 md:py-[80px] px-[20px]  md:px-20 text-white text-base md:text-[16px]"
         itemScope
         itemType="https://schema.org/Organization"
       >
@@ -88,17 +88,12 @@ export function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-[20px]">
+            <div className="flex flex-col md:flex-row md:justify-between md:flex-wrap gap-[20px] md:gap-[10px]">
               {/* third row */}
               <p className="text-base">
                 RoseMed is your trusted source for Alton (Shanghai) Medical
                 Instruments Co., Ltd.'s comprehensive range of disposable
                 endoscopic accessories.
-              </p>
-
-              {/* fourth row | copyright */}
-              <p className="text-base">
-                © {new Date().getFullYear()}. All rights reserved. Rose Medical.{" "}
               </p>
 
               {/* fifth row | social media */}
@@ -115,6 +110,11 @@ export function Footer() {
                   );
                 })}
               </div>
+
+              {/* fourth row | copyright */}
+              <p className="text-base ">
+                © {new Date().getFullYear()}. All rights reserved. Rose Medical.{" "}
+              </p>
             </div>
           </div>
         </div>
