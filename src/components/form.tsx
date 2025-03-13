@@ -66,7 +66,8 @@ export const Form = () => {
         <p className="text-gray-600">We'd love to hear from you!</p>
       </div>
       <form className="space-y-6 pt-6 text-[16px]" onSubmit={handleSubmit}>
-          <label className="block ">
+        <div className="flex flex-col md:flex-row gap-[20px]">
+          <label className="block md:w-1/2 ">
             <p className="text-gray-700   mb-2">First name</p>
             <input
               type="text"
@@ -78,7 +79,7 @@ export const Form = () => {
               onChange={handleChange}
             />
           </label>
-          <label className="block">
+          <label className="block md:w-1/2">
             <p className="text-gray-700   mb-2">Last name</p>
             <input
               type="text"
@@ -90,6 +91,7 @@ export const Form = () => {
               onChange={handleChange}
             />
           </label>
+        </div>
         <label className="block">
           <p className="text-gray-700  mb-2">Email</p>
           <input

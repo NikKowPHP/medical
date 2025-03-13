@@ -43,7 +43,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-[20px] md:px-0">
           <div className="flex flex-col justify-start md:flex-row md:flex-wrap gap-[30px] sm:gap-[30px]  md:gap-[100px]  w-full">
             {/* first row */}
-            <div className="flex gap-[20px] items-center">
+            <div className="flex gap-[20px] items-center md:items-start">
               <div className="w-[110px] h-[28px] relative">
                 <Link
                   href="/"
