@@ -1,27 +1,27 @@
-import { Product } from '@/domain/models/models';
+import { SliderItem } from '@/domain/models/models';
 import { SqlLiteAdapter } from '@/lib/repositories/adapters/sqllite.adapter';
 import { Database } from 'sqlite3';
 import { getDatabaseFilePath } from '@/lib/config/database.config';
 import logger from '@/lib/logger';
-import { IProductRepository } from '../services/product.service';
+import { ISliderRepository } from '@/lib/interfaces/repositories.interface';
 
 const dbPath = getDatabaseFilePath();
 const db = new Database(dbPath);
 
-export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> implements IProductRepository  {
+export class SliderRepositoryLocal extends SqlLiteAdapter<SliderItem, string> implements ISliderRepository {
   constructor() {
-    // Using same table name as the Supabase repository ("medical_products")
-    super("medical_products", db);
+    // Use the table name for slider items as defined in your migration
+    super("slider_items", db);
   }
 
-  // Fetch all products ordered by created_at descending
-  getProducts = async (): Promise<Product[]> => {
+  // Fetch all slider items
+  getSliderItems = async (): Promise<SliderItem[]> => {
     return new Promise((resolve, reject) => {
-      const query = `SELECT * FROM "${this.tableName}" ORDER BY created_at DESC;`;
-      this.db.all(query, [], (err, rows: Product[]) => {
+      const query = `SELECT * FROM "${this.tableName}";`;
+      this.db.all(query, [], (err, rows: SliderItem[]) => {
         if (err) {
-          logger.log(`Error fetching products from table "${this.tableName}":`, err);
-          reject(new Error(`Database error fetching products: ${err.message || 'Unknown error'}`));
+          logger.log(`Error fetching slider items from table "${this.tableName}":`, err);
+          reject(new Error(`Database error fetching slider items: ${err.message || 'Unknown error'}`));
           return;
         }
         resolve(rows || []);
@@ -29,15 +29,15 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
     });
   };
 
-  // Create a new product
-  createProduct = async (product: Partial<Product>): Promise<Product> => {
+  // Create a new slider item
+  createSliderItem = async (sliderItem: Partial<SliderItem>): Promise<SliderItem> => {
     return new Promise((resolve, reject) => {
-      // Build columns, placeholders, and values from product DTO
-      const keys = Object.keys(product)
-        .filter(key => product[key as keyof Product] !== undefined);
+      // Build columns, placeholders, and values from sliderItem DTO
+      const keys = Object.keys(sliderItem)
+        .filter(key => sliderItem[key as keyof SliderItem] !== undefined);
       const columns = keys.map(key => `"${key}"`).join(', ');
       const placeholders = keys.map(() => '?').join(', ');
-      const values = keys.map(key => product[key as keyof Product]);
+      const values = keys.map(key => sliderItem[key as keyof SliderItem]);
 
       const query = `
         INSERT INTO "${this.tableName}" (${columns})
@@ -47,25 +47,25 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
       const that = this;
       that.db.run(query, values, function(err) {
         if (err) {
-          logger.log(`Error creating product in table "${that.tableName}":`, err);
-          reject(new Error(`Database error creating product: ${err.message || 'Unknown error'}`));
+          logger.log(`Error creating slider item in table "${that.tableName}":`, err);
+          reject(new Error(`Database error creating slider item: ${err.message || 'Unknown error'}`));
           return;
         }
-        // After insertion, retrieve the created product.
-        // Assumes that product.id is provided; if not, generate and include it before insertion.
-        const id = product.id;
+        // After insertion, retrieve the created slider item.
+        // It assumes that sliderItem.id is provided; if not, you should generate and include it before insertion.
+        const id = sliderItem.id;
         if (!id) {
-          reject(new Error('Product id must be provided'));
+          reject(new Error('Slider item id must be provided'));
           return;
         }
-        that.db.get(`SELECT * FROM "${that.tableName}" WHERE id = ?;`, [id], (err, row: Product) => {
+        that.db.get(`SELECT * FROM "${that.tableName}" WHERE id = ?;`, [id], (err, row: SliderItem) => {
           if (err) {
-            logger.log(`Error retrieving created product from table "${that.tableName}":`, err);
-            reject(new Error(`Database error retrieving created product: ${err.message || 'Unknown error'}`));
+            logger.log(`Error retrieving created slider item from table "${that.tableName}":`, err);
+            reject(new Error(`Database error retrieving created slider item: ${err.message || 'Unknown error'}`));
             return;
           }
           if (!row) {
-            reject(new Error(`Failed to retrieve created product from table "${that.tableName}"`));
+            reject(new Error(`Failed to retrieve created slider item from table "${that.tableName}"`));
             return;
           }
           resolve(row);
@@ -74,13 +74,13 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
     });
   };
 
-  // Update an existing product by id
-  updateProduct = async (id: string, product: Partial<Product>): Promise<Product> => {
+  // Update an existing slider item by id
+  updateSliderItem = async (id: string, sliderItem: Partial<SliderItem>): Promise<SliderItem> => {
     return new Promise((resolve, reject) => {
-      const keys = Object.keys(product)
-        .filter(key => product[key as keyof Product] !== undefined);
+      const keys = Object.keys(sliderItem)
+        .filter(key => sliderItem[key as keyof SliderItem] !== undefined);
       const updates = keys.map(key => `"${key}" = ?`).join(', ');
-      const values = keys.map(key => product[key as keyof Product]);
+      const values = keys.map(key => sliderItem[key as keyof SliderItem]);
 
       const query = `
         UPDATE "${this.tableName}"
@@ -90,18 +90,18 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
       const that = this;
       that.db.run(query, [...values, id], function(err) {
         if (err) {
-          logger.log(`Error updating product with id ${id} in table "${that.tableName}":`, err);
-          reject(new Error(`Database error updating product: ${err.message || 'Unknown error'}`));
+          logger.log(`Error updating slider item with id ${id} in table "${that.tableName}":`, err);
+          reject(new Error(`Database error updating slider item: ${err.message || 'Unknown error'}`));
           return;
         }
-        that.db.get(`SELECT * FROM "${that.tableName}" WHERE id = ?;`, [id], (err, row: Product) => {
+        that.db.get(`SELECT * FROM "${that.tableName}" WHERE id = ?;`, [id], (err, row: SliderItem) => {
           if (err) {
-            logger.log(`Error retrieving updated product with id ${id} from table "${that.tableName}":`, err);
-            reject(new Error(`Database error retrieving updated product: ${err.message || 'Unknown error'}`));
+            logger.log(`Error retrieving updated slider item with id ${id} from table "${that.tableName}":`, err);
+            reject(new Error(`Database error retrieving updated slider item: ${err.message || 'Unknown error'}`));
             return;
           }
           if (!row) {
-            reject(new Error(`Failed to retrieve updated product with id ${id}`));
+            reject(new Error(`Failed to retrieve updated slider item with id ${id}`));
             return;
           }
           resolve(row);
@@ -110,14 +110,14 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
     });
   };
 
-  // Delete a product by id
-  deleteProduct = async (id: string): Promise<void> => {
+  // Delete a slider item by id
+  deleteSliderItem = async (id: string): Promise<void> => {
     return new Promise((resolve, reject) => {
       const query = `DELETE FROM "${this.tableName}" WHERE id = ?;`;
       this.db.run(query, [id], function(err) {
         if (err) {
-          logger.log(`Error deleting product with id ${id} from table :`, err);
-          reject(new Error(`Database error deleting product: ${err.message || 'Unknown error'}`));
+          logger.log(`Error deleting slider item with id ${id} from table "slider_items":`, err);
+          reject(new Error(`Database error deleting slider item: ${err.message || 'Unknown error'}`));
           return;
         }
         resolve();
@@ -125,12 +125,13 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
     });
   };
 
-  getProductById = async (id: string): Promise<Product> => {
+  // Retrieve a slider item by id
+  getSliderItemById = async (id: string): Promise<SliderItem> => {
     return new Promise((resolve, reject) => {
-      this.db.get(`SELECT * FROM "${this.tableName}" WHERE id = ?;`, [id], (err, row: Product) => {
+      this.db.get(`SELECT * FROM "${this.tableName}" WHERE id = ?;`, [id], (err, row: SliderItem) => {
         if (err) {
-          logger.log(`Error fetching product with id ${id} from table "${this.tableName}":`, err);
-          reject(new Error(`Database error fetching product: ${err.message || 'Unknown error'}`));
+          logger.log(`Error fetching slider item with id ${id} from table "${this.tableName}":`, err);
+          reject(new Error(`Database error fetching slider item: ${err.message || 'Unknown error'}`));
           return;
         }
         resolve(row);
@@ -140,4 +141,4 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
 }
 
 // Export a singleton instance
-export const productRepositoryLocal = new ProductRepositoryLocal();
+export const sliderRepositoryLocal = new SliderRepositoryLocal();

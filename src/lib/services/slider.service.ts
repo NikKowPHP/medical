@@ -1,17 +1,7 @@
-import { SliderItem, Product } from "@/domain/models/models"
+import { SliderItem } from "@/domain/models/models"
 import { ISliderRepository } from "@/lib/interfaces/repositories.interface"
-import { sliderRepositoryLocal } from "../repositories/slider.repository.local"
-// Import production repository when ready
-// import { sliderRepository } from "../repositories/slider.repository"
-
-export interface ISliderRepository {
-  getSliderItems(): Promise<SliderItem[]>
-  createSliderItem(sliderItem: Partial<SliderItem>): Promise<SliderItem>
-  updateSliderItem(id: string, sliderItem: Partial<SliderItem>): Promise<SliderItem>
-  deleteSliderItem(id: string): Promise<void>
-  getSliderItemById(id: string): Promise<SliderItem>
-}
-
+import { sliderRepositoryLocal } from "../repositories/slider.local.repository"
+import { sliderRepository } from "../repositories/slider.repository"
 
 export class SliderService {
   private sliderRepository: ISliderRepository
@@ -21,7 +11,7 @@ export class SliderService {
       this.sliderRepository = sliderRepositoryLocal
     } else {
       // Replace with actual production repository
-      this.sliderRepository = sliderRepositoryLocal
+      this.sliderRepository =  sliderRepository
     }
   }
 

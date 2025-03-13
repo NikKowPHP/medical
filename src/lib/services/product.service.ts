@@ -2,14 +2,8 @@ import { ProductRepository } from "../repositories/product.repository"
 import { Product } from "@/domain/models/models"
 import { productRepositoryLocal } from "../repositories/product.local.repository"
 import logger from "../logger"
+import { IProductRepository } from "../interfaces/repositories.interface"
 
-export interface IProductRepository {
-  getProducts(): Promise<Product[]>
-  createProduct(product: Partial<Product>): Promise<Product>
-  updateProduct(id: string, product: Partial<Product>): Promise<Product>
-  deleteProduct(id: string): Promise<void>
-  getProductById(id: string): Promise<Product>
-}
 
 // Create an instance of the production repository
 const productionRepository = new ProductRepository()
