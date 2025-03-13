@@ -1,5 +1,4 @@
-import { ChevronRight, MessageCircle, MessageSquareMore, Phone, Square } from "lucide-react";
-import Link from "next/link";
+import {  MessageSquareMore, Phone } from "lucide-react";
 import { Form } from "../form";
 import { Lightbulb } from "lucide-react";
 
@@ -7,7 +6,7 @@ export const ContactSection = () => {
   return (
     <section
       id="cta-section"
-      className="py-[40px] px-[20px] md:px-0  flex flex-col justify-center items-center"
+      className="pt-[40px] pb-[120px] px-[20px] md:px-0  flex flex-col justify-center items-center"
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
@@ -41,6 +40,7 @@ export const ContactSection = () => {
       </div>
 
       <Form />
+
     </section>
   );
 };

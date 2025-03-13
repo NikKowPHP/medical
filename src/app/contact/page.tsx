@@ -1,4 +1,4 @@
-import { ContactSection } from "@/helpers/componentsLoad";
+import { ContactSection, CtaSection } from "@/helpers/componentsLoad";
 
 export default function ContactPage() {
   return (
@@ -8,6 +8,7 @@ export default function ContactPage() {
       itemType="https://schema.org/WebPage"
     >
       <ContactSection />
+      <CtaSection />
     </div>
   );
 }

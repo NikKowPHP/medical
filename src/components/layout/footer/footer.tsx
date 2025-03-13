@@ -36,14 +36,14 @@ export function Footer() {
   return (
     <>
       <footer
-        className="bg-[#014441] w-full py-12 md:py-[80px] px-[20px]  md:px-20 text-white text-base md:text-[16px]"
+        className="bg-[#014441] w-full py-12 md:py-[80px]  text-white text-base md:text-[16px]"
         itemScope
         itemType="https://schema.org/Organization"
       >
         <div className="max-w-7xl mx-auto px-[20px] md:px-0">
           <div className="flex flex-col justify-start md:flex-row md:flex-wrap gap-[30px] sm:gap-[30px]  md:gap-[100px]  w-full">
             {/* first row */}
-            <div className="flex gap-[20px]">
+            <div className="flex gap-[20px] items-center">
               <div className="w-[110px] h-[28px] relative">
                 <Link
                   href="/"
@@ -66,7 +66,7 @@ export function Footer() {
             </div>
 
             {/* second row*/}
-            <div className="flex md:flex-1 justify-end md:gap-[200px] gap-[20px]">
+            <div className="flex md:flex-1 justify-between md:justify-end md:gap-[200px] gap-[20px]">
               {/* first column */}
               <div className="flex flex-col gap-[10px]">
                 <h5 className="text-[20px] mb-[10px]">Company</h5>
@@ -97,7 +97,7 @@ export function Footer() {
               </p>
 
               {/* fifth row | social media */}
-              <div className="flex gap-4 items-center justify-end  ">
+              <div className="flex gap-[10px] items-center justify-end order-2  md:order-none">
                 <span>@rosemedical</span>
                 {footerConfig.socialLinks.map((link) => {
                   // Get the proper icon component based on the icon property
@@ -112,7 +112,7 @@ export function Footer() {
               </div>
 
               {/* fourth row | copyright */}
-              <p className="text-base ">
+              <p className="text-base order-1 md:order-none pb-5 md:pb-0 ">
                 © {new Date().getFullYear()}. All rights reserved. Rose Medical.{" "}
               </p>
             </div>
