@@ -2,11 +2,10 @@
 
 import React, { createContext, useCallback, useContext  } from "react";
 import { useApi } from "@/hooks/use-api";
-import { Product } from "@/domain/models/models";
+import { Product, SliderItem } from "@/domain/models/models";
 import { ProductSubmissionData, useAdminProducts } from "@/hooks/use-admin-products";
-
+import { SliderItemSubmissionData, useAdminSlider } from "@/hooks/use-admin-slider";
 // Update the function types to accept file values as separate fields.
-
 
 type AdminContextType = {
   // Common
@@ -22,6 +21,12 @@ type AdminContextType = {
   updateProduct: (id: string, data: ProductSubmissionData) => Promise<Product>;
   deleteProduct: (id: string) => Promise<void>;
 
+  // Slider
+  sliderItems: SliderItem[];
+  getSliderItems: () => Promise<SliderItem[]>;
+  createSliderItem: (data: SliderItemSubmissionData) => Promise<SliderItem>;
+  updateSliderItem: (id: string, data: SliderItemSubmissionData) => Promise<SliderItem>;
+  deleteSliderItem: (id: string) => Promise<void>;  
  
 };
 
@@ -62,6 +67,8 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         revalidateCache,
         // Product CRUD Methods
         ...useAdminProducts(),
+        // Slider CRUD Methods
+        ...useAdminSlider(),
       }}
     >
       {children}
