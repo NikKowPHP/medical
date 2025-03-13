@@ -31,7 +31,7 @@ export const useAdminSlider = () => {
       }
 
       if (process.env.NEXT_PUBLIC_MOCK_UPLOADS === "true") {
-        imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/slider/images/mock-uploaded-image.avif`;
+        imageUrl = `https://6jnegrfq8rkxfevo.public.blob.vercel-storage.com/products/images/1741514066709-2025-03-09_07-55-trAfuCDSuaW2aZYiXHgENMuGfGNdCo.png`;
       } else {
         imageUrl = await uploadFile(data.imageFile, "slider/images");
       }
@@ -60,7 +60,6 @@ export const useAdminSlider = () => {
       method: "GET",
       errorMessage: "Failed to fetch slider items",
     });
-    debugger
     const itemsArray = Array.isArray(result) ? result : [];
     setSliderItems(itemsArray);
     return itemsArray;
@@ -80,9 +79,10 @@ export const useAdminSlider = () => {
           image_url: imageUrl,
           // If you add additional fields to SliderItem, include them here.
         };
+      debugger
 
         const result = await fetchApi<SliderItem>({
-          url: "/api/admin/slider-items",
+          url: "/api/admin/slider-item",
           method: "POST",
           data: sliderData,
           errorMessage: "Failed to create slider item",
@@ -135,6 +135,7 @@ export const useAdminSlider = () => {
   // DELETE a slider item
   const deleteSliderItem = useCallback(
     async (id: string): Promise<void> => {
+      debugger
       await fetchApi({
         url: `/api/admin/slider-item`,
         method: "DELETE",

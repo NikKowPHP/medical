@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useContext  } from "react";
 import { useApi } from "@/hooks/use-api";
 import { Product, SliderItem } from "@/domain/models/models";
 import { ProductSubmissionData, useAdminProducts } from "@/hooks/use-admin-products";
-import { SliderItemSubmissionData, useAdminSlider } from "@/hooks/use-admin-slider";
+import { SliderSubmissionData, useAdminSlider } from "@/hooks/use-admin-slider";
 // Update the function types to accept file values as separate fields.
 
 type AdminContextType = {
@@ -24,8 +24,8 @@ type AdminContextType = {
   // Slider
   sliderItems: SliderItem[];
   getSliderItems: () => Promise<SliderItem[]>;
-  createSliderItem: (data: SliderItemSubmissionData) => Promise<SliderItem>;
-  updateSliderItem: (id: string, data: SliderItemSubmissionData) => Promise<SliderItem>;
+  createSliderItem: (data: SliderSubmissionData) => Promise<SliderItem>;
+  updateSliderItem: (id: string, data: SliderSubmissionData) => Promise<SliderItem>;
   deleteSliderItem: (id: string) => Promise<void>;  
  
 };

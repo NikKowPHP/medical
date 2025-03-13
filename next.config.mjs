@@ -1,10 +1,10 @@
-import withBundleAnalyzer from '@next/bundle-analyzer';
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 // Dynamic import for performance config
-import { PERFORMANCE_CONFIG } from './src/config/performance.js';
+import { PERFORMANCE_CONFIG } from "./src/config/performance.js";
 
 const withAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
   openAnalyzer: false,
 });
 
@@ -12,7 +12,12 @@ const withAnalyzer = withBundleAnalyzer({
 const config = {
   // Image optimization
   images: {
-    domains: ['localhost', 'ziro.space', 'drive.google.com', 'i.ibb.co', 'i.postimg.cc', 'i.ytimg.com'],
+    domains: [
+      "localhost",
+      "i.postimg.cc",
+      "public.blob.vercel-storage.com",
+      "6jnegrfq8rkxfevo.public.blob.vercel-storage.com",
+    ],
     deviceSizes: PERFORMANCE_CONFIG.images.deviceSizes,
     imageSizes: PERFORMANCE_CONFIG.images.imageSizes,
     minimumCacheTTL: PERFORMANCE_CONFIG.images.minimumCacheTTL,
@@ -29,20 +34,16 @@ const config = {
     scrollRestoration: true,
     turbo: {
       rules: {
-        '*.png': ['file-loader'],
-        '*.svg': ['@svgr/webpack'],
-        '*.jpg': ['file-loader'],
-        '*.jpeg': ['file-loader'],
+        "*.png": ["file-loader"],
+        "*.svg": ["@svgr/webpack"],
+        "*.jpg": ["file-loader"],
+        "*.jpeg": ["file-loader"],
       },
       resolveAlias: {
-        '@': './src',
+        "@": "./src",
       },
     },
-    optimizePackageImports: [
-      '@heroicons/react',
-      'clsx',
-      'tailwind-merge',
-    ],
+    optimizePackageImports: ["@heroicons/react", "clsx", "tailwind-merge"],
     webpackBuildWorker: true,
   },
 
@@ -55,7 +56,7 @@ const config = {
         sideEffects: true,
         minimize: true,
         splitChunks: {
-          chunks: 'all',
+          chunks: "all",
           minSize: 20000,
           maxSize: 244000,
           minChunks: 1,
@@ -65,15 +66,15 @@ const config = {
             default: false,
             vendors: false,
             vendor: {
-              name: 'vendor',
-              chunks: 'all',
+              name: "vendor",
+              chunks: "all",
               test: /[\\/]node_modules[\\/]/,
               priority: 20,
             },
             common: {
-              name: 'common',
+              name: "common",
               minChunks: 2,
-              chunks: 'all',
+              chunks: "all",
               priority: 10,
               reuseExistingChunk: true,
               enforce: true,
@@ -89,12 +90,15 @@ const config = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-XSS-Protection", value: "1; mode=block" },
         ],
       },
     ];
@@ -104,8 +108,8 @@ const config = {
   async redirects() {
     return [
       {
-        source: '/home',
-        destination: '/',
+        source: "/home",
+        destination: "/",
         permanent: true,
       },
     ];
@@ -118,11 +122,11 @@ const config = {
 
 // Critters installation check
 try {
-  await import('critters');
+  await import("critters");
 } catch (e) {
-  console.warn('Installing critters...');
-  const { execSync } = await import('child_process');
-  execSync('npm install critters', { stdio: 'inherit' });
+  console.warn("Installing critters...");
+  const { execSync } = await import("child_process");
+  execSync("npm install critters", { stdio: "inherit" });
 }
 
 export default withAnalyzer(config);

@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
 // GET: Retrieve all slider items
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const sliderItems = await sliderService.getSliderItems();
     if (!sliderItems) {
@@ -56,13 +56,36 @@ export async function POST(request: NextRequest) {
   }
 }
 
+
+// DELETE: Delete an existing slider item
+export async function DELETE(request: NextRequest) {
+  const body = await request.json();
+  if (!body.id) {
+    return NextResponse.json(
+      { message: 'ID is required for deleting slider item' },
+      { status: 400 }
+    );
+  }
+  await sliderService.deleteSliderItem(body.id);
+  revalidateTag(CACHE_TAGS.SLIDER);
+  return NextResponse.json({ message: 'Slider item deleted successfully' });
+}
+
+// PUT: Update an existing slider item
+export async function PUT(request: NextRequest) {
+  const body = await request.json();
+  const updatedSliderItem = await sliderService.updateSliderItem(body.id, body);
+  revalidateTag(CACHE_TAGS.SLIDER);
+  return NextResponse.json(updatedSliderItem);
+}
+
 // OPTIONS: Handle CORS pre-flight requests.
 export function OPTIONS() {
   return NextResponse.json(
     {},
     {
       headers: {
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type'
       },
     }

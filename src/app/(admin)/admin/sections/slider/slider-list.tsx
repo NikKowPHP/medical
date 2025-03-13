@@ -24,6 +24,7 @@ export function SliderList() {
   const [selectedSlider, setSelectedSlider] = useState<SliderItem | null>(null)
 
   const handleDelete = async (id: string) => {
+    debugger
     setLocalLoading(true)
     if (confirm('Are you sure you want to delete this slider image?')) {
       try {

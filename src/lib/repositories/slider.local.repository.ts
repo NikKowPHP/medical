@@ -33,6 +33,7 @@ export class SliderRepositoryLocal extends SqlLiteAdapter<SliderItem, string> im
   createSliderItem = async (sliderItem: Partial<SliderItem>): Promise<SliderItem> => {
     return new Promise((resolve, reject) => {
       // Build columns, placeholders, and values from sliderItem DTO
+      sliderItem.id = Date.now().toString();
       const keys = Object.keys(sliderItem)
         .filter(key => sliderItem[key as keyof SliderItem] !== undefined);
       const columns = keys.map(key => `"${key}"`).join(', ');
@@ -54,6 +55,7 @@ export class SliderRepositoryLocal extends SqlLiteAdapter<SliderItem, string> im
         // After insertion, retrieve the created slider item.
         // It assumes that sliderItem.id is provided; if not, you should generate and include it before insertion.
         const id = sliderItem.id;
+        logger.log('id slider item ', id)
         if (!id) {
           reject(new Error('Slider item id must be provided'));
           return;
