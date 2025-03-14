@@ -8,12 +8,11 @@ export function SubHeroSection() {
   const { scrollY } = useScroll();
   const shouldReduceMotion = useReducedMotion();
 
-  // Vertical parallax effect
-  const y = useTransform(scrollY, [0, 1000], [0, -200], { clamp: false });
-  // scroll down makes translateY positively drastially , initial scale is 1 , scroll down scalle bigger a little 
+  // Vertical parallax effect - CHANGED: Now moves DOWN (positive) as user scrolls
+  const y = useTransform(scrollY, [0, 1000], [0, 200], { clamp: false });
   
-  // Scale transformation (zoom effect)
-  const scale = useTransform(scrollY, [0, 1000], [1, 1.1], { clamp: false });
+  // Scale transformation (zoom effect) - Slightly increased for more dramatic effect
+  const scale = useTransform(scrollY, [0, 1000], [1, 1.15], { clamp: false });
 
   return (
     <motion.section
