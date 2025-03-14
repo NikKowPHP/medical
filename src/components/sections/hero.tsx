@@ -63,7 +63,7 @@ export const HeroSection = () => {
         }}
       />
 
-      <div className='max-w-3xl mx-auto pt-[100px] sm:pt-[20px] relative'>
+      <div className='max-w-3xl mx-auto pt-[60px] sm:pt-[20px] relative'>
         <motion.div 
           className="flex flex-col items-center justify-center gap-[32px]"
           variants={containerVariants}
