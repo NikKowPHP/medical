@@ -14,7 +14,7 @@ export function Navbar() {
 
   return (
     <header
-      className="sticky top-0 left-0 right-0 z-50 bg-white px-5 md:px-0  text-[#575757] transition-all duration-300"
+      className="sticky  top-0 left-0 right-0 z-50 bg-white px-5 md:px-0  text-[#575757] transition-all duration-300"
       itemScope
       itemType="https://schema.org/WPHeader"
     >

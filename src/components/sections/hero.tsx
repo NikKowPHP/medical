@@ -96,7 +96,7 @@ export const HeroSection = () => {
             itemProp="headline"
             variants={childVariants}
           >
-            Your Trusted Source for Alton's Sterile Disposable Endoscopic Accessories
+            Your Trusted Source for Alton&apos;s Sterile Disposable Endoscopic Accessories
           </motion.h2>
 
           <motion.div 
