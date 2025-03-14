@@ -74,7 +74,7 @@ export const Form = () => {
               required
               name="First"
               placeholder="Jane"
-              className=" appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 border-gray-300 leading-tight focus:outline-none focus:border-gray-300"
+              className=" appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 border-gray-200 leading-tight focus:outline-none focus:border-gray-300"
               value={formData.First}
               onChange={handleChange}
             />

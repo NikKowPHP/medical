@@ -1,6 +1,6 @@
 import { MessageSquareMore, Phone } from "lucide-react";
 import { Form } from "../form";
-import { Lightbulb } from "lucide-react";
+import { IconBadge } from "../ui/icon-badge";
 
 export const ContactSection = () => {
   return (
@@ -11,15 +11,9 @@ export const ContactSection = () => {
       itemType="https://schema.org/WebPageElement"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-start md:flex-row gap-[20px]">
+        <div className="flex flex-col items-center md:items-start md:flex-row gap-[20px]">
           <div className="flex flex-col items-start gap-[16px] md:w-full">
-            {/* todo make as component */}
-            <div className="bg-[#014441] pr-[15px] pl-[10px] py-[8px] text-base flex items-center justify-center rounded-full gap-[10px] ">
-              <Lightbulb className="w-[17px] h-[17px] text-white" />
-              <span className="block text-[16px]  leading-[1.1] font-medium tracking-[-0.02em]  text-white">
-                Contact us
-              </span>
-            </div>
+            <IconBadge text="Contact us" bgColor="#014441" lucideIconName="Lightbulb" textColor="white" />
 
             <h2 className="text-[22px] md:text-[44px] ">24/7 Available</h2>
 
@@ -45,7 +39,7 @@ export const ContactSection = () => {
             </div>
           </div>
 
-          <div className="md:w-full">
+          <div className="w-full">
             <Form />
           </div>
         </div>

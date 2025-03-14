@@ -42,7 +42,6 @@ const ProcessTitleSubtitle = () => {
   return (
     <header className="mb-[42px] gap-[32px] md:gap-[12px] flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
-        {/* todo: refactor */}
         <IconBadge
           lucideIconName="Diamond"
           text="Better Outcomes"
