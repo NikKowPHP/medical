@@ -20,6 +20,15 @@ export const SliderSection = dynamic(
   }
 )
 
+export const BetterOutcomesSection = dynamic(
+  () =>
+    import('@/components/sections/better_outcomes-section').then(
+      (mod) => mod.BetterOutcomesSection
+    ),
+  {
+    ssr: true,
+  }
+)
 
 
 
@@ -49,12 +58,7 @@ export const SubHeroSection = dynamic(
   }
 )
 
-export const SaferSolutionsSection = dynamic(
-  () => import('@/components/sections/slider-section.server').then(mod => mod.default),
-  {
-    ssr: true,
-  }
-)
+
 
 export const FaqSection = dynamic(
   () => import('@/components/sections/faq-section.server').then(mod => mod.default),

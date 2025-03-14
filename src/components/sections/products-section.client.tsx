@@ -49,7 +49,7 @@ export function ProductSectionClient({ products }: { products: Product[] }) {
   // logger.log('blogposts in blog posts component', blogPosts)
   return (
     <section id="work" className="relative overflow-hidden">
-      <div className="max-w-7xl px-[20px] md:px-0 mx-auto py-[80px]">
+      <div className="max-w-7xl px-[20px] md:px-0 mx-auto py-[80px] md:py-[160px]">
         <Suspense
           fallback={
             <div className="min-h-[500px]">

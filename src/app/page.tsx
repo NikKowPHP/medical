@@ -5,7 +5,7 @@ import {
   ProductSection,
   SubHeroSection,
   SliderSection,
-  SaferSolutionsSection,
+  BetterOutcomesSection,
   FaqSection,
   CtaSection
 } from "@/helpers/componentsLoad";
@@ -35,7 +35,7 @@ export default async function HomePage() {
             <SliderSection />
           </Suspense>
           <Suspense fallback={<div className="min-h-[700px]" />}> 
-            <SaferSolutionsSection />
+            <BetterOutcomesSection />
           </Suspense>
           <Suspense fallback={<div className="min-h-[700px]" />}> 
             <FaqSection />

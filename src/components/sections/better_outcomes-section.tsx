@@ -6,7 +6,7 @@ import {
 import { Square } from "lucide-react";
 import { LucideIcons } from "@/lib/data/better_outcome-data";
 
-export const SliderSection = async () => {
+export const BetterOutcomesSection = async () => {
   const processItems = getProcessItems();
 
   return (
@@ -23,7 +23,7 @@ export const SliderSection = async () => {
       >
         <section
           id="better-outcomes"
-          className="pb-[80px] md:py-[160px]  "
+          className="pb-[80px] md:pb-[160px] "
           itemScope
           itemType="https://schema.org/HowTo"
           aria-labelledby="process-title"

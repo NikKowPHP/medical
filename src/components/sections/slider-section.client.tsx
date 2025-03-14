@@ -5,13 +5,14 @@ import Image from "next/image";
 import { Square } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SliderItem as SliderType } from "@/domain/models/models";
+import SaferSolutionsSvg from "../svg/safer-solutions.svg";
 
 export function SliderSectionClient({ items }: { items: SliderType[] }) {
   // debugger
   return (
     <section
       id="safer-solutions"
-      className="pb-[80px] md:pb-[160px] "
+      className="pb-[80px] md:pb-[160px] md:pt-[80px]"
       itemScope
       itemType="https://schema.org/HowTo"
       aria-labelledby="process-title"
@@ -30,9 +31,9 @@ const ProcessTitleSubtitle = () => {
     <header className="mb-[42px] gap-[32px] md:gap-[12px]  flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
         <div className="bg-[#014441] px-[10px] py-[8px] flex items-center justify-center rounded-full gap-[10px]">
-          <Square className="w-[20px] h-[20px] text-white transform -rotate-45" />
+          <SaferSolutionsSvg className="w-[20px] h-[20px] text-white  " />
           <span className="block text-[16px] leading-[1.1] font-medium tracking-[-0.02em] text-white">
-            Better Outcomes
+           Safer Solutions
           </span>
         </div>
       </h2>
