@@ -1,18 +1,17 @@
-import '@/styles/globals.css'
+import '@/app/globals.css'
 import { ClientWrapper } from './client-wrapper'
 import { PageProvider } from '@/contexts/page-context'
 import { siteUrl } from '@/config/constants';
-// import { SmoothScroll } from '@/components/smooth-scroll';
-
+import { SmoothScroll } from '@/components/smooth-scroll';
 interface LocaleLayoutProps {
   children: React.ReactNode
 }
 
 
-
 export default async function LocaleLayout({
   children,
 }: LocaleLayoutProps) {
+
 
 
 
@@ -42,9 +41,9 @@ export default async function LocaleLayout({
       <body suppressHydrationWarning>
           <PageProvider>
             <ClientWrapper>
-              {/* <SmoothScroll> */}
+              <SmoothScroll>
                 <main className="relative">{children}</main>
-              {/* </SmoothScroll> */}
+              </SmoothScroll>
               </ClientWrapper>
             </PageProvider>
       </body>

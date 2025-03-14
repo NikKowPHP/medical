@@ -47,23 +47,23 @@
   }
 }
 
-
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  /* Apply the locally loaded Roboto Serif font */
-  font-family: "Helvetica Neue", sans-serif;
-  scroll-snap-type: y proximity;
+/* Add this if not already present */
+html.lenis {
+  height: auto;
 }
 
-/* Optional: Remove or update the universal selector if you want a consistent font */
-* {
-  font-family: "Helvetica Neue", serif;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
 
-html {
-  scroll-behavior: smooth;
-  overscroll-behavior: none;
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
