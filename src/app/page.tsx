@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import {
   HeroSection,
   QuoteSection,
-  ProductList,
+  ProductSection,
   SubHeroSection,
   SliderSection,
   SaferSolutionsSection,
@@ -29,7 +29,7 @@ export default async function HomePage() {
             <QuoteSection />
           </Suspense>
           <Suspense fallback={<div className="min-h-[300px]" />}>
-            <ProductList />
+            <ProductSection />
           </Suspense>
           <Suspense fallback={<div className="min-h-[700px]" />}>
             <SliderSection />

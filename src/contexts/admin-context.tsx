@@ -5,7 +5,6 @@ import { useApi } from "@/hooks/use-api";
 import { Product, SliderItem } from "@/domain/models/models";
 import { ProductSubmissionData, useAdminProducts } from "@/hooks/use-admin-products";
 import { SliderSubmissionData, useAdminSlider } from "@/hooks/use-admin-slider";
-// Update the function types to accept file values as separate fields.
 
 type AdminContextType = {
   // Common

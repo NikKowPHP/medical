@@ -8,34 +8,8 @@ import { Tag } from "@/components/ui/tag/tag";
 import { ChevronRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const products: Product[] = [
-  {
-    id: "1",
-    image_url: "/product1.avif",
-    description:
-      "Single-use design eliminates the risk of patient infection, improving patient trust and confidence.",
-    pdf_url: "https://example.com/product1.pdf",
-    title: "Product 1",
-    category: "Enhanced Safety:",
-    created_at: new Date(),
-    updated_at: new Date(),
-  },
-  {
-    id: "2",
-    image_url: "/product1.avif",
-    description:
-      "Reduces expenses associated with sterilization, disinfectants, and autoclaves. Streamline your workflow and save valuable resources.",
-    pdf_url: "https://example.com/product2.pdf",
-    title: "Product 2",
-    category: "Cost-Effective",
-    created_at: new Date(),
-    updated_at: new Date(),
-  },
-];
 
-/**
- * A client-only component that adds a parallax effect to an image using Framer Motion.
- */
+
 function ParallaxImage({
   src,
   alt,
@@ -71,10 +45,8 @@ function ParallaxImage({
   );
 }
 
-export async function ProductList() {
-  // const blogPosts = await blogPostService.getBlogPosts();
+export function ProductSectionClient({ products }: { products: Product[] }) {
   // logger.log('blogposts in blog posts component', blogPosts)
-
   return (
     <section id="work" className="relative overflow-hidden">
       <div className="max-w-7xl px-[20px] md:px-0 mx-auto py-[80px]">
@@ -92,7 +64,7 @@ export async function ProductList() {
               itemType="https://schema.org/ItemList"
           >
             
-            {products.map((product, index) => (
+              {products.map((product, index) => (
               <ProductItem
                 key={product.id}
                 product={product}

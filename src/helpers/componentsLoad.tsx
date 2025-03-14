@@ -23,10 +23,10 @@ export const SliderSection = dynamic(
 
 
 
-export const ProductList = dynamic(
+export const ProductSection = dynamic(
   () =>
-    import('@/components/sections/products-section').then(
-      (mod) => mod.ProductList
+    import('@/components/sections/product-section.server').then(
+      (mod) => mod.default
     ),
   { 
     ssr: true,

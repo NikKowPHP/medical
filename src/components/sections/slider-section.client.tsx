@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SliderItem as SliderType } from "@/domain/models/models";
 
 export function SliderSectionClient({ items }: { items: SliderType[] }) {
-  debugger
+  // debugger
   return (
     <section
       id="safer-solutions"
