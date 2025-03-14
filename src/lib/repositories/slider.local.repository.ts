@@ -33,7 +33,6 @@ export class SliderRepositoryLocal extends SqlLiteAdapter<SliderItem, string> im
   createSliderItem = async (sliderItem: Partial<SliderItem>): Promise<SliderItem> => {
     return new Promise((resolve, reject) => {
       // Build columns, placeholders, and values from sliderItem DTO
-      sliderItem.id = Date.now().toString();
       const keys = Object.keys(sliderItem)
         .filter(key => sliderItem[key as keyof SliderItem] !== undefined);
       const columns = keys.map(key => `"${key}"`).join(', ');

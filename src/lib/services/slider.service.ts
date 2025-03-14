@@ -23,6 +23,7 @@ export class SliderService {
     sliderItem: Partial<SliderItem>
   ): Promise<SliderItem> => {
     console.log('slider.service.createSliderItem.log', sliderItem)
+    sliderItem.id = (Math.random() * 1000000) + new Date().getTime().toString()
     return this.sliderRepository.createSliderItem(sliderItem)
   }
 
