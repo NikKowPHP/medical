@@ -3,8 +3,8 @@ import {
   getProcessItems,
   ProcessItem as ProcessItemType,
 } from "@/lib/data/better_outcome-data";
-import { Square } from "lucide-react";
 import { LucideIcons } from "@/lib/data/better_outcome-data";
+import { IconBadge } from "../ui/icon-badge";
 
 export const BetterOutcomesSection = async () => {
   const processItems = getProcessItems();
@@ -43,13 +43,12 @@ const ProcessTitleSubtitle = () => {
     <header className="mb-[42px] gap-[32px] md:gap-[12px] flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
         {/* todo: refactor */}
-        <div className="bg-[#014441] px-[10px] py-[8px] flex items-center justify-center rounded-full gap-[10px] ">
-          {/* <RectangleSvg width={20} height={20} /> */}
-          <Square className="w-[20px] h-[20px] text-white transform -rotate-45" />
-          <span className="block text-[16px]  leading-[1.1] font-medium tracking-[-0.02em]  text-white">
-            Better Outcomes
-          </span>
-        </div>
+        <IconBadge
+          lucideIconName="Diamond"
+          text="Better Outcomes"
+          bgColor="#014441"
+          textColor="white"
+        />
       </h2>
       <h3 className="text-[24px] md:text-[44px] ">Achieve Better Outcomes in Endoscopy</h3>
       <p className="text-[18px] md:text-[20px]">

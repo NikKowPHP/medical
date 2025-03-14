@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SliderItem as SliderType } from "@/domain/models/models";
 import SaferSolutionsSvg from "../svg/safer-solutions.svg";
+import { IconBadge } from "../ui/icon-badge";
 
 export function SliderSectionClient({ items }: { items: SliderType[] }) {
   // debugger
@@ -29,12 +30,13 @@ const ProcessTitleSubtitle = () => {
   return (
     <header className="mb-[42px] gap-[32px] md:gap-[12px]  flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
-        <div className="bg-[#014441] px-[10px] py-[8px] flex items-center justify-center rounded-full gap-[10px]">
-          <SaferSolutionsSvg className="w-[20px] h-[20px] text-white  " />
-          <span className="block text-[16px] leading-[1.1] font-medium tracking-[-0.02em] text-white">
-           Safer Solutions
-          </span>
-        </div>
+      
+        <IconBadge
+          customIcon={<SaferSolutionsSvg className="w-[20px] h-[20px] text-white  " />}
+          text="Safer Solutions"
+          bgColor="#014441"
+          textColor="white"
+        />
       </h2>
       <h3 className="text-[24px] md:text-[44px]">Reimagining Endoscopy: Safer, Smarter Solutions Await</h3>
       <p className="text-[18px] md:text-[20px]">
