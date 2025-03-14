@@ -85,8 +85,7 @@ const ProductItem = ({
   product: Product;
   position: number;
 }) => {
-  const isImageRight = position % 3 !== 0;
-  console.log(isImageRight)
+  const isImageRight = position % 2 === 0;
 
   return (
     <li

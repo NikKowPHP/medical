@@ -33,6 +33,7 @@ export class ProductRepositoryLocal extends SqlLiteAdapter<Product, string> impl
   createProduct = async (product: Partial<Product>): Promise<Product> => {
     return new Promise((resolve, reject) => {
       // Build columns, placeholders, and values from product DTO
+      product.id = Date.now().toString();
       const keys = Object.keys(product)
         .filter(key => product[key as keyof Product] !== undefined);
       const columns = keys.map(key => `"${key}"`).join(', ');
