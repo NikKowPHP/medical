@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MotionButton } from '@/components/ui/motion-button'
+import { MotionLink } from '@/components/ui/motion-link'
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -82,27 +83,29 @@ export function Navbar() {
                 <ul className="flex justify-between gap-[42px]">
                   {navigationConfig.mainNav.map((item) => (
                     <li key={item.href} aria-label={item.title}>
-                      <Link
-                        href={item.href}
-                        className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px] relative"
-                      >
-                        <motion.span
-                          className="relative"
-                          whileHover="hover"
-                          initial="initial"
-                        >
-                          {item.title}
-                          <motion.div
-                            className="absolute bottom-0 left-0 w-full h-[2px] bg-current origin-left"
-                            variants={{
-                              hover: { scaleX: 1 },
-                              initial: { scaleX: 0 }
-                            }}
-                            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                            aria-hidden="true"
-                          />
-                        </motion.span>
-                      </Link>
+                      <MotionLink
+                    href={item.href}
+                    isRoute={item.isRoute}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px] relative"
+                  >
+                    <motion.span
+                      className="relative inline-block"
+                      whileHover="hover"
+                      initial="initial"
+                    >
+                      {item.title}
+                      <motion.div
+                        className="absolute bottom-0 left-0 w-full h-[2px] bg-current origin-left"
+                        variants={{
+                          hover: { scaleX: 1 },
+                          initial: { scaleX: 0 }
+                        }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        aria-hidden="true"
+                      />
+                    </motion.span>
+                  </MotionLink>
                     </li>
                   ))}
                 </ul>
@@ -132,10 +135,11 @@ export function Navbar() {
             <ul className="flex flex-col p-4 gap-[16px] justify-center items-center pb-[24px]">
               {navigationConfig.mainNav.map((item) => (
                 <li key={item.href} aria-label={item.title}>
-                  <Link
+                   <MotionLink
                     href={item.href}
+                    isRoute={item.isRoute}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block text-[18px] font-medium relative"
+                    className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px] relative"
                   >
                     <motion.span
                       className="relative inline-block"
@@ -153,7 +157,7 @@ export function Navbar() {
                         aria-hidden="true"
                       />
                     </motion.span>
-                  </Link>
+                  </MotionLink>
                 </li>
               ))}
               <li key="request-a-quote">

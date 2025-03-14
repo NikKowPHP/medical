@@ -6,7 +6,7 @@ export const QuoteSection = () => {
 
   return (
     <section
-      id="quote-section"
+      id="about"
       className="py-[50px] md:py-[120px] px-[20px] md:px-0 bg-[#014441] flex flex-col justify-center items-center"
       itemScope
       itemType="https://schema.org/WebPageElement"

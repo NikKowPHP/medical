@@ -10,45 +10,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 
 
-function ParallaxImage({
-  src,
-  alt,
-  className,
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-}) {
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Get the scroll progress relative to the element referenced by containerRef.
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Map the scroll progress to a translateY effect.
-  // Adjust the output range (here: 0 to 50) to change the parallax strength.
-  const y = useTransform(scrollYProgress, [0, 1], [50, -200]);
-
-  return (
-    <motion.div ref={containerRef} style={{ y }} className="absolute inset-0 w-full md:min-h-[400px] h-[200%]">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className={`object-cover ${className ? className : ""}`}
-        loading="lazy"
-        quality={100}
-      />
-    </motion.div>
-  );
-}
 
 export function ProductSectionClient({ products }: { products: Product[] }) {
   // logger.log('blogposts in blog posts component', blogPosts)
   return (
-    <section id="work" className="relative overflow-hidden">
+    <section id="features" className="relative overflow-hidden">
       <div className="max-w-7xl px-[20px] md:px-0 mx-auto py-[80px] md:py-[160px]">
         <Suspense
           fallback={
@@ -154,13 +121,13 @@ const ProductItem = ({
 
           <div className="flex flex-wrap  gap-[10px]">
             <Link
-              href="/products"
+              href="/contact"
               className="flex items-center gap-[10px] text-white  text-[16px] bg-[#014441] rounded-full  pl-[20px] pr-[10px] py-[15px]"
             >
               Request a Quote <ChevronRight className="w-6 h-6" />
             </Link>
             <Link
-              href="/products"
+              href={product.pdf_url}
               className="flex items-center gap-[10px] text-white  text-[16px] bg-[black] rounded-full  pl-[20px] pr-[10px] py-[15px]"
             >
               Download Product Brochure <ChevronRight className="w-6 h-6" />
@@ -171,3 +138,38 @@ const ProductItem = ({
     </li>
   );
 };
+
+function ParallaxImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Get the scroll progress relative to the element referenced by containerRef.
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Map the scroll progress to a translateY effect.
+  // Adjust the output range (here: 0 to 50) to change the parallax strength.
+  const y = useTransform(scrollYProgress, [0, 1], [50, -200]);
+
+  return (
+    <motion.div ref={containerRef} style={{ y }} className="absolute inset-0 w-full md:min-h-[400px] h-[200%]">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={`object-cover ${className ? className : ""}`}
+        loading="lazy"
+        quality={100}
+      />
+    </motion.div>
+  );
+}

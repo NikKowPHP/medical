@@ -10,7 +10,7 @@ export function SliderSectionClient({ items }: { items: SliderType[] }) {
   // debugger
   return (
     <section
-      id="safer-solutions"
+      id="products"
       className="pb-[80px] md:pb-[160px] md:pt-[80px]"
       itemScope
       itemType="https://schema.org/HowTo"
