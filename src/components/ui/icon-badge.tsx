@@ -27,8 +27,16 @@ export function IconBadge({
   useEffect(() => {
     if (lucideIconName) {
       const loadIcon = async () => {
-        const { [lucideIconName as keyof typeof import('lucide-react')]: icon } = await import('lucide-react')
-        setLucideIcon(icon)
+        try {
+          const lucideIcons = await import('lucide-react')
+          const iconName = lucideIconName as keyof typeof lucideIcons
+          
+          if (lucideIcons[iconName]) {
+            setLucideIcon(lucideIcons[iconName] as LucideIcon)
+          }
+        } catch (error) {
+          console.error(`Failed to load icon: ${lucideIconName}`, error)
+        }
       }
       loadIcon()
     }
