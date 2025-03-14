@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { navigationConfig } from '@/config/navigation'
-import { ChevronRight, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'

@@ -1,7 +1,5 @@
 "use client"
 
-import { ChevronRight } from 'lucide-react'
-import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { MotionButton } from '../ui/motion-button'

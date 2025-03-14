@@ -1,4 +1,4 @@
-import { Calendar, Square } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 export default function TermsOfServicePage() {
   return (

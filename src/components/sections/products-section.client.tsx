@@ -1,11 +1,9 @@
 "use client";
 
 import { Suspense, useRef } from "react";
-import Link from "next/link";
 import { Product } from "@/domain/models/models";
 import Image from "next/image";
 import { Tag } from "@/components/ui/tag/tag";
-import { ChevronRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { MotionButton } from "../ui/motion-button";
 
