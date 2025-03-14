@@ -4,6 +4,7 @@ import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { MotionButton } from '../ui/motion-button'
 
 export const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -108,12 +109,8 @@ export const HeroSection = () => {
             }}
             className="relative z-30"
           >
-            <Link 
-              href="/products" 
-              className="flex items-center text-center gap-[10px] text-white text-[16px] bg-[#014441] rounded-full pl-[20px] pr-[10px] py-[15px] hover:bg-[#0AB2AC] transition-all duration-300 hover:scale-105"
-            >
-              Contact Us <ChevronRight className="w-6 h-6" />
-            </Link>
+            <MotionButton href="/contact" text="Contact Us" variant="cta" />
+           
           </motion.div>
         </motion.div>
       </div>

@@ -6,6 +6,7 @@ import { ChevronRight, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { MotionButton } from '@/components/ui/motion-button'
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -168,46 +169,10 @@ export function Navbar() {
 
 export function RequestQuoteButton() {
   return (
-    <motion.button
-      className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]"
-      initial="rest"
-      whileHover="hover"
-      whileTap={{ scale: 0.95 }}
-      variants={{
-        rest: { scale: 1, borderColor: "#C3C4C5" },
-        hover: { scale: 0.95, borderColor: "#000", transition: { duration: 0.3 } }
-      }}
-    >
-      <span className="text-[16px]">Request a Quote</span>
-      <motion.div
-        className="relative w-[20px] h-[20px] overflow-hidden"
-       
-        variants={{
-          rest: {},
-          hover: {} 
-        }}
-      >
-        <motion.div
-          className="absolute inset-0 flex items-center"
-          variants={{
-            rest: { x: 0 },
-            hover: { x: "100%" }
-          }}
-          transition={{ type: "tween", duration: 0.3 }}
-        >
-          <ChevronRight className="w-full h-full text-[#b7b7b8]" />
-        </motion.div>
-        <motion.div
-          className="absolute inset-0 flex items-center"
-          variants={{
-            rest: { x: "-100%", opacity: 0 },
-            hover: { x: 0, opacity: 1 }
-          }}
-          transition={{ type: "tween", duration: 0.3 }}
-        >
-          <ChevronRight className="w-full h-full text-[#575757]" />
-        </motion.div>
-      </motion.div>
-    </motion.button>
+    <MotionButton 
+      href="/contact" 
+      text="Request a Quote" 
+      variant="outline" 
+    />
   )
 }

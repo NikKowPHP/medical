@@ -23,7 +23,7 @@ export const navigationConfig = {
     {
       title: 'Contact',
       href: 'contact',
-      isRoute: false,
+      isRoute: true,
       color: '#f9a8d4' // pink
 
     }
