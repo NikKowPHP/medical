@@ -16,10 +16,10 @@ export const HeroSection = () => {
   const yHeading = useTransform(scrollYProgress, [0, 1], [0, -200])
   const ySubheading = useTransform(scrollYProgress, [0, 1], [0, -150])
   const yButton = useTransform(scrollYProgress, [0, 1], [0, -100])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2])
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, -15])
-  const zHeading = useTransform(scrollYProgress, [0, 1], [0, 100])
-  const zSubheading = useTransform(scrollYProgress, [0, 1], [0, 50])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9])
+  const rotateX = useTransform(scrollYProgress, [0, 1], [0, -5])
+  const zHeading = useTransform(scrollYProgress, [0, 1], [0, 50])
+  const zSubheading = useTransform(scrollYProgress, [0, 1], [0, 30])
 
   // Initial entrance animations
   const containerVariants = {
@@ -57,9 +57,9 @@ export const HeroSection = () => {
       <motion.div 
         className="absolute inset-0"
         style={{
-          scale: useTransform(scrollYProgress, [0, 1], [1, 1.5]),
-          y: useTransform(scrollYProgress, [0, 1], [0, 200]),
-          rotateX: useTransform(scrollYProgress, [0, 1], [0, 10])
+          scale: useTransform(scrollYProgress, [0, 1], [1, 0.8]),
+          y: useTransform(scrollYProgress, [0, 1], [0, -200]),
+          rotateX: useTransform(scrollYProgress, [0, 1], [0, -5])
         }}
       />
 
