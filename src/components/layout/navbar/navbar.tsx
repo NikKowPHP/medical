@@ -168,9 +168,23 @@ export function Navbar() {
 
 export function RequestQuoteButton() {
   return (
-    <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
+    <motion.button
+      className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]"
+      whileHover={{
+        scale: 0.95,
+        borderColor: "black",
+        transition: { duration: 0.3 }
+      }}
+      whileTap={{ scale: 0.95 }}
+    >
       <span className="text-[16px]">Request a Quote</span>
-      <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
-    </button>
+      <motion.div
+        className="w-[20px] h-[20px] text-[#C3C4C5]"
+        whileHover={{ x:4 }}
+        transition={{type:'spring', stiffness: 400, damping: 10 }}
+      >
+        <ChevronRight />
+      </motion.div>
+    </motion.button>
   )
 }
