@@ -10,6 +10,7 @@ export function SubHeroSection() {
 
   // Vertical parallax effect
   const y = useTransform(scrollY, [0, 1000], [0, -200], { clamp: false });
+  // scroll down makes translateY positively drastially , initial scale is 1 , scroll down scalle bigger a little 
   
   // Scale transformation (zoom effect)
   const scale = useTransform(scrollY, [0, 1000], [1, 1.1], { clamp: false });

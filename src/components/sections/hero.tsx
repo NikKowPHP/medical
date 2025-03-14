@@ -11,6 +11,7 @@ export const HeroSection = () => {
     target: ref,
     offset: ["start start", "end start"]
   })
+  // scroll down makes translateY negative , initial scale is 1 , scroll down scalle smaller a little 
 
   // 3D-like parallax transformations
   const yHeading = useTransform(scrollYProgress, [0, 1], [0, -200])
