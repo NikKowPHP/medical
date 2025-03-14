@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Square } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SliderItem as SliderType } from "@/domain/models/models";
 import SaferSolutionsSvg from "../svg/safer-solutions.svg";

@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import logger from '@/lib/logger'
-import { useAdminSlider } from '@/hooks/use-admin-slider'
 import { Button } from '@/components/ui/button/button'
 import { LoadingSpinner } from '@/components/ui/loadingSpinner'
 import { SliderForm } from './components/slider-form'
