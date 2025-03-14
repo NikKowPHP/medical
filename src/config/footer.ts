@@ -3,7 +3,7 @@ export const footerConfig = {
    
     {
       title: 'Contact us',
-      href: 'contact-us',
+      href: 'contact',
       isRoute: true,
     },
   
@@ -12,12 +12,12 @@ export const footerConfig = {
    
     {
       title: 'Terms of Service',
-      href: 'terms-of-service',
+      href: '/legal/terms-of-service',
       isRoute: true,
     },
     {
       title: 'Privacy Policy',
-      href: 'privacy-policy',
+      href: '/legal/privacy-policy',
       isRoute: true,
     },
   ],

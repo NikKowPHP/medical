@@ -42,6 +42,7 @@ const ProcessTitleSubtitle = () => {
   return (
     <header className="mb-[42px] gap-[32px] md:gap-[12px] flex flex-col flex-start">
       <h2 id="process-title" className="flex" itemProp="name">
+        {/* todo: refactor */}
         <div className="bg-[#014441] px-[10px] py-[8px] flex items-center justify-center rounded-full gap-[10px] ">
           {/* <RectangleSvg width={20} height={20} /> */}
           <Square className="w-[20px] h-[20px] text-white transform -rotate-45" />
