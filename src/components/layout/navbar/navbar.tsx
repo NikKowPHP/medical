@@ -83,10 +83,24 @@ export function Navbar() {
                     <li key={item.href} aria-label={item.title}>
                       <Link
                         href={item.href}
-                        className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px]"
-                        style={{ '--hover-color': item.color } as React.CSSProperties}
+                        className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px] relative"
                       >
-                        {item.title}
+                        <motion.span
+                          className="relative"
+                          whileHover="hover"
+                          initial="initial"
+                        >
+                          {item.title}
+                          <motion.div
+                            className="absolute bottom-0 left-0 w-full h-[2px] bg-current origin-left"
+                            variants={{
+                              hover: { scaleX: 1 },
+                              initial: { scaleX: 0 }
+                            }}
+                            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                            aria-hidden="true"
+                          />
+                        </motion.span>
                       </Link>
                     </li>
                   ))}
@@ -123,9 +137,24 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block text-[18px] font-medium"
+                    className="block text-[18px] font-medium relative"
                   >
-                    {item.title}
+                    <motion.span
+                      className="relative inline-block"
+                      whileHover="hover"
+                      initial="initial"
+                    >
+                      {item.title}
+                      <motion.div
+                        className="absolute bottom-0 left-0 w-full h-[2px] bg-current origin-left"
+                        variants={{
+                          hover: { scaleX: 1 },
+                          initial: { scaleX: 0 }
+                        }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        aria-hidden="true"
+                      />
+                    </motion.span>
                   </Link>
                 </li>
               ))}
