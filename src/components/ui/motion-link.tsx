@@ -1,7 +1,9 @@
 'use client'
 
-import { ReactNode, useCallback } from 'react'
+import { ReactNode, useCallback, useEffect } from 'react'
 import Link from 'next/link'
+import { useSmoothScrollStore } from '@/hooks/use-smooth-scroll'
+import { usePathname, useRouter } from 'next/navigation'
 
 type MotionLinkProps = {
   href: string
@@ -9,6 +11,7 @@ type MotionLinkProps = {
   className?: string
   isRoute?: boolean
   onClick?: () => void
+  targetSection?: string
 }
 
 export function MotionLink({
@@ -16,32 +19,70 @@ export function MotionLink({
   children,
   className = '',
   isRoute = true,
-  onClick
+  onClick,
+  targetSection
 }: MotionLinkProps) {
-  const handleSmoothScroll = useCallback((e: React.MouseEvent) => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const lenis = useSmoothScrollStore((state) => state.lenis)
+
+
+   // Handle section scrolling after page navigation
+   useEffect(() => {
+    // Check if we have a hash in the URL
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '')
+      
+      if (hash) {
+        // Wait a bit for the page to fully render
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element && lenis) {
+            lenis.scrollTo(element, { offset: 0 })
+          } else if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
+      }
+    }
+  }, [pathname, lenis])
+
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    // Custom handling for section links
     if (!isRoute) {
       e.preventDefault()
       
       // Remove the # if it exists in the href
-      const targetId = href.startsWith('#') ? href.substring(1) : href
-      const element = document.getElementById(targetId)
+      const targetId = targetSection || (href.startsWith('#') ? href.substring(1) : href)
       
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
+   
+      // If we're not on the homepage and the link is to a section, navigate first
+      if (pathname !== '/' && href == ('/')) {
+        // Navigate to homepage with the hash
+        debugger
+        router.push(`/#${targetId}`)
+        return
       }
       
-      // Update URL without reload (optional)
+      // On the same page, just scroll
+      const element = document.getElementById(targetId)
+      
+      if (element && lenis) {
+        lenis.scrollTo(element, { offset: 0 })
+      } else if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+      
+      // Update URL without reload
       window.history.pushState(null, '', `#${targetId}`)
     }
     
     if (onClick) onClick()
-  }, [href, isRoute, onClick])
+  }, [href, isRoute, onClick, pathname, router, targetSection, lenis])
 
+  // Standard route link (not a section)
   if (isRoute) {
-   
     return (
       <Link href={href} className={className} onClick={onClick}>
         {children}
@@ -50,12 +91,12 @@ export function MotionLink({
   }
 
   return (
-    <a
-      href={`#${href}`} 
+    <Link
+      href={pathname === '/' ? `#${targetSection || href}` : `/#${targetSection || href}`}
       className={className}
-      onClick={handleSmoothScroll}
+      onClick={handleClick}
     >
       {children}
-    </a>
+    </Link>
   )
 }

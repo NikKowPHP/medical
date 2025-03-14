@@ -82,9 +82,10 @@ export function Navbar() {
               <div className="flex sm:gap-[100px]">
                 <ul className="flex justify-between gap-[42px]">
                   {navigationConfig.mainNav.map((item) => (
-                    <li key={item.href} aria-label={item.title}>
+                    <li key={item.title} aria-label={item.title}>
                       <MotionLink
                     href={item.href}
+                    targetSection={!item.isRoute ? item.targetSection : undefined}
                     isRoute={item.isRoute}
                     onClick={() => setMobileMenuOpen(false)}
                     className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px] relative"
@@ -134,9 +135,10 @@ export function Navbar() {
           >
             <ul className="flex flex-col p-4 gap-[16px] justify-center items-center pb-[24px]">
               {navigationConfig.mainNav.map((item) => (
-                <li key={item.href} aria-label={item.title}>
+                <li key={item.title} aria-label={item.title}>
                    <MotionLink
                     href={item.href}
+                    targetSection={!item.isRoute ? item.targetSection : undefined}
                     isRoute={item.isRoute}
                     onClick={() => setMobileMenuOpen(false)}
                     className="transition-colors inline-flex items-center text-[16px] gap-2 duration-200 px-[8px] py-[4px] relative"

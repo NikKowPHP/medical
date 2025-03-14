@@ -1,35 +1,31 @@
 export const navigationConfig = {
   mainNav: [
-   
     {
       title: 'About',
-      href: 'about',
+      href: '/', // Main page URL
+      targetSection: 'about', // Section ID to scroll to
       isRoute: false,
-       color: '#fdba74' // orange
+      color: '#fdba74' // orange
     },
     {
       title: 'Features',
-      href: 'features',
+      href: '/',
+      targetSection: 'features',
       isRoute: false,
       color: '#93c5fd' // blue
     },
     {
       title: 'Products',
-      href: 'products',
+      href: '/',
+      targetSection: 'products',
       isRoute: false,
       color: '#f9a8d4' // pink
-
     },
     {
       title: 'Contact',
       href: 'contact',
       isRoute: true,
       color: '#f9a8d4' // pink
-
     }
   ],
-
-
-
-
-} as const 
+}  as const 
