@@ -26,7 +26,7 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Helvetica Neue' ],
+        sans: ['SF Pro Display' ],
       },
       fontSize: {
         'xs': '12px',

@@ -80,7 +80,7 @@ export const HeroSection = () => {
               y: yHeading,
               translateZ: zHeading
             }}
-            className="text-[36px] sm:text-[42px] lg:text-[60px] leading-[1.1] font-bold text-center relative z-10"
+            className="text-[36px] sm:text-[42px] lg:text-[60px] leading-[1.1] font-bold text[#262625] text-center relative z-10"
             itemProp="headline"
             variants={childVariants}
           >
