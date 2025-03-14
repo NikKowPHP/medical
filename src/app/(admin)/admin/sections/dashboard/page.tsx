@@ -42,6 +42,12 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-medium text-gray-900 mb-2">
             Slider Section
           </h2>
+          <p className="text-gray-600 mb-4">
+            Manage the slider section.
+          </p>
+          <Button variant="primary" className="mt-auto w-full sm:w-auto">
+            Manage Slider Section
+          </Button>
         </Link>
 
         {/* Products Section */}
