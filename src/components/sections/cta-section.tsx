@@ -1,5 +1,4 @@
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { MotionButton } from "../ui/motion-button";
 
 export const CtaSection = () => {
   return (
@@ -16,15 +15,8 @@ export const CtaSection = () => {
               Ready to Improve Your Endoscopy Procedures?
             </h2>
             <div className="flex items-center justify-start">
-              <Link
-                href="/products"
-                className="flex items-center justify-between gap-[30px]  text-white  text-[18px] md:text-[20px] bg-[#262625] rounded-full  pl-[20px] pr-[10px] py-[10px]"
-              >
-                <span>Request a Quote</span>
-                <div className="p-[10px] bg-white rounded-full">
-                  <ChevronRight className="w-6 h-6 text-black" />
-                </div>
-              </Link>
+              <MotionButton href="/products" text="Request a Quote" variant="ctaBlack"/>
+             
             </div>
           </div>
           <h3 className="text-[20px] md:text-[28px] font-bold text-black leading-[1.2] ">

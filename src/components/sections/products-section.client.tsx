@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Tag } from "@/components/ui/tag/tag";
 import { ChevronRight } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { MotionButton } from "../ui/motion-button";
 
 
 
@@ -120,18 +121,22 @@ const ProductItem = ({
           </div>
 
           <div className="flex flex-wrap  gap-[10px]">
-            <Link
+            <MotionButton href="/contact" text="Request a Quote" variant="cta"/>
+            {/* <Link
               href="/contact"
               className="flex items-center gap-[10px] text-white  text-[16px] bg-[#014441] rounded-full  pl-[20px] pr-[10px] py-[15px]"
             >
               Request a Quote <ChevronRight className="w-6 h-6" />
-            </Link>
-            <Link
+            </Link> */}
+
+            
+            <MotionButton href={product.pdf_url} text="Download Product Brochure" variant="black"/>
+            {/* <Link
               href={product.pdf_url}
               className="flex items-center gap-[10px] text-white  text-[16px] bg-[black] rounded-full  pl-[20px] pr-[10px] py-[15px]"
             >
               Download Product Brochure <ChevronRight className="w-6 h-6" />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
