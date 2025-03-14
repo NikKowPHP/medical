@@ -110,10 +110,7 @@ export function Navbar() {
           </div>
 
           <div className="flex-1 hidden md:flex md:justify-end md:items-center">
-            <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
-              <span className="text-[16px]">Request a Quote</span>
-              <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
-            </button>
+            <RequestQuoteButton />
           </div>
         </div>
       </div>
@@ -159,15 +156,21 @@ export function Navbar() {
                 </li>
               ))}
               <li key="request-a-quote">
-                <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
-                  <span className="text-[16px]">Request a Quote</span>
-                  <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
-                </button>
+                <RequestQuoteButton />
               </li>
             </ul>
           </motion.nav>
         )}
       </AnimatePresence>
     </header>
+  )
+}
+
+export function RequestQuoteButton() {
+  return (
+    <button className="flex items-center gap-[5px] rounded-full pr-[15px] pl-[25px] py-[15px] border border-[#C3C4C5]">
+      <span className="text-[16px]">Request a Quote</span>
+      <ChevronRight className="w-[20px] h-[20px] text-[#C3C4C5]" />
+    </button>
   )
 }
