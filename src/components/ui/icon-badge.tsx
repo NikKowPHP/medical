@@ -36,7 +36,7 @@ export function IconBadge({
 
   return (
     <div 
-      className={`flex items-center justify-center rounded-full gap-[10px] px-[10px] py-[8px] ${className}`}
+      className={`flex items-center justify-center rounded-full gap-[5px] pl-[10px] pr-[15px] py-[8px] ${className}`}
       style={{ backgroundColor: bgColor }}
     >
       {customIcon ? (
